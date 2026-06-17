@@ -1,0 +1,562 @@
+[
+  {
+    "id": "c959b08b-eb07-446e-a481-8f877205f9b0",
+    "text": "Use multiple search queries in parallel to cover different angles and languages.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T09:56:59.220600"
+  },
+  {
+    "id": "6f8bbadb-fb3c-416b-bc9d-2001452b8462",
+    "text": "Identify the target company first by searching for its founding year, focus area, and key personnel background.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T09:56:59.220625"
+  },
+  {
+    "id": "4ba50380-cb9b-4c9e-9730-2f35597e06bf",
+    "text": "Leverage Wikipedia or similar authoritative sources to consolidate funding and investor information.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T09:56:59.220635"
+  },
+  {
+    "id": "e549e4ee-7c87-4046-adef-1f6de05204cd",
+    "text": "Cross-reference search results with crawled page content to confirm relationships and operating system details.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T09:56:59.220645"
+  },
+  {
+    "id": "2778c921-b288-4bb4-a2bf-185d719b968e",
+    "text": "Use bilingual (English and Chinese) searches to improve coverage and find direct answers",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T09:58:09.251998"
+  },
+  {
+    "id": "e7503607-b5f7-4394-be9e-b0e780865ece",
+    "text": "Identify the target country first by searching for the specific event (defense agreement) with precise dates and keywords",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T09:58:09.252024"
+  },
+  {
+    "id": "4ce29e54-e9a2-4c05-8543-8ac30e4c8aeb",
+    "text": "Leverage authoritative sources like Wikipedia or official government pages for national symbols",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T09:58:09.252034"
+  },
+  {
+    "id": "f70b7812-beb7-4058-83ae-cef729af06af",
+    "text": "Cross-reference multiple independent sources to confirm the national fruit or other factual answers",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T09:58:09.252043"
+  },
+  {
+    "id": "c5d9d317-6b8f-4093-b921-326a893f9616",
+    "text": "Use specific dietary details (e.g., \"cold chocolate,\" \"eggs, vegetables, cheese\") as search keywords to directly identify the author",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:01:02.741287"
+  },
+  {
+    "id": "da9b40b6-7d71-4760-9f00-f0be0d2e78e2",
+    "text": "Combine Chinese and English search queries to cover both local and international sources for historical figures",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:01:02.741313"
+  },
+  {
+    "id": "c8faaa64-e583-4e12-b28f-77dd099583a9",
+    "text": "Cross-reference multiple independent sources (e.g., Guardian, RFI, Paper and Salt) to confirm the author's eating habits and the novel's obscenity trial",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:01:02.741323"
+  },
+  {
+    "id": "bdea3d94-4dc4-4e32-b397-9a5898c0e2e0",
+    "text": "Search for character-specific food descriptions within literary analyses (e.g., \"夏尔·包法利 饮食 简单\") to find direct parallels",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:01:02.741332"
+  },
+  {
+    "id": "de4e2ba2-12e2-4c66-95b3-c6c5a2ab4e54",
+    "text": "Use bilingual searches (Chinese and English) to cover both local and international sources for historical or cultural details",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:04:41.910778"
+  },
+  {
+    "id": "8712060d-d53e-43da-83c4-ad1aac9a8f77",
+    "text": "Cross-reference multiple independent sources to verify the identity of the author, work, and film adaptation before searching for specific trivia",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:04:41.910803"
+  },
+  {
+    "id": "ef89273d-41e5-40d3-baa8-c2f7d5f13317",
+    "text": "Break down the question into sequential sub-goals: identify the work, then the film, then the actress, then the prop detail",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:04:41.910814"
+  },
+  {
+    "id": "31905890-8714-4c62-a9a9-4df2be5b187f",
+    "text": "When direct search queries fail, try alternative phrasing or related concepts (e.g., \"bitter almonds\" for cyanide taste) to find the information",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:04:41.910822"
+  },
+  {
+    "id": "467a7e7d-77c7-4008-872f-04a1dd8cb26f",
+    "text": "Avoid relying on unofficial sources like Reddit for cost estimates; use official toll calculators and mapping services instead.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:07:22.274910"
+  },
+  {
+    "id": "0a1be3d1-162f-442e-af75-f9929b433af4",
+    "text": "Do not make assumptions about costs without verifying from authoritative sources (e.g., Amtrak’s own website or a reliable aggregator).",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:07:22.274935"
+  },
+  {
+    "id": "8c3badac-c0b4-4ad0-8126-c883b0766e7e",
+    "text": "Break down the comparison into clear, quantified metrics (time, fuel, tolls, parking, ticket price) before drawing a conclusion.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:07:22.274946"
+  },
+  {
+    "id": "64443220-6fc4-4669-8763-532e91100dfa",
+    "text": "Limit the number of search iterations by synthesizing available data early; repeating similar searches wastes steps and risks hitting the step limit.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:07:22.274954"
+  },
+  {
+    "id": "ca4a59d1-9230-4d3f-a487-49342fb84cfa",
+    "text": "Avoid repeating similar searches without first synthesizing information already collected.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:11:51.037886"
+  },
+  {
+    "id": "46306862-b1eb-4284-bc9d-c78de8d8e282",
+    "text": "Identify the core concept (e.g., the specific food) early before searching for its variations.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:11:51.037910"
+  },
+  {
+    "id": "bff0bd6d-a4d5-4c8e-bf7d-d8da13169108",
+    "text": "Handle tool call generation errors by validating the model output format before execution.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:11:51.037920"
+  },
+  {
+    "id": "b9be1ff4-2c72-4b82-934d-a8d4f82179f1",
+    "text": "Use the provided failure insights from memory to limit search iterations and prevent step limits.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:11:51.037929"
+  },
+  {
+    "id": "8d05f6b1-1b81-4ab6-a653-e82da6d604fd",
+    "text": "Break the problem into independent subgoals and search for each one separately.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:14:50.503908"
+  },
+  {
+    "id": "da577497-88da-4960-855a-75611af10a87",
+    "text": "Use both English and Chinese queries to capture relevant information from different sources.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:14:50.503934"
+  },
+  {
+    "id": "68ac2cf9-3bdd-4c24-a394-bed79e99b4e9",
+    "text": "Crawl dedicated summary pages that explicitly state the answer to avoid ambiguous results.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:14:50.503945"
+  },
+  {
+    "id": "efb0b830-6ab6-4e37-a6fa-e5224f6be4c5",
+    "text": "Verify the common algorithm across all related systems to ensure the correct compute figure is linked.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:14:50.503954"
+  },
+  {
+    "id": "65399072-c3c5-4e33-bac3-6f42960b0669",
+    "text": "Break down complex questions into sequential sub-goals that can be searched independently.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:19:15.401104"
+  },
+  {
+    "id": "24785f86-248d-4032-8d93-8ecbcd652511",
+    "text": "Use both English and Chinese queries to capture information from different language sources.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:19:15.401128"
+  },
+  {
+    "id": "129b5267-9731-48cd-9f79-eb0745b98bcd",
+    "text": "Verify key facts (like Grammy count or box office milestones) from official or authoritative pages (e.g., Wikipedia, Grammy.com).",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:19:15.401138"
+  },
+  {
+    "id": "6f7d7d5f-d3cc-4b95-a495-5763a676cf4f",
+    "text": "Iterate and refine search terms when initial results are unclear or missing the specific detail needed.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:19:15.401146"
+  },
+  {
+    "id": "bb5bb1d9-3adc-4fef-8073-f1af68c48103",
+    "text": "Use both English and Chinese search queries to capture information from different language sources.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:20:40.759867"
+  },
+  {
+    "id": "9b194dcd-af4e-4d73-9990-8b829dd0adc1",
+    "text": "Crawl the official product announcement or documentation page to get the most authoritative specification.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:20:40.759892"
+  },
+  {
+    "id": "1e7aefdb-bc65-44bf-b5d2-dc07b8a164f5",
+    "text": "Verify the context length with a secondary source (e.g., a technical reference site) to confirm consistency.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:20:40.759903"
+  },
+  {
+    "id": "14c1d7c0-d153-48cb-bb0c-00738fac6200",
+    "text": "Include a temporal search to ensure the information is current as of the required cutoff date.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:20:40.759912"
+  },
+  {
+    "id": "6d7ecff9-15e2-4a82-acee-f9a4307aedf6",
+    "text": "Always verify Grammy win/nomination counts from official sources like Grammy.com, not just search snippets, to confirm exact numbers.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:25:23.078217"
+  },
+  {
+    "id": "b6762936-3a96-4cb6-9aa4-d9db5933dddd",
+    "text": "Cross-reference multiple reliable attendee lists (e.g., Vogue, Today Show, Harper’s Bazaar) to determine if a celebrity attended a high-profile event.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:25:23.078242"
+  },
+  {
+    "id": "4ec3d4ab-eaa1-4a84-931b-e1a01ddf8071",
+    "text": "Break the task into two clear sub‑goals: first identify the person, then investigate their event attendance, to keep searches focused.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:25:23.078252"
+  },
+  {
+    "id": "05ecf0a7-7736-486d-bd2b-1b94efd596a8",
+    "text": "Use both English and Chinese search queries to increase coverage, especially for identifying a known artist with specific statistics.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:25:23.078262"
+  },
+  {
+    "id": "c3364215-1185-4b79-bff1-d97bb5b034d2",
+    "text": "Use both English and Chinese search queries to maximize coverage of relevant sources.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:26:36.933952"
+  },
+  {
+    "id": "ce025071-88b1-4cc7-99bb-f61f0162af62",
+    "text": "Break down the task into specific sub-goals with multiple search paths to increase success rate.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:26:36.933978"
+  },
+  {
+    "id": "8785273e-ade5-465e-9844-651f65c1a368",
+    "text": "Always crawl specific web pages (e.g., official reports, aggregated data pages) to extract exact numbers rather than relying on snippets alone.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:26:36.933988"
+  },
+  {
+    "id": "134b0a18-e862-484e-a1bc-cfe5d5f1046d",
+    "text": "Cross-reference data from diverse authoritative sources (e.g., official university pages, government documents, independent news reports) to confirm accuracy.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:26:36.933997"
+  },
+  {
+    "id": "c22cb566-90dd-417c-bc58-5cec0f2af13d",
+    "text": "Use bilingual (Chinese and English) search queries to cover both local and international sources for identifying people or events.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:28:50.355195"
+  },
+  {
+    "id": "cb415baa-d74e-45ee-8621-69486a8106fa",
+    "text": "Break down the task into sub-goals (e.g., identify the pair, get birth dates, compute difference) to ensure systematic progress.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:28:50.355221"
+  },
+  {
+    "id": "29a66a4b-4e4e-44b8-8d9d-ec5cf0f9d0bb",
+    "text": "Crawl authoritative pages (Wikipedia, Olympics.com) directly for exact numbers like birth dates rather than relying on search snippets.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:28:50.355231"
+  },
+  {
+    "id": "ccff3c9f-78c6-4da3-b751-b466648d0448",
+    "text": "Cross‑verify birth dates from at least two independent sources to ensure accuracy before performing calculations.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:28:50.355240"
+  },
+  {
+    "id": "fcdb59de-d5f1-4b3a-89a8-2b2e5dbbb813",
+    "text": "Break down the task into sequential sub-goals: identify the band, extract the cocktail name, then find its classic recipe.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:30:11.870921"
+  },
+  {
+    "id": "85efa8eb-4998-408e-b8f8-97726d5fe99d",
+    "text": "Use both English and Chinese search queries to cover different language sources and increase coverage.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:30:11.870946"
+  },
+  {
+    "id": "93c3a8d4-5558-48bb-a33f-c4b79418ed5d",
+    "text": "Prioritize authoritative sources (e.g., IBA official recipes, Wikipedia entries) for verifying standard cocktail ingredients.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:30:11.870956"
+  },
+  {
+    "id": "bb328100-d4bd-4818-af06-5d9485365118",
+    "text": "Cross-verify the recipe details from at least two independent sources to ensure accuracy.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:30:11.870966"
+  },
+  {
+    "id": "270c2253-27fa-4460-829b-ee7909efd296",
+    "text": "Always verify the video's view count directly from YouTube's official page or a trusted analytics platform before accepting it as over 100 million.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:31:40.196546"
+  },
+  {
+    "id": "56472a18-c0ba-4f71-b73a-e897ee0fe6d6",
+    "text": "Cross-check the filming location using at least two independent, authoritative sources (e.g., news articles, official statements) rather than relying on a single aggregator site.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:31:40.196570"
+  },
+  {
+    "id": "10a1460a-bce0-47b4-a53b-f6cf8efccd9f",
+    "text": "Do not assume a video is the correct one based solely on content description; confirm the video title, upload date, and view count match the task's exact criteria.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:31:40.196581"
+  },
+  {
+    "id": "7d7d2f42-baaa-4945-aec6-c0267d1c7439",
+    "text": "Use multiple diverse search queries (in different languages) to ensure you find corroborating evidence for key facts like location and view count.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:31:40.196590"
+  },
+  {
+    "id": "c0f147a1-6a3d-4e40-8433-cf099ec201a9",
+    "text": "Always search for the list of countries from an official or authoritative source first, then cross-reference with historical data to identify the unique candidate.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:34:17.383584"
+  },
+  {
+    "id": "1d415e99-b592-4d92-9300-2c8abdb28015",
+    "text": "Use multiple search queries in different languages (e.g., English and Chinese) to ensure comprehensive coverage of the same information.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:34:17.383610"
+  },
+  {
+    "id": "df4f6328-78ed-40ba-b4eb-7b4c31c2909c",
+    "text": "When determining if a country participated in a historical event, verify whether the country existed as a sovereign state at that time.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:34:17.383620"
+  },
+  {
+    "id": "1625b4db-c428-45a1-bbfd-eb8a371f476b",
+    "text": "Crawl a reliable encyclopedia page (e.g., Wikipedia) to extract the precise founding or independence date.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:34:17.383629"
+  },
+  {
+    "id": "36418c02-d44d-4f56-947b-e195a865709e",
+    "text": "Use multiple search queries in different languages to capture diverse sources",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:36:23.485075"
+  },
+  {
+    "id": "4045820b-aff1-45ad-ae2d-3e95c1f16f77",
+    "text": "Break the problem into sequential sub-goals: identify country, then region, then climate",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:36:23.485101"
+  },
+  {
+    "id": "dd7ae42d-bb9a-4563-88a2-14f17460b6ae",
+    "text": "Rely on official or authoritative sources like NASA, Wikipedia, or government pages for factual data",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:36:23.485111"
+  },
+  {
+    "id": "d3eea787-b061-463e-9c0b-3e5a8aaf97a5",
+    "text": "Cross-verify key facts (e.g., signing order) from at least two independent sources",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:36:23.485120"
+  },
+  {
+    "id": "1d571273-31d8-4531-a37e-cd3b8b7403f9",
+    "text": "Prioritize locating downloadable data sources (e.g., official CSV/Excel files) instead of relying solely on webpage scraping for structured lists.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:43:51.222825"
+  },
+  {
+    "id": "9c58558e-3c74-41d5-ac1a-08c9813d6aba",
+    "text": "Ensure search queries are specific and include terms like “下载”, “CSV”, or “list” to directly target data exports rather than general overview pages.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:43:51.222852"
+  },
+  {
+    "id": "cf2765fa-f6f2-4d96-a77e-886502ac6eb9",
+    "text": "Identify and verify all required data fields (like acceptance date and registration date) before starting, and confirm the target source contains them.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:43:51.222863"
+  },
+  {
+    "id": "c0bf1845-3171-45e6-9842-0c37d83d8444",
+    "text": "If a data extraction approach fails repeatedly, switch to looking for pre-existing summaries or analytical reports that might already answer the question.",
+    "source": "expel",
+    "type": "failure",
+    "timestamp": "2026-06-16T10:43:51.222873"
+  },
+  {
+    "id": "553731ac-2a39-41b1-a29b-68a87664eb9d",
+    "text": "Use specific time and date keywords in search queries to narrow results to exact departure windows",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:45:05.525924"
+  },
+  {
+    "id": "8c5f2475-6c91-4cc4-9705-671437ff980b",
+    "text": "Crawl multiple timetable sources (e.g., official 12306, third-party aggregators) and cross-verify schedules for accuracy",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:45:05.525948"
+  },
+  {
+    "id": "fc322352-dc7a-4aa1-97a8-a9712e0c490a",
+    "text": "Break down the question into subgoals: first confirm the route exists, then retrieve the schedule for the target time period",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:45:05.525958"
+  },
+  {
+    "id": "47f069b1-36fa-4af9-8308-dcfc2f0af158",
+    "text": "Leverage memory of similar successful cases to reuse proven decomposition and search strategies",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:45:05.525968"
+  },
+  {
+    "id": "4752fdcc-53bc-47f8-818a-7e9b742f50f6",
+    "text": "Use multiple authoritative sources (e.g., Wikipedia, Baidu Baike) to confirm band rankings and member lists.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:47:52.206286"
+  },
+  {
+    "id": "3ad46cc7-d2bd-407c-9082-f6456c0ef244",
+    "text": "Search for each band's members individually, noting that \"female member\" can be identified by names, titles (e.g., 女鼓手), or explicit gender descriptions.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:47:52.206312"
+  },
+  {
+    "id": "5b12b8f6-5f15-42dc-bb3b-f9704c323155",
+    "text": "Verify the exact lineup at the time of the show, as band members may change over time.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:47:52.206323"
+  },
+  {
+    "id": "d07192ef-b0b5-4474-b65e-202ecdec85bb",
+    "text": "Cross-reference gender information from at least two independent sources to avoid misclassification.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:47:52.206332"
+  },
+  {
+    "id": "31915616-7bf1-4911-b40b-a172883cf83e",
+    "text": "Use multiple search queries in different languages to increase coverage for specific phrases or quotes.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:49:04.149841"
+  },
+  {
+    "id": "ecc0ca60-954e-49a5-9638-168d2715deee",
+    "text": "Cross-reference information from at least two independent sources before finalizing an answer.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:49:04.149865"
+  },
+  {
+    "id": "70f28c16-0671-42ce-848f-bbc36ac69aa0",
+    "text": "Break down the problem into distinct search paths (e.g., direct quote, character-specific, related themes) to avoid missing results.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:49:04.149876"
+  },
+  {
+    "id": "aa97e7aa-b624-4d92-8ee7-79a43e738065",
+    "text": "Leverage aggregated summary pages (like UniFuncs) that compile answers from multiple sources for faster verification.",
+    "source": "expel",
+    "type": "success",
+    "timestamp": "2026-06-16T10:49:04.149885"
+  }
+]

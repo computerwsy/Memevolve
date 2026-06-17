@@ -1,0 +1,6 @@
+.env
+backup_*
+
+# Local browser binaries and model caches
+Flash-Searcher-main/.playwright-browsers/
+Flash-Searcher-main/storage/models/

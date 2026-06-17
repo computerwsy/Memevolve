@@ -1,0 +1,714 @@
+Temperature: 0.75
+Model: deepseek/deepseek-v4-flash
+Timestamp: 20260616_152047
+================================================================================
+
+## Provider Information
+
+**Class Name**: CognitionLoomMemoryProvider
+**Module Name**: cognition_loom_memory_provider
+
+## Provider Code
+
+```python
+import json
+import os
+import uuid
+import sys
+from typing import List, Optional, Dict, Any, Tuple
+from collections import defaultdict
+from dataclasses import dataclass, field
+from datetime import datetime
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sentence_transformers import SentenceTransformer
+import re
+from concurrent.futures import ThreadPoolExecutor
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+from ..base_memory import BaseMemoryProvider
+from ..memory_types import (
+    MemoryRequest,
+    MemoryResponse,
+    TrajectoryData,
+    MemoryType,
+    MemoryItem,
+    MemoryItemType,
+    MemoryStatus
+)
+
+
+# ---------------------------------------------------------------------------
+#  Utility: load embedding model with local caching
+# ---------------------------------------------------------------------------
+def load_embedding_model(model_name: str = 'sentence-transformers/all-MiniLM-L6-v2',
+                         cache_dir: str = './storage/models') -> SentenceTransformer:
+    os.makedirs(cache_dir, exist_ok=True)
+    local_model_path = os.path.join(cache_dir, model_name.replace('/', '_'))
+    try:
+        if os.path.exists(local_model_path) and os.listdir(local_model_path):
+            return SentenceTransformer(local_model_path)
+    except Exception:
+        pass
+    try:
+        model = SentenceTransformer(model_name)
+        model.save(local_model_path)
+        return model
+    except Exception as e:
+        raise RuntimeError(f"Unable to load embedding model {model_name}: {e}")
+
+
+# ---------------------------------------------------------------------------
+#  Data structures
+# ---------------------------------------------------------------------------
+@dataclass
+class ExperienceNode:
+    """A single experience stored as a node in the cognitive graph."""
+    node_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    query: str = ""
+    timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
+    # Multi-field textual content
+    agent_planning: str = ""
+    search_agent_planning: str = ""
+    agent_experience: str = ""
+    search_agent_experience: str = ""
+    failure_pattern: str = ""               # extracted from failed trajectories
+    counter_strategy: str = ""              # suggested fix for the failure
+    success: bool = True                    # whether the task succeeded
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    # Precomputed embeddings (set externally)
+    query_embedding: Optional[np.ndarray] = None
+    planning_embedding: Optional[np.ndarray] = None
+    experience_embedding: Optional[np.ndarray] = None
+
+
+@dataclass
+class Edge:
+    """Semantic connection between two nodes."""
+    source: str
+    target: str
+    weight: float  # cosine similarity
+    relation: str = "similar"  # e.g., "similar", "contradicts", "generalizes"
+
+
+# ---------------------------------------------------------------------------
+#  Cognitive Graph
+# ---------------------------------------------------------------------------
+class CognitiveGraph:
+    """In-memory graph that stores ExperienceNode and Edges, with TF-IDF and
+    embedding indices for multi-field hybrid retrieval."""
+
+    def __init__(self, model_cache_dir: str = './storage/models'):
+        self.nodes: Dict[str, ExperienceNode] = {}
+        self.edges: List[Edge] = []
+        self.embedding_model = load_embedding_model(
+            model_name='sentence-transformers/all-MiniLM-L6-v2',
+            cache_dir=model_cache_dir
+        )
+        # TF-IDF indices per field
+        self.tfidf_vectorizers: Dict[str, TfidfVectorizer] = {}
+        self.tfidf_matrices: Dict[str, np.ndarray] = {}
+        self.tfidf_node_ids: Dict[str, List[str]] = {}
+        # Embedding indices per field
+        self.embedding_arrays: Dict[str, np.ndarray] = {}
+        self.embedding_node_ids: Dict[str, List[str]] = {}
+        # Conflict tracker
+        self.conflict_cache: Dict[str, List[str]] = defaultdict(list)  # value_hash -> node_ids
+        self._initialized = False
+
+    def initialize_from_json(self, json_path: str):
+        if not os.path.exists(json_path):
+            return
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        for item in data:
+            node = ExperienceNode(
+                node_id=item.get('node_id', str(uuid.uuid4())),
+                query=item.get('query', ''),
+                timestamp=item.get('timestamp', datetime.now().isoformat()),
+                agent_planning=item.get('agent_planning', ''),
+                search_agent_planning=item.get('search_agent_planning', ''),
+                agent_experience=item.get('agent_experience', ''),
+                search_agent_experience=item.get('search_agent_experience', ''),
+                failure_pattern=item.get('failure_pattern', ''),
+                counter_strategy=item.get('counter_strategy', ''),
+                success=item.get('success', True),
+                metadata=item.get('metadata', {})
+            )
+            self.nodes[node.node_id] = node
+        self.build_indices()
+
+    def add_node(self, node: ExperienceNode):
+        self.nodes[node.node_id] = node
+        # update indices incrementally? For simplicity rebuild after batch.
+        # We'll mark for lazy rebuild and rebuild on next search or batch.
+
+    def add_batch(self, nodes: List[ExperienceNode]):
+        for n in nodes:
+            self.nodes[n.node_id] = n
+        self._rebuild_indices()
+
+    def _rebuild_indices(self):
+        """Full rebuild of all indices – called after batch insertion."""
+        node_list = list(self.nodes.values())
+        if not node_list:
+            return
+
+        fields = ['query', 'planning', 'experience']
+        field_text_getter = {
+            'query': lambda n: n.query,
+            'planning': lambda n: f"{n.agent_planning} {n.search_agent_planning}",
+            'experience': lambda n: f"{n.agent_experience} {n.search_agent_experience}"
+        }
+
+        for field in fields:
+            texts = [field_text_getter[field](n) for n in node_list]
+            # TF-IDF
+            vectorizer = TfidfVectorizer(stop_words='english', max_features=5000)
+            matrix = vectorizer.fit_transform(texts)
+            self.tfidf_vectorizers[field] = vectorizer
+            self.tfidf_matrices[field] = matrix
+            self.tfidf_node_ids[field] = [n.node_id for n in node_list]
+
+            # Embeddings
+            embeddings = self.embedding_model.encode(
+                texts,
+                batch_size=32,
+                show_progress_bar=False,
+                convert_to_numpy=True
+            )
+            self.embedding_arrays[field] = embeddings
+            self.embedding_node_ids[field] = [n.node_id for n in node_list]
+
+        # Build edges (semantic similarity > 0.85)
+        self.edges.clear()
+        # For simplicity, only compute on query embeddings (can extend)
+        query_embs = self.embedding_arrays.get('query')
+        if query_embs is not None and len(query_embs) > 1:
+            sim_matrix = cosine_similarity(query_embs)
+            q_ids = self.embedding_node_ids['query']
+            for i in range(len(q_ids)):
+                for j in range(i + 1, len(q_ids)):
+                    s = sim_matrix[i][j]
+                    if s > 0.85:
+                        self.edges.append(Edge(source=q_ids[i], target=q_ids[j], weight=float(s)))
+
+        # Conflict detection: if two nodes have highly similar query and different answers
+        # we can flag them. (Simplified: store hash of query)
+        self.conflict_cache.clear()
+        for n in node_list:
+            q_clean = n.query.strip().lower()
+            self.conflict_cache[q_clean].append(n.node_id)
+
+        self._initialized = True
+
+    def build_indices(self):
+        self._rebuild_indices()
+
+    # ------------------------------------------------------------
+    # Hybrid retrieval across all fields and phases
+    # ------------------------------------------------------------
+    def hybrid_search(self, query: str, phase: str = "begin",
+                      top_k: int = 5, weights: Dict[str, float] = None) -> List[Dict[str, Any]]:
+        """Phase-aware multi-field hybrid search."""
+        if not self._initialized or not self.nodes:
+            return []
+
+        # Determine which fields to search and their importance
+        if phase == "begin":
+            field_weights = {'query': 0.3, 'planning': 0.4, 'experience': 0.3}
+        else:  # "in"
+            field_weights = {'query': 0.2, 'planning': 0.2, 'experience': 0.6}
+
+        weights = weights or {'text': 0.4, 'semantic': 0.6}
+
+        score_board = defaultdict(float)
+        all_node_ids = set()
+
+        for field, fw in field_weights.items():
+            # Lexical search (TF-IDF)
+            v = self.tfidf_vectorizers.get(field)
+            mat = self.tfidf_matrices.get(field)
+            ids = self.tfidf_node_ids.get(field)
+            if v is not None and mat is not None and ids:
+                q_vec = v.transform([query])
+                scores = cosine_similarity(q_vec, mat).flatten()
+                for idx, sid in enumerate(ids):
+                    if scores[idx] > 0:
+                        score_board[sid] += weights['text'] * fw * scores[idx]
+                        all_node_ids.add(sid)
+
+            # Semantic search
+            emb_arr = self.embedding_arrays.get(field)
+            emb_ids = self.embedding_node_ids.get(field)
+            if emb_arr is not None and emb_ids:
+                q_emb = self.embedding_model.encode([query], convert_to_numpy=True)
+                sims = cosine_similarity(q_emb, emb_arr).flatten()
+                for idx, sid in enumerate(emb_ids):
+                    score_board[sid] += weights['semantic'] * fw * sims[idx]
+                    all_node_ids.add(sid)
+
+        # Aggregate and sort
+        sorted_ids = sorted(score_board.items(), key=lambda x: x[1], reverse=True)[:top_k]
+        results = []
+        for nid, sc in sorted_ids:
+            node = self.nodes.get(nid)
+            if not node:
+                continue
+            # Check for conflicts in same query cluster
+            conflict_nodes = []
+            q_clean = node.query.strip().lower()
+            if q_clean in self.conflict_cache:
+                other_ids = [oid for oid in self.conflict_cache[q_clean] if oid != nid]
+                for oid in other_ids:
+                    onode = self.nodes.get(oid)
+                    if onode:
+                        conflict_nodes.append(onode)
+            results.append({
+                'node_id': nid,
+                'score': float(sc),
+                'query': node.query,
+                'agent_planning': node.agent_planning,
+                'search_agent_planning': node.search_agent_planning,
+                'agent_experience': node.agent_experience,
+                'search_agent_experience': node.search_agent_experience,
+                'failure_pattern': node.failure_pattern,
+                'counter_strategy': node.counter_strategy,
+                'success': node.success,
+                'conflicts': conflict_nodes,
+                'edges': [e for e in self.edges if e.source == nid or e.target == nid]
+            })
+        return results
+
+    def get_node(self, node_id: str) -> Optional[ExperienceNode]:
+        return self.nodes.get(node_id)
+
+    def save_to_json(self, path: str):
+        data = []
+        for n in self.nodes.values():
+            data.append({
+                'node_id': n.node_id,
+                'query': n.query,
+                'timestamp': n.timestamp,
+                'agent_planning': n.agent_planning,
+                'search_agent_planning': n.search_agent_planning,
+                'agent_experience': n.agent_experience,
+                'search_agent_experience': n.search_agent_experience,
+                'failure_pattern': n.failure_pattern,
+                'counter_strategy': n.counter_strategy,
+                'success': n.success,
+                'metadata': n.metadata
+            })
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+# ---------------------------------------------------------------------------
+#  Main Provider
+# ---------------------------------------------------------------------------
+class CognitionLoomMemoryProvider(BaseMemoryProvider):
+
+    DEFAULT_PROMPTS = {
+        'query_refinement': """You are an expert memory retrieval assistant. Refine the user's query to better capture the core problem and required knowledge. Focus on extracting essential technical terms, domain context, and the type of guidance needed (planning, search strategy, execution steps). Output a single refined query string with no extra text.
+Original: {{original_query}}
+Refined:""",
+
+        'student_guidance': """Based on the following retrieved experiences (plans and strategies), synthesize 2-3 concise, actionable suggestions for the agent's **planning phase**. Focus on methodological improvements, tool selection strategies, and problem decomposition techniques. Use gentle, suggestive language.
+Current task: {{query}}
+Retrieved plans and strategies:
+{{matched_content}}
+Provide only the numbered suggestions, no extra explanation.""",
+
+        'teacher_guidance': """Based on the following retrieved experiences (successful/unsuccessful outcomes and lessons learned), synthesize cohesive, unified operational guidance for the agent's **execution phase**. Include specific techniques, common pitfalls to avoid, and concrete steps.
+Current task: {{query}}
+Retrieved experiences:
+{{matched_content}}
+Provide 2-3 sentences of actionable guidance.""",
+
+        'failure_extraction': """Analyze the following failed task trajectory and extract the key failure pattern and a counter-strategy. Output JSON with keys "failure_pattern" and "counter_strategy". Each should be 1-2 detailed sentences.
+Trajectory:
+{{trajectory}}
+JSON:""",
+
+        'conflict_resolution': """The retrieved memories contain conflicting information regarding the same task. Summarize the conflict and provide a recommendation for which source to trust, with reasoning.
+Conflict details:
+{{conflict_details}}
+Recommendation:"""
+    }
+
+    def __init__(self, config: Optional[dict] = None):
+        super().__init__(MemoryType.COGNITION_LOOM_MEMORY, config)
+        self.database_path = self.config.get("database_path", "./storage/cognition_loom_memory/graph.json")
+        self.top_k_begin = self.config.get("top_k_begin", 3)
+        self.top_k_in = self.config.get("top_k_in", 2)
+        self.search_weights = self.config.get("search_weights", {"text": 0.4, "semantic": 0.6})
+        self.model_cache_dir = self.config.get("model_cache_dir", "./storage/models")
+        self.model = self.config.get("model", None)
+
+        self.graph: Optional[CognitiveGraph] = None
+        self.pending_nodes: List[ExperienceNode] = []
+        self.merge_threshold = self.config.get("merge_threshold", 0.9)
+
+    def initialize(self) -> bool:
+        try:
+            if not os.path.exists(os.path.dirname(self.database_path)):
+                os.makedirs(os.path.dirname(self.database_path), exist_ok=True)
+            self.graph = CognitiveGraph(model_cache_dir=self.model_cache_dir)
+            if os.path.exists(self.database_path):
+                self.graph.initialize_from_json(self.database_path)
+            else:
+                # create empty graph
+                self.graph.build_indices()
+            return True
+        except Exception as e:
+            print(f"Error initializing CognitionLoomMemoryProvider: {e}")
+            return False
+
+    # -----------------------------------------------------------------------
+    #  PROVIDE
+    # -----------------------------------------------------------------------
+    def provide_memory(self, request: MemoryRequest) -> MemoryResponse:
+        if not self.graph:
+            return MemoryResponse(
+                memories=[],
+                memory_type=self.memory_type,
+                total_count=0,
+                request_id=str(uuid.uuid4())
+            )
+
+        # Phase-aware top_k
+        phase = request.status.value  # "begin" or "in"
+        top_k = self.top_k_begin if phase == "begin" else self.top_k_in
+
+        # Optionally refine query via LLM
+        refined_query = self._refine_query(request.query) if self.model else request.query
+
+        # Hybrid search (multi-field, phase-weighted)
+        raw_results = self.graph.hybrid_search(
+            query=refined_query,
+            phase=phase,
+            top_k=top_k,
+            weights=self.search_weights
+        )
+
+        if not raw_results:
+            return MemoryResponse(
+                memories=[],
+                memory_type=self.memory_type,
+                total_count=0,
+                request_id=str(uuid.uuid4())
+            )
+
+        # Synthesize guidance based on phase
+        if phase == "begin":
+            guidance = self._synthesize_begin_guidance(raw_results, request)
+        else:
+            guidance = self._synthesize_in_guidance(raw_results, request)
+
+        # Build metadata with conflict info
+        conflicts = []
+        for r in raw_results:
+            for c in r.get('conflicts', []):
+                conflicts.append({
+                    'node_id': c.node_id,
+                    'query': c.query,
+                    'agent_experience': c.agent_experience
+                })
+
+        memory_item = MemoryItem(
+            id=f"cogloom_{uuid.uuid4()}",
+            content=guidance,
+            metadata={
+                'phase': phase,
+                'num_sources': len(raw_results),
+                'source_queries': [r['query'] for r in raw_results],
+                'avg_score': sum(r['score'] for r in raw_results) / len(raw_results) if raw_results else 0,
+                'original_query': request.query,
+                'refined_query': refined_query,
+                'conflicts_detected': len(conflicts)
+            },
+            score=sum(r['score'] for r in raw_results) / len(raw_results)
+        )
+        return MemoryResponse(
+            memories=[memory_item],
+            memory_type=self.memory_type,
+            total_count=1,
+            request_id=str(uuid.uuid4())
+        )
+
+    def _refine_query(self, query: str) -> str:
+        prompt = self.DEFAULT_PROMPTS['query_refinement'].replace('{{original_query}}', query)
+        try:
+            messages = [{"role": "user", "content": [{"type": "text", "text": prompt}]}]
+            response = self.model(messages)
+            refined = getattr(response, "content", str(response)).strip()
+            return refined if refined else query
+        except Exception:
+            return query
+
+    def _synthesize_begin_guidance(self, results: List[Dict], request: MemoryRequest) -> str:
+        """Return Student (planning) + Teacher (experience) guidance."""
+        # Student guidance from plans
+        plans_text = ""
+        for i, r in enumerate(results, 1):
+            plans_text += f"Source {i}:\nQuery: {r['query']}\n"
+            if r.get('agent_planning'):
+                plans_text += f"Plan: {r['agent_planning']}\n"
+            if r.get('search_agent_planning'):
+                plans_text += f"Search Plan: {r['search_agent_planning']}\n"
+            # Include failure patterns as warnings
+            if r.get('failure_pattern'):
+                plans_text += f"Failure Pattern (avoid): {r['failure_pattern']}\n"
+            plans_text += "\n"
+
+        if not plans_text.strip():
+            return "No prior experience available for this task."
+
+        student_prompt = self.DEFAULT_PROMPTS['student_guidance'].replace('{{query}}', request.query)
+        student_prompt = student_prompt.replace('{{matched_content}}', plans_text)
+        student_guidance = ""
+        if self.model:
+            try:
+                messages = [{"role": "user", "content": [{"type": "text", "text": student_prompt}]}]
+                resp = self.model(messages)
+                student_guidance = getattr(resp, "content", str(resp)).strip()
+            except Exception:
+                pass
+
+        # Teacher guidance from experiences
+        exp_text = ""
+        for i, r in enumerate(results, 1):
+            exp_text += f"Source {i}:\nQuery: {r['query']}\n"
+            if r.get('agent_experience'):
+                exp_text += f"Experience: {r['agent_experience']}\n"
+            if r.get('search_agent_experience'):
+                exp_text += f"Search Experience: {r['search_agent_experience']}\n"
+            if r.get('counter_strategy'):
+                exp_text += f"Counter-Strategy: {r['counter_strategy']}\n"
+            exp_text += "\n"
+
+        teacher_prompt = self.DEFAULT_PROMPTS['teacher_guidance'].replace('{{query}}', request.query)
+        teacher_prompt = teacher_prompt.replace('{{matched_content}}', exp_text)
+        teacher_guidance = ""
+        if self.model:
+            try:
+                messages = [{"role": "user", "content": [{"type": "text", "text": teacher_prompt}]}]
+                resp = self.model(messages)
+                teacher_guidance = getattr(resp, "content", str(resp)).strip()
+            except Exception:
+                pass
+
+        # Conflict resolution if any
+        conflict_resolution = ""
+        conflict_details_raw = ""
+        for r in results:
+            if r.get('conflicts'):
+                for c in r['conflicts']:
+                    conflict_details_raw += f"Current: {r['query']} -> {r.get('agent_experience','')[:100]}\n"
+                    conflict_details_raw += f"Conflict: {c.query} -> {c.agent_experience[:100]}\n"
+        if conflict_details_raw and self.model:
+            conflict_prompt = self.DEFAULT_PROMPTS['conflict_resolution'].replace('{{conflict_details}}', conflict_details_raw)
+            try:
+                messages = [{"role": "user", "content": [{"type": "text", "text": conflict_prompt}]}]
+                resp = self.model(messages)
+                conflict_resolution = getattr(resp, "content", str(resp)).strip()
+            except Exception:
+                pass
+
+        guidance_parts = []
+        if student_guidance:
+            guidance_parts.append(f"### Planning Suggestions\n{student_guidance}")
+        if teacher_guidance:
+            guidance_parts.append(f"### Execution Guidance\n{teacher_guidance}")
+        if conflict_resolution:
+            guidance_parts.append(f"### Conflict Resolution\n{conflict_resolution}")
+        return "\n\n".join(guidance_parts) if guidance_parts else "No synthesized guidance available."
+
+    def _synthesize_in_guidance(self, results: List[Dict], request: MemoryRequest) -> str:
+        """For IN phase: focus on concrete tool recommendations and step-by-step tactics."""
+        # Build a concise list of actionable steps from experiences
+        steps = []
+        for r in results:
+            # Extract concrete tips from experience fields
+            if r.get('agent_experience'):
+                steps.append(r['agent_experience'])
+            if r.get('search_agent_experience'):
+                steps.append(r['search_agent_experience'])
+            # Also include counter-strategies
+            if r.get('counter_strategy'):
+                steps.append(f"Alert: {r['counter_strategy']}")
+        if not steps:
+            return "No execution-time guidance available."
+
+        # Use LLM to compress and prioritize
+        combined = "\n".join(steps)
+        if self.model:
+            prompt = f"""You are an execution advisor. Based on the following collected tips and experiences, produce 2-3 short, actionable commands the agent can follow right now. Focus on immediate next steps, tool usage, and query formulation. Be very specific.
+Current task: {request.query}
+Tips:
+{combined}
+Actionable guidance:"""
+            try:
+                messages = [{"role": "user", "content": [{"type": "text", "text": prompt}]}]
+                resp = self.model(messages)
+                compressed = getattr(resp, "content", str(resp)).strip()
+                return compressed if compressed else combined[:500]
+            except Exception:
+                pass
+        return combined[:500]
+
+    # -----------------------------------------------------------------------
+    #  TAKE_IN
+    # -----------------------------------------------------------------------
+    def take_in_memory(self, trajectory_data: TrajectoryData) -> Tuple[bool, str]:
+        try:
+            success = self._is_task_successful(trajectory_data)
+            # Always extract memory, even from failures (store failure pattern)
+            memory_summary = self._summarize_trajectory(trajectory_data, success)
+
+            if not memory_summary:
+                return False, "Failed to summarize trajectory."
+
+            node = ExperienceNode(
+                query=trajectory_data.query,
+                timestamp=datetime.now().isoformat(),
+                agent_planning=memory_summary.get('agent_planning', ''),
+                search_agent_planning=memory_summary.get('search_agent_planning', ''),
+                agent_experience=memory_summary.get('agent_experience', ''),
+                search_agent_experience=memory_summary.get('search_agent_experience', ''),
+                failure_pattern=memory_summary.get('failure_pattern', ''),
+                counter_strategy=memory_summary.get('counter_strategy', ''),
+                success=success,
+                metadata={
+                    'task_id': trajectory_data.metadata.get('task_id') if trajectory_data.metadata else None,
+                    'has_tool_memory': False
+                }
+            )
+
+            # Attempt merging with existing similar node (dedup)
+            merged = self._merge_if_similar(node)
+            if not merged:
+                self.graph.add_node(node)
+            # Save to disk
+            self.graph.save_to_json(self.database_path)
+            return True, f"Stored node {node.node_id}, success={success}"
+        except Exception as e:
+            return False, f"Error taking in memory: {e}"
+
+    def _is_task_successful(self, trajectory_data: TrajectoryData) -> bool:
+        meta = trajectory_data.metadata or {}
+        for key in ['is_correct', 'success', 'task_success']:
+            if key in meta and meta[key] is True:
+                return True
+        return False
+
+    def _summarize_trajectory(self, trajectory_data: TrajectoryData, success: bool) -> Optional[Dict[str, str]]:
+        """Use LLM to produce structured summary. For failures, also extract failure pattern."""
+        trajectory_text = self._format_trajectory(trajectory_data)
+        if not self.model:
+            # fallback: return empty strings
+            return {
+                'agent_planning': '',
+                'search_agent_planning': '',
+                'agent_experience': '',
+                'search_agent_experience': '',
+                'failure_pattern': '',
+                'counter_strategy': ''
+            }
+
+        if success:
+            prompt = f"""You are an expert learning system. Analyze the following successful task execution and extract structured knowledge.
+Question: {trajectory_data.query}
+Trajectory:
+{trajectory_text}
+Result: {trajectory_data.result if trajectory_data.result else 'Completed'}
+Output JSON with keys: "agent_planning", "search_agent_planning", "agent_experience", "search_agent_experience", "failure_pattern" (empty string), "counter_strategy" (empty string).
+Each field must be a detailed, specific paragraph (minimum 2 sentences)."""
+        else:
+            prompt = f"""You are an expert learning system. Analyze the following **failed** task execution and extract both the successful methodology (if any) and the failure pattern with a counter-strategy.
+Question: {trajectory_data.query}
+Trajectory:
+{trajectory_text}
+Result: {trajectory_data.result if trajectory_data.result else 'Failed'}
+Output JSON with keys: "agent_planning" (what was planned, partially worked), "search_agent_planning", "agent_experience" (general experience), "search_agent_experience", "failure_pattern" (root cause of failure), "counter_strategy" (specific fix).
+Each field must be detailed."""
+        try:
+            messages = [{"role": "user", "content": [{"type": "text", "text": prompt}]}]
+            response = self.model(messages)
+            text = getattr(response, "content", str(response)).strip()
+            # Parse JSON
+            json_match = re.search(r'\{.*\}', text, re.DOTALL)
+            if json_match:
+                summary = json.loads(json_match.group(0))
+                # Validate required fields
+                required = ["agent_planning", "search_agent_planning", "agent_experience", "search_agent_experience"]
+                if all(k in summary for k in required):
+                    return summary
+            print("Failed to parse JSON summary, fallback")
+            return None
+        except Exception as e:
+            print(f"Summarization error: {e}")
+            return None
+
+    def _format_trajectory(self, trajectory_data: TrajectoryData) -> str:
+        if not trajectory_data.trajectory:
+            return "No trajectory available."
+        lines = [f"Task: {trajectory_data.query}"]
+        for i, step in enumerate(trajectory_data.trajectory, 1):
+            lines.append(f"Step {i} ({step.get('type','step')}): {step.get('content','')}")
+        if trajectory_data.result:
+            lines.append(f"Final Result: {trajectory_data.result}")
+        return "\n".join(lines)
+
+    def _merge_if_similar(self, node: ExperienceNode) -> bool:
+        """Check if a node with very similar query exists; if so, update the existing one."""
+        if not self.graph or not self.graph.nodes:
+            return False
+        # Compute embedding for the new node's query
+        query_emb = self.graph.embedding_model.encode([node.query], convert_to_numpy=True)
+        existing_ids = list(self.graph.nodes.keys())
+        existing_embs = []
+        for nid in existing_ids:
+            existing_node = self.graph.nodes[nid]
+            if existing_node.query_embedding is not None:
+                existing_embs.append(existing_node.query_embedding)
+            else:
+                existing_embs.append(self.graph.embedding_model.encode([existing_node.query], convert_to_numpy=True)[0])
+        if not existing_embs:
+            return False
+        sims = cosine_similarity(query_emb, np.array(existing_embs)).flatten()
+        max_idx = np.argmax(sims)
+        if sims[max_idx] >= self.merge_threshold:
+            # Merge: update existing node with new information (if more detailed)
+            existing_node = self.graph.nodes[existing_ids[max_idx]]
+            # Keep longer text for each field
+            fields = ['agent_planning', 'search_agent_planning', 'agent_experience', 'search_agent_experience',
+                      'failure_pattern', 'counter_strategy']
+            for f in fields:
+                existing_val = getattr(existing_node, f, '')
+                new_val = getattr(node, f, '')
+                if len(new_val) > len(existing_val):
+                    setattr(existing_node, f, new_val)
+            # Update timestamp
+            existing_node.timestamp = node.timestamp
+            print(f"Merged new node into existing node {existing_node.node_id}")
+            return True
+        return False
+```
+
+## Configuration
+
+**database_path**: ./storage/cognition_loom_memory/graph.json
+**top_k_begin**: 3
+**top_k_in**: 2
+**search_weights**: {"text": 0.4, "semantic": 0.6}
+**model_cache_dir**: ./storage/models
+**merge_threshold**: 0.9
+
+## Memory Type
+
+**Enum Name**: COGNITION_LOOM_MEMORY
+**Enum Value**: cognition_loom_memory

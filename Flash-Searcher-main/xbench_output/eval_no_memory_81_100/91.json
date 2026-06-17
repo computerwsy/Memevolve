@@ -1,0 +1,97 @@
+{
+  "score": 1,
+  "extracted_answer": "123",
+  "task_id": "91",
+  "question": "2024年全年共有多少位新晋学术人员加入了香港大学？",
+  "full_query": "2024年全年共有多少位新晋学术人员加入了香港大学？",
+  "golden_answer": "123",
+  "status": "success",
+  "agent_result": "2024年全年共有123位新晋学术人员加入了香港大学。",
+  "agent_trajectory": [
+    {
+      "name": "plan",
+      "value": "## Goal 1: Search for official statistics on HKU new academic hires in 2024\n- Path 1.1: Chinese web search for \"香港大学 2024 年新晋学术人员数量\"\n  - Success: Locate a page (e.g., HKU announcement or news article) that explicitly states the total number of new academic staff joining in 2024.\n- Path 1.2: English web search for \"University of Hong Kong new faculty 2024 number\"\n  - Success: Find a reliable source (e.g., HKU press release, university report) containing the exact figure.\n- Path 1.3: Search for HKU HR statistics report 2024\n  - Success: Retrieve a PDF or webpage that includes staff hiring data for the year 2024.\n\n## Goal 2: Crawl HKU official website for staff hiring information\n- Path 2.1: Crawl the HKU \"Facts and Figures\" page (https://www.hku.hk/about/facts.html) to locate staff numbers or hiring statistics\n  - Success: Extract a numerical value or a reference to new academic staff additions in 2024.\n- Path 2.2: Crawl the HKU Press Releases page for 2024 (https://www.hku.hk/press/press-releases/) and scan for announcements related to new academic appointments\n  - Success: Identify a press release that summarizes the total number of new hires, or compile counts from multiple releases.\n- Path 2.3: Crawl the HKU \"About\" page or \"University Overview\" page to find a statement on recruitment in 2024\n  - Success: Obtain a clear number of new academic staff members.",
+      "think": "",
+      "cot_think": "We need to plan for the task: \"2024年全年共有多少位新晋学术人员加入了香港大学？\" which means \"How many new academic staff joined The University of Hong Kong in the whole year of 2024?\" We need to decompose into goals, paths, and specify tools usage.\n\nFirst, understand the task: We need to find the number of new academic staff (新晋学术人员) who joined HKU in 2024. This likely refers to new hires, possibly including faculty and researchers. We need to find a reliable source, such as HKU annual reports, press releases, or news articles.\n\nSince the task is about 2024, we need to find data for the entire year. Possible sources: HKU's official website, news about recruitment, or statistical reports.\n\nWe need to plan goals and paths. Each goal should be independent and can be executed in parallel. Each goal should have multiple paths to achieve the same goal.\n\nGoal 1 could be: Search for official HKU reports or statistics on new staff joining in 2024.\nPaths:\n- Path 1.1: Use web_search to search for \"香港大学 2024年 新晋学术人员 数量\" or \"HKU new academic staff 2024\".\n- Path 1.2: Search for HKU annual report 2024 (might not be published yet, but could have interim reports).\n- Path 1.3: Search for news articles about HKU hiring spree in 2024.\n\nGoal 2 could be: Crawl specific HKU webpages that might contain this information, such as the \"About HKU\" or \"People\" section, or press releases.\nPaths:\n- Path 2.1: Crawl HKU's \"News\" section for 2024 press releases about new appointments.\n- Path 2.2: Crawl HKU's \"Faculty\" page to see if they list new faculty members.\n- Path 2.3: Crawl HKU's \"Annual Report\" or \"Facts and Figures\" page.\n\nBut note: The task likely expects a specific number. We might need to combine information from multiple sources.\n\nSince we are only planning, not executing, we need to output the plan in the specified format.\n\nOutput format: \n## Goal 1: [Goal Name]\n- Path 1.1: [Approach name]\n  - Success: [Completion criteria]\n- Path 1.2: [Approach name]\n  - Success: [Completion criteria]\n\nWe should have 1-5 goals, each with 1-5 paths. Let's create 2 or 3 goals.\n\nGoal 1: Search for official HKU statistics on new hires in 2024.\nPaths:\n- Path 1.1: Web search using query \"香港大学 2024 年 新增 学术人员 统计\" in Chinese.\n  - Success: Find a page explicitly listing the number or a report with the number.\n- Path 1.2: Web search using query \"HKU new academic staff 2024 total number\" in English.\n  - Success: Find a reliable source (e.g., HKU official site, news article).\n- Path 1.3: Web search for \"HKU Human Resources annual report 2024\" or \"staff number increase\".\n  - Success: Find a PDF or page with staff statistics.\n\nGoal 2: Crawl HKU's official website sections that may contain the desired information.\nPaths:\n- Path 2.1: Crawl HKU's \"About HKU\" or \"Facts and Figures\" page (e.g., https://www.hku.hk/about/facts.html) and look for staff numbers, possibly broken down by year.\n  - Success: Extract a number or mention of new hires in 2024.\n- Path 2.2: Crawl HKU's \"Press Releases\" page for 2024 (e.g., https://www.hku.hk/press/) and search for announcements about new faculty appointments.\n  - Success: Compile the number from individual press releases (if each announces one or multiple).\n- Path 2.3: Crawl the \"Jobs\" or \"Careers\" page to see if they list numbers of hires.\n  - Success: Find a summary of recruitment activities.\n\nGoal 3: Verify and cross-check the found numbers through multiple reliable sources.\nPaths:\n- Path 3.1: Check news articles from reputable media (e.g., South China Morning Post, Ming Pao) that report on HKU's faculty expansion in 2024.\n  - Success: Find a news article quoting the exact number from HKU.\n- Path 3.2: Check HKU's official social media or academic department announcements.\n  - Success: Confirm the number from an official source.\n\nBut note: The task is a single question, so we need to converge on an answer. The planning should ensure we cover multiple angles.\n\nGiven execution constraints: goals are parallel, paths within goal sequential. So we can assign each goal to a different tool action sequence.\n\nAlso note the available tools: web_search, crawl_page, inspect_file_as_image, inspect_file_as_text, inspect_file_as_audio, final_answer. So we can't directly execute, but we plan which tools to use.\n\nIn the plan, we need to specify the approach and success criteria. We don't need to include tool names explicitly but they are implied.\n\nI'll create two goals: one focused on searching, one on crawling specific pages. That should be sufficient.\n\nGoal 1: Obtain the number of new academic staff at HKU in 2024 via search engine queries.\nPaths:\n- Path 1.1: Chinese query search.\n  - Success: Retrieved a source that explicitly states the total number.\n- Path 1.2: English query search.\n  - Success: Retrieved a source with the number.\n- Path 1.3: Query for HR reports.\n  - Success: Found a PDF or page with staff statistics for 2024.\n\nGoal 2: Extract data from HKU's official website using targeted crawling.\nPaths:\n- Path 2.1: Crawl \"Facts and Figures\" page.\n  - Success: Found the number of new hires mentioned.\n- Path 2.2: Crawl 2024 press releases archive.\n  - Success: Counted individual appointments (if possible) or found a summary.\n- Path 2.3: Crawl the \"About\" page that may contain staff numbers.\n  - Success: Retrieved a number or a reference to another source.\n\nOptionally, Goal 3: Cross-verify through news articles.\nBut we can combine into goals.\n\nWe need to ensure we don't have too many goals. The instruction says 1-5 goals. I'll go with 2 goals.\n\nNow, write the output in the exact format. Use Chinese for the goal names since the task is in Chinese, but it's fine either way. I'll use English for consistency but can mix.\n\nI'll write:\n\n## Goal 1: Search for official statistics on HKU new academic hires in 2024\n- Path 1.1: Chinese web search for \"香港大学 2024 年新晋学术人员数量\"\n  - Success: Locate a page (e.g., HKU announcement or news article) that explicitly states the total number of new academic staff joining in 2024.\n- Path 1.2: English web search for \"University of Hong Kong new faculty 2024 number\"\n  - Success: Find a reliable source (e.g., HKU press release, university report) containing the exact figure.\n- Path 1.3: Search for HKU HR statistics report 2024\n  - Success: Retrieve a PDF or webpage that includes staff hiring data for the year 2024.\n\n## Goal 2: Crawl HKU official website for staff hiring information\n- Path 2.1: Crawl the HKU \"Facts and Figures\" page (https://www.hku.hk/about/facts.html) to locate staff numbers or hiring statistics\n  - Success: Extract a numerical value or a reference to new academic staff additions in 2024.\n- Path 2.2: Crawl the HKU Press Releases page for 2024 (https://www.hku.hk/press/press-releases/) and scan for announcements related to new academic appointments\n  - Success: Identify a press release that summarizes the total number of new hires, or compile counts from multiple releases.\n- Path 2.3: Crawl the HKU \"About\" page or \"University Overview\" page to find a statement on recruitment in 2024\n  - Success: Obtain a clear number of new academic staff members.\n\nSince we have only two goals, that's fine.\n\nWe should also consider that the answer might be found in a news article about HKU's increased hiring. So maybe a third goal: Verify via news media. But I'll stick with two.\n\nNow, output as per format.",
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "香港大学 2024 年新晋学术人员数量"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "University of Hong Kong new faculty 2024 number"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "HKU staff hiring statistics 2024"
+          }
+        },
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://www.hku.hk/about/facts.html",
+            "query": "number of new academic staff in 2024"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'web_search' with arguments '{'query': '香港大学 2024 年新晋学术人员数量'}':\n1. [2024年港大新晋学术人员数据 - UniFuncs](https://unifuncs.com/s/7e3BKn4m)\nDate published: Jan 11, 2026\nSource: Unknown source\n   根据香港大学官方数据，2024年全年共有123位新晋学术人员加入港大，涵盖12个国籍的学者，研究领域广泛。港大学术发展中心发布的新闻也印证了这一数据， ...\n\n2. [Overview - 綜覽| Quick Stats | The University of Hong Kong](https://www.cpao.hku.hk/qstats/overview)\nSource: Unknown source\n   Student Admission* 新入學學生人數* (2025 / 2026) · Research Postgraduate 研究式研究生, 715 ; Student Admission* 新入學學生人數* (2025 / 2026) · All 總計, 9,257 ...\n\n3. [香港大学2024年录取人数 - 教育在线](https://www.eol.cn/liuxue/redian/kb20250110613157.html)\nDate published: Jan 10, 2025\nSource: Unknown source\n   港大在2023/2024学年共录取新生16,794人，其中：本科生4,638人，修课式研究生11,067人，研究式研究生1,089人。在所有入学新生中，非香港本地生总占比60.7%。\n\n4. [香港大学2024年度报告公布！内地生成最大生源，扩招趋势明显](https://zhuanlan.zhihu.com/p/19761972925)\nDate published: Jan 22, 2025\nSource: Unknown source\n   香港大学2023/2024年所有课程非本地学生的就读人数共有19,145名，其中：. ○ 本科生：5,013人. ○ 修课式研究生：10,655人. ○ 研究式研究生：3,477人. 由图所示， ...\n\n5. [香港大学最新招生数据出炉：内地生占比破60% - 自主选拔在线](https://www.zizzs.com/gk/xuexibeikao/195751.html)\nDate published: Mar 11, 2025\nSource: Unknown source\n   根据往年数据，港大学生数量呈逐年上升趋势，2023/24学生总数比上一学年（36,387名）新增2,779人。目前，在所有港大学生中，非中国香港本地生占比为48.9%，已快 ...\n\nResults for tool call 'web_search' with arguments '{'query': 'University of Hong Kong new faculty 2024 number'}':\n1. [University of Hong Kong - Wikipedia](https://en.wikipedia.org/wiki/University_of_Hong_Kong)\nSource: Unknown source\n   Academic Ranking of World Universities 2024, Not more than twenty members appointed by the Chancellor. Twelve professors* Six teachers*, not being professors\n\n2. [The University of Hong Kong invites application for vacant (66 ...](https://scholaridea.com/the-university-of-hong-kong-invites-application-for-vacant-66-teaching-and-faculty-positions/)\nDate published: Aug 31, 2024\nSource: Unknown source\n   The University of Hong Kong invites application for vacant (66) Teaching and Faculty Positions ; Teaching Assistant, Faculty of Education (10000) ...\n\n3. [The University of Hong Kong (HKU)](https://www.hku.hk/)\nSource: Unknown source\n   Begin your journey of discovery and innovation at HKU. A world of knowledge and excellence in ten Faculties.\n\n4. [Academic staff departures at Hong Kong universities hit highest ...](https://www.scmp.com/news/hong-kong/education/article/3251032/hong-kong-public-universities-record-new-high-academic-staff-departures-380-leaving-jobs)\nDate published: Feb 5, 2024\nSource: Unknown source\n   public universities had also hired 660 new academic staff. the number of new hires consistently exceeding the number of departures.\n\n5. [New Academic Staff 2025 | The University of Hong Kong (HKU)](https://academicdevelopment.hku.hk/new-academic-staff-2025/)\nSource: Unknown source\n   HKU's Newest Academic Staff for 2025. The following is the cohort of 114 who joined our ranks in the 2025 calendar year (January 1 – December 31, 2025). ...\n\nResults for tool call 'web_search' with arguments '{'query': 'HKU staff hiring statistics 2024'}':\n1. [HKU 2024 Bachelor's Degree Graduates Set New Salary Benchmark](https://www.hku.hk/press/press-releases/detail/28533.html)\nDate published: Aug 6, 2025\nSource: Unknown source\n   Among the employed graduates, 98.6% received their first job offer by December 2024, with 95.8% working in Hong Kong. The proportion of ...\n\n2. [Job Openings - Department of AI & Data Science, HKU](https://www.ai.hku.hk/people/job-openings)\nSource: Unknown source\n   We are currently recruiting tenure-track professoriate staff in the following areas: Tenure-track Professor/ Associate Professor/ Assistant Professor ...\n\n3. [Non local Grads : < 50% chance you will be employed : r/HKUniversity](https://www.reddit.com/r/HKUniversity/comments/1kefz3i/non_local_grads_50_chance_you_will_be_employed/)\nDate published: May 4, 2025\nSource: Unknown source\n   There is a < 50% chance a non local graduate from HKU will be employed post graduation and we can see the numbers rising.\n\n4. [HKU 2024 Graduates: Employment and Further Study Trends](https://www.linkedin.com/posts/laurence-tang_hku-2024-bachelors-degree-graduates-set-activity-7359093528515264514-9Uj9)\nDate published: Aug 6, 2025\nSource: Unknown source\n   Here are some key figures from the HKU 2024 Bachelor's Degree Graduates Employment Summary: 1. Average Salary: HK$33,492 [+4.7%] 2. Median ...\n\n5. [HKU Releases Hong Kong's First Employer-Focused Early Careers ...](https://www.hku.hk/press/news_detail_28514.html)\nDate published: Jul 24, 2025\nSource: Unknown source\n   The findings reaffirm employers' strong endorsement of HKU graduates: 99.4% of surveyed employers indicated plans to continue hiring HKU ...\n\nResults for tool call 'crawl_page' with arguments '{'url': 'https://www.hku.hk/about/facts.html', 'query': 'number of new academic staff in 2024'}':\nNo relevant information",
+      "think": "I need to find how many new academic staff joined HKU in 2024. I have two goals: Goal 1 (web searches) and Goal 2 (crawling HKU official site). I'll start by executing Path 1.1 (Chinese search), Path 1.2 (English search), Path 1.3 (HR stats search), and Path 2.1 (crawl HKU Facts page) in parallel to maximize efficiency.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://unifuncs.com/s/7e3BKn4m",
+            "query": "2024年香港大学新晋学术人员数量 123"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "site:academicdevelopment.hku.hk new academic staff 2024"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'crawl_page' with arguments '{'url': 'https://unifuncs.com/s/7e3BKn4m', 'query': '2024年香港大学新晋学术人员数量 123'}':\n根据网页内容，2024年全年（2024年1月1日至12月31日）香港大学新晋学术人员数量为**123人**。该数据来源于香港大学学术发展中心官方页面，并由港大学术发展中心新闻“More than 120 international scholars joined HKU in 2024”进一步佐证。\n\nResults for tool call 'web_search' with arguments '{'query': 'site:academicdevelopment.hku.hk new academic staff 2024'}':\n1. [New Academic Staff 2024 | The University of Hong Kong (HKU)](https://academicdevelopment.hku.hk/new-academic-staff-2024/)\nDate published: Dec 31, 2024\nSource: Unknown source\n   The University of Hong Kong draws scholars from around the world. The following is the cohort of 123 who joined our ranks in the 2024 calendar year.\n\n2. [Two new academic staff join the Faculty of Dentistry](https://academicdevelopment.hku.hk/news/two-new-academic-staff-join-the-faculty-of-dentistry/)\nSource: Unknown source\n   Two new academic staff join the Faculty of Dentistry. 31 May 2024. Recruitment. Recent Updates. Awards and Honours. Paul CAMPBELL receives Emerging Scholar ...\n\n3. [New Academic Staff 2023 | The University of Hong Kong (HKU)](https://academicdevelopment.hku.hk/new-academic-staff2023/)\nSource: Unknown source\n   A truly diverse roster of world-class researchers and teachers representing all disciplines and career stages, from Assistant Professors to Nobel Laureates.\n\n4. [Recruitment – Page 2 - Academic Development - HKU](https://academicdevelopment.hku.hk/news-category/recruitment/page/2/)\nSource: Unknown source\n   The Faculty of Dentistry welcomes 2 new professors · Dec 23, 2024. —. by. Two new academic staff join the Faculty of Dentistry · Dec 23, 2024. —. by. New ...\n\n5. [2024 – Page 6 - ACADEMIC DEVELOPMENT](https://academicdevelopment.hku.hk/professor_year/2024/page/6/)\nSource: Unknown source\n   Professor Years: 2024 · Peter TANUSEPUTRO · Chiu Yuen Jason WOO · Hoyeon LEE · Eva Yi Wah CHEUNG · Hei Lok Emmanuel CHEUNG · Chung Cheung Thomas YAU · Cho Wing Bryan ...",
+      "think": "From the previous tool calls, I found a promising lead: a Chinese search result from unifuncs.com claims that according to HKU official data, 123 new academic staff joined in 2024. Additionally, an English search result mentions HKU's 'New Academic Staff 2025' page showing 114 for 2025, which suggests HKU's Academic Development office tracks this data. I need to verify the 123 figure by crawling the unifuncs page and also check if the HKU Academic Development website has a similar page for 2024. Both goals aim to confirm the exact number. I will execute these verifications in parallel.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "final_answer",
+          "arguments": {
+            "answer": "2024年全年共有123位新晋学术人员加入了香港大学。"
+          }
+        }
+      ],
+      "obs": "2024年全年共有123位新晋学术人员加入了香港大学。",
+      "think": "I have obtained clear and consistent data from two independent sources: the unifuncs.com page (which references official HKU data) and the official HKU Academic Development page (`new-academic-staff-2024/`). Both explicitly state that 123 new academic staff joined HKU in the 2024 calendar year. This satisfies all goals. The task is in Chinese, so the final answer should be in Chinese.",
+      "cot_think": null,
+      "memory_guidance": null
+    }
+  ],
+  "metrics": {
+    "elapsed_time": 97.69193196296692,
+    "total_tokens": 33139,
+    "prompt_tokens": 29499,
+    "completion_tokens": 3640,
+    "api_calls": 6
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "score": 0,
+  "extracted_answer": "无",
+  "task_id": "97",
+  "question": "截至2025年5月16日，上交所科创板自开板以来，在所有注册生效状态且申报历时小于等于180天的公司中，多少家注册地是在中国沿海地区的？",
+  "full_query": "截至2025年5月16日，上交所科创板自开板以来，在所有注册生效状态且申报历时小于等于180天的公司中，多少家注册地是在中国沿海地区的？",
+  "golden_answer": "86家",
+  "status": "success",
+  "agent_result": "",
+  "agent_trajectory": [
+    {
+      "name": "plan",
+      "value": "## Goal 1: Obtain list of all 科创板 注册生效 companies with 申报历时 and 注册地\n- Path 1.1: Web search for an aggregated table\n  - Approach: Use web_search with query \"科创板 注册生效 公司列表 申报历时 注册地 表格\" to locate a webpage containing the required data (e.g., an East Money or iFinD summary table).\n  - Success: Find a page with a structured table listing company names, registration effective dates, acceptance dates (or explicit 申报历时), and registered addresses.\n\n- Path 1.2: Crawl official SSE STAR Market pages\n  - Approach: Use crawl_page on the STAR Market registration status page (e.g., http://kcb.sse.com.cn/home), extracting data for all companies with “注册生效” status. For each company, crawl its detail page to obtain the acceptance date and registered address.\n  - Success: Retrieve a complete dataset of companies (including full names, dates, and addresses) from the official source, covering all records since inception.\n\n- Path 1.3: Search for downloadable statistics or news summaries\n  - Approach: Use web_search with queries like \"科创板 注册生效 历次 数据\" or \"科创板 申报历时 统计\" to find articles or reports that list all effective companies with their timelines.\n  - Success: Obtain a list or link to a document (e.g., PDF, Excel) containing the necessary fields for every company.\n\n## Goal 2: Define 中国沿海地区 provinces/municipalities\n- Path 2.1: Web search for official coastal area definition\n  - Approach: Use web_search with query \"中国沿海地区包括哪些省市区\" to retrieve a standard list from authoritative sources (e.g., government websites or Baidu Baike).\n  - Success: Obtain a clear, comprehensive list of coastal provinces, municipalities, and autonomous regions (e.g., 辽宁、河北、天津、山东、江苏、上海、浙江、福建、广东、广西、海南).\n\n- Path 2.2: Cross-validate with multiple sources\n  - Approach: Perform additional searches (e.g., \"沿海省份 列表\") and crawl a second source to confirm the list.\n  - Success: Two independent sources agree on the same set of coastal administrative divisions.\n\n## Goal 3: Filter and count companies meeting both criteria\n- Path 3.1: Compute 申报历时 and filter ≤180 days\n  - Approach: Using the dataset from Goal 1, calculate 申报历时 (e.g., difference between acceptance date and registration effective date, or use an explicitly provided value). Keep only companies where this duration is ≤180 days.\n  - Success: A filtered subset of companies with their 注册地 preserved.\n\n- Path 3.2: Classify 注册地 as coastal or not\n  - Approach: For each company in the filtered subset, check whether its registered province/municipality matches the coastal list from Goal 2. Use string matching or geographic parsing.\n  - Success: Each company is marked as coastal or inland.\n\n- Path 3.3: Count the final number\n  - Approach: Sum the count of coastal companies from the filtered set.\n  - Success: Obtain a single integer representing the answer to the task.",
+      "think": "",
+      "cot_think": "We need to decompose the task into parallel goals. The task: \"截至2025年5月16日，上交所科创板自开板以来，在所有注册生效状态且申报历时小于等于180天的公司中，多少家注册地是在中国沿海地区的？\"\n\nInterpretation: As of May 16, 2025, among all companies that have been registered as effective (注册生效) on the STAR Market (科创板) of the Shanghai Stock Exchange since its inception, and whose application duration (申报历时) is less than or equal to 180 days, how many have their registered address in China's coastal areas (沿海地区)?\n\nWe need to determine the count. The task asks for planning, not final answer. So we need to plan how to get this information.\n\nPossible goals:\n1. Obtain list of all companies that have registered as effective on the STAR Market (科创板) since its inception.\n2. For each company, determine the application duration (申报历时) and filter those <=180 days.\n3. For each filtered company, determine the registered address (注册地) and classify whether it is in a coastal area (中国沿海地区).\n4. Count those meeting criteria.\n\nThese goals are interdependent; we need to get data sequentially. But we can parallelize some aspects: For example, we can search for different sources of data simultaneously. Or we can define goals that are independent but contribute to the overall task.\n\nGiven the tools: web_search, crawl_page, inspect files (but no data files provided). We need to search the web for data about STAR Market companies. Possibly there are publicly available lists, statistics, or databases.\n\nWe can plan to:\n- Goal 1: Find comprehensive list of all 注册生效 companies on 科创板 with their 申报历时 and 注册地.\n- Goal 2: Determine which provinces/municipalities are considered 沿海地区 (coastal areas) according to standard Chinese classification.\n- Goal 3: From the list, filter those with 申报历时 <=180 days and 注册地 in coastal areas, then count.\n\nBut Goal 1 is the main challenge. We can parallelize by searching multiple sources: e.g., official SSE website, financial news summaries, data aggregation sites like Wind, iFinD, or East Money.\n\nPaths:\n- Path 1.1: Crawl SSE official website for STAR Market listing statistics and company details.\n- Path 1.2: Search for summaries/articles that list all 科创板 注册生效 companies with dates.\n- Path 1.3: Use web search to find a database or table with required fields.\n\nGoal 2 is simple: we can search for \"中国沿海地区包括哪些省市\" to get a list.\n\nGoal 3 is analysis based on data from Goal 1 and 2.\n\nWe need to ensure that the data is as of May 16, 2025. So we need to find recent data.\n\nGiven the tools, we can attempt to perform these searches. But the planning should describe the approaches and success criteria.\n\nLet's structure the plan as per format:\n\n## Goal 1: Obtain list of all 科创板 注册生效 companies with 申报历时 and 注册地\n- Path 1.1: Use web_search with query like \"科创板 注册生效 公司列表 申报历时 注册地\" to find a table or article.\n  - Success: Find a webpage that contains a table of companies with columns for company name, registration date (or acceptance date and approval date to calculate 申报历时), and registered address.\n- Path 1.2: Crawl the official SSE website (www.sse.com.cn) STAR Market section, specifically pages like http://kcb.sse.com.cn/home or listing of approved companies. Use crawl_page with appropriate queries.\n  - Success: Extract structured data for each company including registration effective date and registered address.\n- Path 1.3: Search for financial data APIs or aggregated datasets (e.g., from East Money) that provide STAR Market company information. Since we cannot call APIs directly, we can search for web pages that list the data.\n  - Success: Find a comprehensive list that can be parsed.\n\n## Goal 2: Define 中国沿海地区 provinces/municipalities\n- Path 2.1: Search \"中国沿海地区包括哪些省\" and get a standard list.\n  - Success: Obtain a list of provinces (e.g., Liaoning, Hebei, Shandong, Jiangsu, Shanghai, Zhejiang, Fujian, Guangdong, Hainan, Guangxi, etc.) and possibly coastal cities directly.\n- Path 2.2: Verify with multiple sources to ensure accuracy.\n  - Success: Consistent list from at least two authoritative sources.\n\n## Goal 3: Filter and count companies meeting both criteria\n- Path 3.1: After obtaining the list from Goal 1, calculate 申报历时 for each company (time from acceptance date to effective date if available, or from filing to approval). Assume 申报历时 is provided or can be computed.\n  - Success: For each company, determine if duration <=180 days.\n- Path 3.2: Check if 注册地 is in the coastal list from Goal 2.\n  - Success: Identify those companies.\n- Path 3.3: Count the number of such companies.\n  - Success: Obtain a final integer count.\n\nSince the execution would be sequential within goals but goals can be executed in parallel (e.g., Goal 1 and Goal 2 can be done simultaneously), the plan should reflect that.\n\nAlso note: The task asks for planning analysis, not final answer. So we output the plan.\n\nWe must not attempt to solve the task directly, but we can provide a detailed plan.\n\nLet's write the plan.",
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "科创板 注册生效 公司列表 申报历时 注册地 表格"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "中国沿海地区包括哪些省市区"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'web_search' with arguments '{'query': '科创板 注册生效 公司列表 申报历时 注册地 表格'}':\n1. [发行上市 - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/)\nSource: Unknown source\n   思必驰科技股份有限公司. 科创板, 已受理 ; 北京微纳星空科技股份有限公司. 科创板, 已问询 ; 上海频准激光科技股份有限公司. 科创板, 提交注册 ; 珠海泰诺麦博制药股份有限 ...\n\n2. [科创板 - 上海证券交易所](https://www.sse.com.cn/services/listingwithsse/regulations/star/)\nSource: Unknown source\n   发行人申请在本所科创板上市，市值及财务指标应当至少符合下列标准中的一项：. 1.预计市值 +净利润/营业收入 · 不低于人民币10亿元 ; 发行人申请在本所科创板上市，市值及财务 ...\n\n3. [科创板首次公开发行股票注册管理办法（试行）](http://www.csrc.gov.cn/csrc/c106256/c1653777/content.shtml)\nSource: Unknown source\n   科创板上市,应当符合发行条件、上市条件以及相关信息披露要求,依法经上海证券交易所(以下简称交易所)发行上市审核按照中国证监会有关规定制作注册申请文件,由保荐人保荐并 ...\n\n4. [[PDF] 科创板 - 普华永道中国](https://www.pwccn.com/zh/research-and-insights/china-capital-new-time-jan2023.pdf)\nSource: Unknown source\n   自受理发行上市申请文件之日起，交易所审核和中国证监会注册. 的时间总计不超过三个月。全国股转系统挂牌公司申请转板至科. 创板上市的，交易所自受理申请文件之日起2个月内 ...\n\n5. [注册项目动态 - 上海证券交易所科创板](http://star.sse.com.cn/star/renewal/)\nSource: Unknown source\n   本所科创板股票发行上市审核工作实行全程电子化，申请、受理、问询、回复等事项均通过本所发行上市审核系统办理。 · 全部1010 · 已受理4 · 已问询29 · 上市委审议1 · 提交注册6 ...\n\nResults for tool call 'web_search' with arguments '{'query': '中国沿海地区包括哪些省市区'}':\n1. [沿海地区_百度百科](https://baike.baidu.com/item/%E6%B2%BF%E6%B5%B7%E5%9C%B0%E5%8C%BA/1083210)\nSource: Unknown source\n   ... 沿海地区下的定义是指有海岸线（大陆岸线和岛屿岸线）的地区，按行政区划分为沿海省、自治区、直辖市。中国沿海包括的14个省级行政单位；53个沿海城市、242个沿海区县。\n\n2. [东西中部和东北地区划分方法 - 国家统计局](https://www.stats.gov.cn/zt_18555/zthd/sjtjr/dejtjkfr/tjkp/202302/t20230216_1909741.htm)\nDate published: Jun 13, 2011\nSource: Unknown source\n   中部包括：山西、安徽、江西、河南、湖北和湖南。 西部包括：内蒙古、广西、重庆、四川、贵州、云南、西藏、陕西、甘肃、青海、宁夏和新疆。 东北 ...\n\n3. [我国沿海省份有哪些- 本地宝](http://wenda.bendibao.com/life/20201029/141672.shtm)\nSource: Unknown source\n   【导语】：辽宁省、河北省、天津市、山东省、江苏省、上海市、浙江省、福建省、广东省、广西壮族自治区、海南省等省市。由于历史的原因，今天只有辽宁还保留着海岸线。\n\n4. [中国行政区划- 来自维基导游的旅行指南](https://zh.wikivoyage.org/wiki/%E4%B8%AD%E5%9B%BD%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92)\nSource: Unknown source\n   23个省：河北、山西、辽宁、吉林、黑龙江、江苏、浙江、安徽、 福建、 江西、山东、河南、湖北、湖南、广东、海南、四川、贵州、云南、陕西、甘肃、青海、台湾（地区，见下） ...\n\n5. [中国东部经济区- 维基百科，自由的百科全书](https://zh.wikipedia.org/zh-hans/%E4%B8%AD%E5%9B%BD%E4%B8%9C%E9%83%A8%E7%BB%8F%E6%B5%8E%E5%8C%BA)\nSource: Unknown source\n   中国东部经济区也称中国东部沿海地区，是一个经济地理概念，指位于中国东部沿海的十个省级行政区，包括7个省和3个直辖市。 自晚清以来，随着现代工业在中国的发展，这一地区 ...",
+      "think": "We have three goals to advance in parallel. Goal 1 requires obtaining the list of 科创板 注册生效 companies with 申报历时 and 注册地. Goal 2 requires defining 中国沿海地区 provinces/municipalities. Goal 3 (filtering and counting) depends on results from Goals 1 and 2, so it cannot start yet. Therefore, for this first action, I will execute the first path of Goal 1 (web search for an aggregated table) and the first path of Goal 2 (web search for the coastal area definition) simultaneously. This advances both independent goals concurrently.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "http://star.sse.com.cn/star/renewal/",
+            "query": "所有注册生效的公司名称、受理日期、注册日期、注册地"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "科创板 注册生效 名单 受理日期 注册日期 申报历时"
+          }
+        },
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://baike.baidu.com/item/%E6%B2%BF%E6%B5%B7%E5%9C%B0%E5%8C%BA/1083210",
+            "query": "中国沿海包括的14个省级行政单位名单"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'crawl_page' with arguments '{'url': 'http://star.sse.com.cn/star/renewal/', 'query': '所有注册生效的公司名称、受理日期、注册日期、注册地'}':\nNo relevant information\n\nResults for tool call 'web_search' with arguments '{'query': '科创板 注册生效 名单 受理日期 注册日期 申报历时'}':\n1. [注册项目动态 - 上海证券交易所科创板](http://star.sse.com.cn/star/renewal/)\nSource: Unknown source\n   本所科创板股票发行上市审核工作实行全程电子化，申请、受理、问询、回复等事项均通过本所发行上市审核系统办理。 · 全部1010 · 已受理4 · 已问询29 · 上市委审议1 · 提交注册6 ...\n\n2. [影石创新科技股份有限公司科创板IPO - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/index_listing_detail.shtml?auditId=756)\nSource: Unknown source\n   审议已问询2021-09-09 上市委会议2021-09-16 通过提交注册2022-01-28 注册生效2025-02-27 项目基本信息公司全称影石创新科技股份有限公司受理\n\n3. [科创板首次公开发行股票注册管理办法（试行）](http://www.csrc.gov.cn/csrc/c106256/c1653777/content.shtml)\nSource: Unknown source\n   第二十一条 交易所应当自受理注册申请文件之日起3个月内形成审核意见。发行人根据要求补充、修改注册申请文件，以及交易所按照规定对发行人实施现场检查，或者要求保荐 ...\n\n4. [发行上市 - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/)\nSource: Unknown source\n   下载. 发行人全称, 板块, 审核状态, 注册地, 行业分类, 保荐机构, 律师事务所, 会计师事务所, 更新日期, 受理日期 ... 科创板, 已问询, 广东. 专用设备制造业. 中信证券股份 ...\n\n5. [[PDF] 科创板 - 普华永道中国](https://www.pwccn.com/zh/research-and-insights/china-capital-new-time-jan2023.pdf)\nSource: Unknown source\n   全国股转系统挂牌公司申请转板至科. 创板上市的，交易所自受理申请文件之日起2个月内作出是否同意. 转板上市的决定。 中国证监会收到交易所报送的审核意见及发行人注册申请 ...\n\nResults for tool call 'crawl_page' with arguments '{'url': 'https://baike.baidu.com/item/%E6%B2%BF%E6%B5%B7%E5%9C%B0%E5%8C%BA/1083210', 'query': '中国沿海包括的14个省级行政单位名单'}':\n根据搜索查询“中国沿海包括的14个省级行政单位名单”，网页内容中明确列出了如下14个省级行政单位：\n\n1. 天津市（华北门户）  \n2. 河北省（燕赵沃野）  \n3. 辽宁省（辽海重地）  \n4. 山东省（齐鲁大地）  \n5. 江苏省（富饶水乡）  \n6. 上海市（东方明珠）  \n7. 浙江省（钱塘江畔）  \n8. 福建省（东南侨乡）  \n9. 台湾省（祖国宝岛）  \n10. 广东省（岭南热土）  \n11. 香港特别行政区（繁华都会）  \n12. 澳门特别行政区（海上花园）  \n13. 广西壮族自治区（锦绣壮乡）  \n14. 海南省（热带果园）\n\n以上即为中国沿海地区包括的全部省级行政单位名单（涵盖省、自治区、直辖市和特别行政区）。",
+      "think": "We have three independent goals: (1) obtain the list of 科创板 注册生效 companies with their 申报历时 and 注册地, (2) define the coastal area provinces/municipalities, (3) filter and count. For Goal 1, I will try Path 1.2: crawl the SSE registration dynamic page (http://star.sse.com.cn/star/renewal/) to extract company statuses, names, and possibly dates. Additionally, as a backup Path 1.1 attempt, I will search for a more specific query like '科创板 注册生效 名单 受理日期 注册日期' to find a structured table. For Goal 2, I will crawl the Baidu Baike page on coastal areas to extract the official list. These three actions are independent and can be executed in parallel.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://www.sse.com.cn/listing/renewal/ipo/",
+            "query": "科创板 注册生效 受理日期 注册地 下载数据或表格"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "科创板 注册生效 所有公司 受理日期 注册日期 申报历时 列表"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'crawl_page' with arguments '{'url': 'https://www.sse.com.cn/listing/renewal/ipo/', 'query': '科创板 注册生效 受理日期 注册地 下载数据或表格'}':\nNo relevant information\n\nResults for tool call 'web_search' with arguments '{'query': '科创板 注册生效 所有公司 受理日期 注册日期 申报历时 列表'}':\n1. [注册项目动态 - 上海证券交易所科创板](http://star.sse.com.cn/star/renewal/)\nSource: Unknown source\n   本所科创板股票发行上市审核工作实行全程电子化，申请、受理、问询、回复等事项均通过本所发行上市审核系统办理。 · 全部1010 · 已受理4 · 已问询29 · 上市委审议1 · 提交注册6 ...\n\n2. [影石创新科技股份有限公司科创板IPO - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/index_listing_detail.shtml?auditId=756)\nSource: Unknown source\n   注册生效 2025-02-27. 项目基本信息. 公司全称影石创新科技股份有限公司. 受理日期2020-10-28. 公司简称影石创新. 融资金额(亿元)4.64. 审核状态注册生效. 更新日期2025-03 ...\n\n3. [科创板首次公开发行股票注册管理办法（试行）](http://www.csrc.gov.cn/csrc/c106256/c1653777/content.shtml)\nSource: Unknown source\n   第二十一条 交易所应当自受理注册申请文件之日起3个月内形成审核意见。 ... 利润实现数未达到盈利预测的50%的，除因不可抗力外，中国证监会在3年内不受理该公司的公开发行证券 ...\n\n4. [[PDF] 科创板 - 普华永道中国](https://www.pwccn.com/zh/research-and-insights/china-capital-new-time-jan2023.pdf)\nSource: Unknown source\n   自受理发行上市申请文件之日起，交易所审核和中国证监会注册. 的时间总计不超过三个月。全国股转系统挂牌公司申请转板至科. 创板上市的，交易所自受理申请文件之日起2个月内 ...\n\n5. [科创板开市三周年：科创之光照耀中国 - King & Wood Mallesons](https://www.kingandwood.com/cn/zh/insights/latest-thinking/the-third-anniversary-of-opening-of-the-science-and-technology-innovation-board.html)\nDate published: Jul 22, 2022\nSource: Unknown source\n   截至2022年7月21日，科创板已受理335家新一代信息技术领域企业的上市申请，是科创板受理企业数量最多的领域，这335家企业覆盖了半导体和集成电路、电子信息、 ...",
+      "think": "The search results show that the SSE has a listing page at https://www.sse.com.cn/listing/renewal/ipo/ which likely contains downloadable data with fields including '受理日期', '注册地', and '审核状态'. Additionally, we need to find a way to get the complete list of companies with '注册生效' status and their application timelines. Let me crawl the SSE listing page to find downloadable data, and also search for a more comprehensive list specifically focusing on 科创板 注册生效 companies.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://www.sse.com.cn/listing/renewal/ipo/",
+            "query": "科创板 注册生效 表格 下载 受理日期 注册地"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "site:sse.com.cn 科创板 注册生效 列表 受理日期 注册地"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "科创板 注册生效 公司 受理日期 注册日期 申报时间 统计 数据"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'crawl_page' with arguments '{'url': 'https://www.sse.com.cn/listing/renewal/ipo/', 'query': '科创板 注册生效 表格 下载 受理日期 注册地'}':\nNo relevant information\n\nResults for tool call 'web_search' with arguments '{'query': 'site:sse.com.cn 科创板 注册生效 列表 受理日期 注册地'}':\n1. [注册项目动态 - 上海证券交易所科创板](http://star.sse.com.cn/star/renewal/)\nSource: Unknown source\n   本所科创板股票发行上市审核工作实行全程电子化，申请、受理、问询、回复等事项均通过本所发行上市审核系统办理。 · 全部1010 · 已受理4 · 已问询29 · 上市委审议1 · 提交注册6 ...\n\n2. [发行上市 - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/)\nSource: Unknown source\n   科创板, 已问询, 广东. 专用设备制造业. 中信证券股份有限公司. 上海市锦天城律师事务所. 中汇会计师事务所（特殊普通合伙）. 2026-06-03, 2025-12-23. 苏州同心医疗科技股份 ...\n\n3. [再融资| 上海证券交易所](http://www.sse.com.cn/listing/renewal/refinancing/index_listing_detail.shtml?auditId=1001207)\nDate published: Jun 3, 2026\nSource: Unknown source\n   科创板再融资已受理2026-04-24 注册生效2026-06-01 项目基本信息上市公司全称思特威(上海)电子科技股份有限公司\n\n4. [影石创新科技股份有限公司科创板IPO - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/index_listing_detail.shtml?auditId=756)\nSource: Unknown source\n   注册生效 2025-02-27. 项目基本信息. 公司全称影石创新科技股份有限公司. 受理日期2020-10-28. 公司简称影石创新. 融资金额(亿元)4.64. 审核状态注册生效. 更新日期2025-03 ...\n\n5. [深圳北芯生命科技股份有限公司科创板IPO - 发行上市 - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/index_listing_detail.shtml?auditId=1783)\nSource: Unknown source\n   提交注册 2025-07-25. 注册生效 2025-12-18. 项目基本信息. 公司全称深圳北芯生命科技股份有限公司. 受理日期2023-03-30. 公司简称北芯生命. 融资金额(亿元)9.52. 审核状态 ...\n\nResults for tool call 'web_search' with arguments '{'query': '科创板 注册生效 公司 受理日期 注册日期 申报时间 统计 数据'}':\n1. [注册项目动态 - 上海证券交易所科创板](http://star.sse.com.cn/star/renewal/)\nSource: Unknown source\n   本所科创板股票发行上市审核工作实行全程电子化，申请、受理、问询、回复等 ... 注册生效, 不予注册, 终止注册, 中止及财报更新, 终止. 审核状态. 全部; 已受理; 已问询\n\n2. [发行上市 - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/)\nSource: Unknown source\n   科创板信息披露监管・ 科创板已受理四川医药制造业中国国际金融・ 上市公司行业统计分类指引\n\n3. [科创板首次公开发行股票注册管理办法（试行）](http://www.csrc.gov.cn/csrc/c106256/c1653777/content.shtml)\nSource: Unknown source\n   科创板(以下简称科创板)上市,适用本办法。 符合发行条件、上市条件以及相关信息披露要求注册申请文件之日起3个月内形成审核意见。\n\n4. [上海证券交易所科创板股票上市规则（2026年4月修订）](https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/c_20260424_10816592.shtml)\nDate published: Apr 24, 2026\nSource: Unknown source\n   12.8.10本所在受理上市公司主动终止上市申请之日后的15个交易日内，作出是否同意其股票终止上市的决定。在此期间，本所要求公司提供补充材料的，公司 ...\n\n5. [上海证券交易所科创板 - 维基百科](https://zh.wikipedia.org/zh-hans/%E4%B8%8A%E6%B5%B7%E8%AD%89%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80%E7%A7%91%E5%89%B5%E6%9D%BF)\nSource: Unknown source\n   科创板的特点是并不限制首次公开募股的定价，且实行注册制上市，亦允许企业采取双重股权结构，上市企业以科技创新企业为主。 2019年6月13日科创板开板. 科创板于2018 ...",
+      "think": "From my previous searches, I found that the SSE listing page (https://www.sse.com.cn/listing/renewal/ipo/) has a downloadable/grid view listing companies with their registration status, registration place, and acceptance dates. I also found a specific company detail page showing individual timelines. I need to find a comprehensive list of all 科创板 注册生效 companies with their acceptance dates (受理日期) and registration effective dates (注册生效日期) to calculate 申报历时, plus their registration places (注册地). Let me try to crawl the SSE listing page with a more specific query, and also search for an aggregate data source.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://www.sse.com.cn/listing/renewal/ipo/",
+            "query": "科创板 注册生效 发行人全称 受理日期 注册地 表格数据 列表"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "\"科创板\" \"注册生效\" \"受理日期\" \"注册地\""
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "科创板注册生效企业名单 完整版 含受理日期 注册地"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "科创板 IPO 注册生效 状态 公司全称 受理日期 注册地 统计 数据 下载"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'crawl_page' with arguments '{'url': 'https://www.sse.com.cn/listing/renewal/ipo/', 'query': '科创板 注册生效 发行人全称 受理日期 注册地 表格数据 列表'}':\nNo relevant information\n\nResults for tool call 'web_search' with arguments '{'query': '\"科创板\" \"注册生效\" \"受理日期\" \"注册地\"'}':\n1. [注册制IPO动态 - 数据- 东方财富](https://emdata.eastmoney.com/zczipo/index.html)\nSource: Unknown source\n   科创板; 创业板; 北交所. 上市地, 注册生效数, 注册通过率, 受理至注册平均耗时. 沪市 ... 受理日期, 保荐机构, 融资金额, 最近一年营业收入, 最近一年净利润, 最近两年累计 ...\n\n2. [发行上市| 上海证券交易所](http://www.sse.com.cn/listing/renewal/ipo/?auditId=961)\nSource: Unknown source\n   发行人全称, 板块, 审核状态, 注册地, 行业分类, 保荐机构, 律师事务所, 会计师事务所, 更新日期, 受理日期. 杭州易加三维增材技术股份有限公司. 科创板, 终止, 浙江.\n\n3. [IPO信息速递 - 古东管家](https://m.gudongtech.com/ipo/detail/3040)\nSource: Unknown source\n   注册生效 2026-01-22. 项目基本信息. 公司名称. 西安泰金新能科技股份有限公司. 公司简称. 泰金新能. 证监会行业. 专用设备制造业. 注册地. 陕西. 受理日期. 2024-06-20.\n\n4. [荣大二郎神: 信披全文检索](https://doc.rongdasoft.com/)\nSource: Unknown source\n   注册地. 行业分类. 保荐机构. 会计师事务所. 律师事务所. 更新日期. 受理日期. 映恩生物（Duality Biotherapeutics Inc）. 科创板. 已受理. 境外. 医药制造业. 中信证券股份 ...\n\n5. [中国资本市场法定信息披露平台| 上海证券报·中国证券网](https://xinpi.kcb.cnstock.com/p/xg_fsdt)\nSource: Unknown source\n   中国资本市场法定信息披露平台. 以权威、专业、价值为宗旨的全媒体财经机构. 以开放、分享、共赢为目标的综合性资本市场服务平台. 科创板 ... 注册地, 证监会行业, 保荐机构 ...\n\nResults for tool call 'web_search' with arguments '{'query': '科创板注册生效企业名单 完整版 含受理日期 注册地'}':\n1. [注册项目动态 - 上海证券交易所科创板](http://star.sse.com.cn/star/renewal/)\nSource: Unknown source\n   本所科创板股票发行上市审核工作实行全程电子化，申请、受理、问询、回复等事项均通过本所发行上市审核系统办理。 · 全部1010 · 已受理4 · 已问询29 · 上市委审议1 · 提交注册6 ...\n\n2. [发行上市 - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/)\nSource: Unknown source\n   发行人全称, 板块, 审核状态, 注册地, 行业分类, 保荐机构, 律师事务所, 会计师事务所, 更新日期, 受理日期. 天博智能科技（山东）股份有限公司. 主板, 已问询, 山东.\n\n3. [科创板首次公开发行股票注册管理办法（试行）](http://www.csrc.gov.cn/csrc/c106256/c1653777/content.shtml)\nSource: Unknown source\n   第二十一条 交易所应当自受理注册申请文件之日起3个月内形成审核意见。发行人根据要求补充、修改注册申请文件，以及交易所按照规定对发行人实施现场检查，或者要求保荐人、 ...\n\n4. [影石创新科技股份有限公司科创板IPO - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/index_listing_detail.shtml?auditId=756)\nSource: Unknown source\n   注册生效 2025-02-27. 项目基本信息. 公司全称影石创新科技股份有限公司. 受理日期2020-10-28. 公司简称影石创新. 融资金额(亿元)4.64. 审核状态注册生效. 更新日期2025-03 ...\n\n5. [上海证券交易所科创板 - 维基百科](https://zh.wikipedia.org/zh-hans/%E4%B8%8A%E6%B5%B7%E8%AD%89%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80%E7%A7%91%E5%89%B5%E6%9D%BF)\nSource: Unknown source\n   科创板的特点是并不限制首次公开募股的定价，且实行注册制上市，亦允许企业采取双重股权结构，上市企业以科技创新企业为主。 2019年6月13日科创板开板. 科创板于2018 ...\n\nResults for tool call 'web_search' with arguments '{'query': '科创板 IPO 注册生效 状态 公司全称 受理日期 注册地 统计 数据 下载'}':\n1. [注册项目动态 - 上海证券交易所科创板](http://star.sse.com.cn/star/renewal/)\nSource: Unknown source\n   本所科创板股票发行上市审核工作实行全程电子化，申请、受理、问询、回复等事项均通过本所发行上市审核系统办理。 · 全部1010 · 已受理4 · 已问询29 · 上市委审议1 · 提交注册6 ...\n\n2. [发行上市 - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/)\nSource: Unknown source\n   下载 ; 无锡市好达电子股份有限公司. 科创板, 已受理 ; 天津富士达自行车工业股份有限公司. 主板, 已问询 ; 广东龙行天下科技股份有限公司. 主板, 已受理 ; 福建马坑矿业股份 ...\n\n3. [科创板首次公开发行股票注册管理办法（试行）](http://www.csrc.gov.cn/csrc/c106256/c1653777/content.shtml)\nSource: Unknown source\n   第四条 首次公开发行股票并在科创板上市，应当符合发行条件、上市条件以及相关信息披露要求，依法经上海证券交易所（以下简称交易所）发行上市审核并报经中国证券监督管理 ...\n\n4. [[PDF] 科创板 - 普华永道中国](https://www.pwccn.com/zh/research-and-insights/china-capital-new-time-jan2023.pdf)\nSource: Unknown source\n   全国股转系统挂牌公司申请转板至科. 创板上市的，交易所自受理申请文件之日起2个月内作出是否同意. 转板上市的决定。 中国证监会收到交易所报送的审核意见及发行人注册申请 ...\n\n5. [深圳北芯生命科技股份有限公司科创板IPO - 发行上市 - 上海证券交易所](https://www.sse.com.cn/listing/renewal/ipo/index_listing_detail.shtml?auditId=1783)\nSource: Unknown source\n   深圳北芯生命科技股份有限公司科创板IPO · 已受理 2023-03-30 · 已问询 2023-04-24 · 上市委会议 2025-07-18 · 提交注册 2025-07-25 · 注册生效 2025-12-18 ...",
+      "think": "I need to continue gathering data. Goal 2 (coastal areas definition) is mostly complete with the 14 provincial-level units. For Goal 1, I need to find a comprehensive list of 科创板 注册生效 companies with their 受理日期 and 注册地. Let me try different search strategies to find this data - perhaps searching for specific data tables or crawling the SSE listing page more carefully.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://emdata.eastmoney.com/zczipo/index.html",
+            "query": "科创板 注册生效 公司列表 受理日期 注册地 数据表格"
+          }
+        },
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://www.sse.com.cn/listing/renewal/ipo/",
+            "query": "科创板 注册生效 发行人全称 板块 审核状态 注册地 受理日期 数据列表 table 下载"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'crawl_page' with arguments '{'url': 'https://emdata.eastmoney.com/zczipo/index.html', 'query': '科创板 注册生效 公司列表 受理日期 注册地 数据表格'}':\nNo relevant information\n\nResults for tool call 'crawl_page' with arguments '{'url': 'https://www.sse.com.cn/listing/renewal/ipo/', 'query': '科创板 注册生效 发行人全称 板块 审核状态 注册地 受理日期 数据列表 table 下载'}':\nNo relevant information",
+      "think": "I have identified key resources from the search results. The East Money data page (https://emdata.eastmoney.com/zczipo/index.html) provides registration-based IPO data including registration-effective counts, and the SSE listing page (https://www.sse.com.cn/listing/renewal/ipo/) has a table with columns including 发行人全称, 板块, 审核状态, 注册地, 受理日期. I need to extract all 科创板 注册生效 companies with their 受理日期 and 注册地. Let me try to access both pages to get the complete dataset.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [],
+      "obs": null,
+      "think": "",
+      "cot_think": "我们被问到：截至2025年5月16日，上交所科创板自开板以来，在所有注册生效状态且申报历时小于等于180天的公司中，多少家注册地是在中国沿海地区的？这是一个需要数据的问题。我们需要知道科创板所有注册生效的公司，并计算它们的申报历时（从受理日期到注册生效日期），筛选出历时≤180天的，然后看他们的注册地是否在沿海地区。沿海地区我们已经从百度百科得到14个省级行政单位：天津、河北、辽宁、山东、江苏、上海、浙江、福建、台湾、广东、香港、澳门、广西、海南。\n\n但最关键的是获取完整的数据集。我们尝试了多种搜索和爬取，但未能直接得到完整的列表。也许我们可以从第三方网站或数据库获取。例如，东方财富的注册制IPO动态页面可能包含数据，但爬取可能困难。另一种思路：我们可以查找已有的统计报告或新闻文章，其中可能提到这个数字。或者我们可以使用百度百科或维基百科上关于科创板上市公司的列表，但可能不包含受理日期。\n\n用户要求提供答案，但我们需要给出一个数值。既然我们无法直接获取完整数据集，也许我们可以基于已知信息进行推理？或者我们可以尝试通过API或其他方式获取。但作为AI，我们只能使用提供的工具。我们还未尝试一些更直接的查询，比如搜索“科创板注册生效公司数量 受理至注册平均耗时”之类的。或者搜索“申报历时 180天 科创板”看看有没有相关统计。\n\n让我们继续搜索。",
+      "memory_guidance": null
+    }
+  ],
+  "metrics": {
+    "elapsed_time": 222.09472250938416,
+    "total_tokens": 153130,
+    "prompt_tokens": 145573,
+    "completion_tokens": 7557,
+    "api_calls": 15
+  }
+}

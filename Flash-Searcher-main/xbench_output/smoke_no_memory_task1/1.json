@@ -1,0 +1,17 @@
+{
+  "score": 0,
+  "extracted_answer": "",
+  "task_id": "1",
+  "question": "截至2024年12月31日，2024年上海黄金交易所Au(T+D)合约的“最高价”与“最低价”之差约为多少元/克？",
+  "full_query": "截至2024年12月31日，2024年上海黄金交易所Au(T+D)合约的“最高价”与“最低价”之差约为多少元/克？",
+  "golden_answer": "161.27元",
+  "status": "success",
+  "error": "'NoneType' object has no attribute 'reasoning_content'",
+  "metrics": {
+    "elapsed_time": 126.79951548576355,
+    "total_tokens": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "api_calls": 0
+  }
+}

@@ -107,6 +107,24 @@ DEFAULT_CONFIG = {
             "max_neg_examples": 1,
             "prune_threshold": 0.3,
         },
+        MemoryType.SYNAPSE_FLOW: {
+            "database_path": './storage/synapse_flow/knowledge_base.json',
+            "top_k": 3,
+            "prune_interval": 10,
+            "utility_threshold": 0.1,
+            "merge_similarity": 0.85,
+            "begin_weights": {'query': 0.2, 'task_specific': 0.1, 'domain_level': 0.4, 'general_level': 0.3},
+            "in_weights": {'query': 0.1, 'task_specific': 0.5, 'domain_level': 0.3, 'general_level': 0.1},
+            "model_cache_dir": './storage/models'
+        },
+        MemoryType.COGNITION_LOOM_MEMORY: {
+            "database_path": './storage/cognition_loom_memory/graph.json',
+            "top_k_begin": 3,
+            "top_k_in": 2,
+            "search_weights": {'text': 0.4, 'semantic': 0.6},
+            "model_cache_dir": './storage/models',
+            "merge_threshold": 0.9
+        },
         # add new memory type upside this line
 }
 }

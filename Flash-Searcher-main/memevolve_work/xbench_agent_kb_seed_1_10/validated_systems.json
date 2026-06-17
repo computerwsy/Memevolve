@@ -1,0 +1,123 @@
+{
+  "validated": [
+    "synapse_flow"
+  ],
+  "failed": [],
+  "details": {
+    "synapse_flow": {
+      "system": "synapse_flow",
+      "timestamp": "2026-06-15T17:02:22.683699",
+      "static_check": {
+        "passed": true,
+        "issues": [
+          {
+            "type": "missing_import",
+            "description": "Uses BaseMemoryProvider but missing import from EvolveLab.base_memory",
+            "severity": "medium"
+          },
+          {
+            "type": "missing_import",
+            "description": "Uses MemoryRequest but missing import from EvolveLab.memory_types",
+            "severity": "medium"
+          },
+          {
+            "type": "missing_import",
+            "description": "Uses MemoryResponse but missing import from EvolveLab.memory_types",
+            "severity": "medium"
+          }
+        ]
+      },
+      "test_results": {},
+      "logs": [
+        "Simulation test passed: all core methods available"
+      ],
+      "error_logs": [],
+      "verdict": "passed",
+      "fast_validation": {
+        "verdict": "passed",
+        "tests": {
+          "import": {
+            "status": "passed",
+            "class_name": "SynapseFlowProvider",
+            "module_name": "synapse_flow_provider"
+          },
+          "instantiation": {
+            "status": "passed"
+          },
+          "initialize": {
+            "status": "passed",
+            "returned": true
+          },
+          "provide_memory": {
+            "status": "passed",
+            "memories_count": 0
+          },
+          "take_in_memory": {
+            "status": "passed",
+            "success": true,
+            "description": "Added new instance 8d06b156-0eba-477f-94b1-bfea3ecf7596",
+            "storage_changes": {}
+          }
+        },
+        "errors": [],
+        "error_logs": [],
+        "captured_logs": [
+          "[DEBUG] httpcore.connection - close.started",
+          "[DEBUG] httpcore.connection - close.complete",
+          "[INFO] sentence_transformers.base.model - No device provided, using cuda:0",
+          "[INFO] sentence_transformers.base.model - Loading SentenceTransformer model from ./storage/models/sentence-transformers_all-MiniLM-L6-v2.",
+          "[DEBUG] sentence_transformers.base.modules.transformer - Active modality config: {'text': {'method': 'forward', 'method_output_name': 'last_hidden_state'}}",
+          "[DEBUG] openai._base_client - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-e0f770b2-7eab-415e-9c8f-17adc923d580', 'security': {'bearer_auth': True}, 'content': None, 'json_data': {'messages': [{'role': 'user', 'content': [{'type': 'text', 'text': 'Extract core keywords and domain concepts from the user query that will help retrieve the most relevant memory. Focus on: entities, actions, constraints, and domain terminology.\\n\\nQuery: test query for memory retrieval simulation\\nConcise keywords:'}]}], 'model': 'deepseek/deepseek-v4-flash', 'max_completion_tokens': 32768}}",
+          "[DEBUG] openai._base_client - Sending HTTP Request: POST https://api.ppio.com/openai/chat/completions",
+          "[DEBUG] httpcore.connection - connect_tcp.started host='api.ppio.com' port=443 local_address=None timeout=5.0 socket_options=None",
+          "[DEBUG] httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f57a12fe080>",
+          "[DEBUG] httpcore.connection - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f591033b840> server_hostname='api.ppio.com' timeout=5.0",
+          "[DEBUG] httpcore.connection - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f57a12fdea0>",
+          "[DEBUG] httpcore.http11 - send_request_headers.started request=<Request [b'POST']>",
+          "[DEBUG] httpcore.http11 - send_request_headers.complete",
+          "[DEBUG] httpcore.http11 - send_request_body.started request=<Request [b'POST']>",
+          "[DEBUG] httpcore.http11 - send_request_body.complete",
+          "[DEBUG] httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>",
+          "[DEBUG] httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 15 Jun 2026 09:02:31 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'1652'), (b'Connection', b'keep-alive'), (b'X-Ratelimit-Limit-Requests', b'0'), (b'X-Ratelimit-Limit-Tokens', b'0'), (b'X-Ratelimit-Remaining-Requests', b'0'), (b'X-Ratelimit-Remaining-Tokens', b'0'), (b'X-Ratelimit-Reset-Requests', b'0s'), (b'X-Ratelimit-Reset-Tokens', b'0s'), (b'X-Request-Id', b''), (b'X-Trace-Id', b'1b42c4b28f3251c2c59ffeb9e3870c3b')])",
+          "[INFO] httpx - HTTP Request: POST https://api.ppio.com/openai/chat/completions \"HTTP/1.1 200 OK\"",
+          "[DEBUG] httpcore.http11 - receive_response_body.started request=<Request [b'POST']>",
+          "[DEBUG] httpcore.http11 - receive_response_body.complete",
+          "[DEBUG] httpcore.http11 - response_closed.started",
+          "[DEBUG] httpcore.http11 - response_closed.complete",
+          "[DEBUG] openai._base_client - HTTP Response: POST https://api.ppio.com/openai/chat/completions \"200 OK\" Headers({'date': 'Mon, 15 Jun 2026 09:02:31 GMT', 'content-type': 'application/json', 'content-length': '1652', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '0', 'x-ratelimit-limit-tokens': '0', 'x-ratelimit-remaining-requests': '0', 'x-ratelimit-remaining-tokens': '0', 'x-ratelimit-reset-requests': '0s', 'x-ratelimit-reset-tokens': '0s', 'x-request-id': '', 'x-trace-id': '1b42c4b28f3251c2c59ffeb9e3870c3b'})",
+          "[DEBUG] openai._base_client - request_id: ",
+          "[DEBUG] openai._base_client - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-2918fe35-9ae8-4c5e-abf1-846e5435c723', 'security': {'bearer_auth': True}, 'content': None, 'json_data': {'messages': [{'role': 'user', 'content': [{'type': 'text', 'text': 'Analyze the following successful task execution trajectory and extract memory at three abstraction levels:\\n\\n- task_specific: Literal steps taken, tools, exact numbers, names (concrete)\\n- domain_level: Methodological patterns applicable to similar domain tasks (e.g., search patterns, validation techniques)\\n- general_level: Cross-domain strategies that could apply to any problem (e.g., decompose complex tasks, cross-verify)\\n\\nTrajectory:\\nQuery: test query for memory ingestion simulation\\nSteps:\\n1. (step) test query\\n2. (step) test response\\nResult: test result - successful task completion\\n\\nAlso classify the overall guidance mode as: factual, strategic, or computed.\\n\\nReturn a JSON object with keys: \"task_specific\", \"domain_level\", \"general_level\", \"guidance_mode\". Each value should be a string of 2-4 sentences.'}]}], 'model': 'deepseek/deepseek-v4-flash', 'max_completion_tokens': 32768}}",
+          "[DEBUG] openai._base_client - Sending HTTP Request: POST https://api.ppio.com/openai/chat/completions",
+          "[DEBUG] httpcore.http11 - send_request_headers.started request=<Request [b'POST']>",
+          "[DEBUG] httpcore.http11 - send_request_headers.complete",
+          "[DEBUG] httpcore.http11 - send_request_body.started request=<Request [b'POST']>",
+          "[DEBUG] httpcore.http11 - send_request_body.complete",
+          "[DEBUG] httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>",
+          "[DEBUG] httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 15 Jun 2026 09:02:40 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'X-Ratelimit-Limit-Requests', b'0'), (b'X-Ratelimit-Limit-Tokens', b'0'), (b'X-Ratelimit-Remaining-Requests', b'0'), (b'X-Ratelimit-Remaining-Tokens', b'0'), (b'X-Ratelimit-Reset-Requests', b'0s'), (b'X-Ratelimit-Reset-Tokens', b'0s'), (b'X-Request-Id', b''), (b'X-Trace-Id', b'c5f79bfbf8f29f05d46fdd509694d269')])",
+          "[INFO] httpx - HTTP Request: POST https://api.ppio.com/openai/chat/completions \"HTTP/1.1 200 OK\"",
+          "[DEBUG] httpcore.http11 - receive_response_body.started request=<Request [b'POST']>",
+          "[DEBUG] httpcore.http11 - receive_response_body.complete",
+          "[DEBUG] httpcore.http11 - response_closed.started",
+          "[DEBUG] httpcore.http11 - response_closed.complete",
+          "[DEBUG] openai._base_client - HTTP Response: POST https://api.ppio.com/openai/chat/completions \"200 OK\" Headers({'date': 'Mon, 15 Jun 2026 09:02:40 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '0', 'x-ratelimit-limit-tokens': '0', 'x-ratelimit-remaining-requests': '0', 'x-ratelimit-remaining-tokens': '0', 'x-ratelimit-reset-requests': '0s', 'x-ratelimit-reset-tokens': '0s', 'x-request-id': '', 'x-trace-id': 'c5f79bfbf8f29f05d46fdd509694d269'})",
+          "[DEBUG] openai._base_client - request_id: ",
+          ""
+        ],
+        "memory_details": {
+          "provide_memory": {
+            "count": 0,
+            "memories": [],
+            "response_type": "MemoryResponse"
+          },
+          "take_in_memory": {
+            "success": true,
+            "description": "Added new instance 8d06b156-0eba-477f-94b1-bfea3ecf7596",
+            "storage_before": {},
+            "storage_after": {},
+            "storage_changes": {}
+          }
+        }
+      }
+    }
+  }
+}

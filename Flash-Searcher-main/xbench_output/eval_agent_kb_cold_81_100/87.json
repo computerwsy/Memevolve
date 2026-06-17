@@ -1,0 +1,17 @@
+{
+  "score": 0,
+  "extracted_answer": "无",
+  "task_id": "87",
+  "question": "2025年初，一家人工智能公司以较低的成本实现了较高的性能，在推理任务上与 OpenAI 的 O1 相当，但训练成本仅为不到 600 万美元，同时开源模型。这个模型的训练时结合了多种算法和工程的优化技巧。其中一种算法曾帮助AlphaGo 击败李世石。OpenAI在采用这种算法训练Dota 2 AI “Five”时消耗了多少个 GPU 集群 ×10 个月的算力？",
+  "full_query": "2025年初，一家人工智能公司以较低的成本实现了较高的性能，在推理任务上与 OpenAI 的 O1 相当，但训练成本仅为不到 600 万美元，同时开源模型。这个模型的训练时结合了多种算法和工程的优化技巧。其中一种算法曾帮助AlphaGo 击败李世石。OpenAI在采用这种算法训练Dota 2 AI “Five”时消耗了多少个 GPU 集群 ×10 个月的算力？",
+  "golden_answer": "256",
+  "status": "success",
+  "error": "Error in generating tool call with model:\n'str' object has no attribute 'get'",
+  "metrics": {
+    "elapsed_time": 540.0877406597137,
+    "total_tokens": 294583,
+    "prompt_tokens": 259961,
+    "completion_tokens": 34622,
+    "api_calls": 34
+  }
+}

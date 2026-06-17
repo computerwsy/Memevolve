@@ -161,6 +161,28 @@ def generate_unified_report(
     Returns:
         Statistics dictionary
     """
+    def is_correct_result(result: Dict[str, Any]) -> bool:
+        judgement = str(result.get("judgement", "")).strip().lower()
+        if judgement:
+            return judgement == "correct"
+        if "score" in result:
+            try:
+                return float(result.get("score")) == 1.0
+            except (TypeError, ValueError):
+                return False
+        return False
+
+    def is_incorrect_result(result: Dict[str, Any]) -> bool:
+        judgement = str(result.get("judgement", "")).strip().lower()
+        if judgement:
+            return judgement == "incorrect"
+        if "score" in result:
+            try:
+                return float(result.get("score")) == 0.0
+            except (TypeError, ValueError):
+                return False
+        return False
+
     if not results:
         logger.warning("No results to generate report")
         return {}
@@ -169,8 +191,8 @@ def generate_unified_report(
     successful = sum(1 for r in results if r.get("status") == "success")
     errors = sum(1 for r in results if r.get("status") == "error")
     
-    correct = sum(1 for r in results if r.get("judgement", "").strip().lower() == "correct")
-    incorrect = sum(1 for r in results if r.get("judgement", "").strip().lower() == "incorrect")
+    correct = sum(1 for r in results if is_correct_result(r))
+    incorrect = sum(1 for r in results if is_incorrect_result(r))
     
     # Aggregate token usage and timing
     total_tokens = 0
@@ -193,7 +215,7 @@ def generate_unified_report(
         for r in results:
             level = r.get(level_key, "unknown")
             by_level[level]["total"] += 1
-            if r.get("judgement", "").strip().lower() == "correct":
+            if is_correct_result(r):
                 by_level[level]["correct"] += 1
     
     # Generate report
@@ -336,4 +358,3 @@ def create_run_directory(
     run_dir = os.path.join(base_dir, f"{dataset_name}_runs", run_name)
     os.makedirs(run_dir, exist_ok=True)
     return run_dir
-

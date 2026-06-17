@@ -36,6 +36,8 @@ class MemoryType(Enum):
     DYNAMIC_CHEATSHEET = "dynamic_cheatsheet"
     AGENT_WORKFLOW_MEMORY = "agent_workflow_memory"
     EVOLVER = "evolver"
+    SYNAPSE_FLOW = "synapse_flow"
+    COGNITION_LOOM_MEMORY = "cognition_loom_memory"
 # add new memory type upside this line(Enum)
 
 # Provider mapping for dynamic loading
@@ -59,6 +61,8 @@ PROVIDER_MAPPING = {
     MemoryType.DYNAMIC_CHEATSHEET:("DynamicCheatsheetProvider","dynamic_cheatsheet_provider"),
     MemoryType.AGENT_WORKFLOW_MEMORY: ("AgentWorkflowMemoryProvider", "agent_workflow_memory_provider"),
     MemoryType.EVOLVER: ("EvolverMemoryProvider", "evolver_memory_provider"),
+    MemoryType.SYNAPSE_FLOW: ("SynapseFlowProvider", "synapse_flow_provider"),
+    MemoryType.COGNITION_LOOM_MEMORY: ("CognitionLoomMemoryProvider", "cognition_loom_memory_provider"),
 # add new memory type upside this line(PROVIDER_MAPPING)
 }
 

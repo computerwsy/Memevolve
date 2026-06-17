@@ -1,0 +1,17 @@
+{
+  "score": 0,
+  "extracted_answer": "无",
+  "task_id": "97",
+  "question": "截至2025年5月16日，上交所科创板自开板以来，在所有注册生效状态且申报历时小于等于180天的公司中，多少家注册地是在中国沿海地区的？",
+  "full_query": "截至2025年5月16日，上交所科创板自开板以来，在所有注册生效状态且申报历时小于等于180天的公司中，多少家注册地是在中国沿海地区的？",
+  "golden_answer": "86家",
+  "status": "success",
+  "error": "Error in generating tool call with model:\n'str' object has no attribute 'get'",
+  "metrics": {
+    "elapsed_time": 3765.8073155879974,
+    "total_tokens": 4104313,
+    "prompt_tokens": 3976940,
+    "completion_tokens": 127373,
+    "api_calls": 192
+  }
+}

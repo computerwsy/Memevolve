@@ -1,0 +1,652 @@
+import json
+import os
+import sys
+import uuid
+import re
+import copy
+from typing import List, Optional, Dict, Any, Tuple
+from collections import defaultdict
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sentence_transformers import SentenceTransformer
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+from ..base_memory import BaseMemoryProvider
+from ..memory_types import (
+    MemoryRequest,
+    MemoryResponse,
+    TrajectoryData,
+    MemoryType,
+    MemoryItem,
+    MemoryItemType,
+    MemoryStatus
+)
+
+
+def load_embedding_model(model_name: str = 'sentence-transformers/all-MiniLM-L6-v2',
+                        cache_dir: str = './storage/models') -> SentenceTransformer:
+    os.makedirs(cache_dir, exist_ok=True)
+    local_model_path = os.path.join(cache_dir, model_name.replace('/', '_'))
+    try:
+        if os.path.exists(local_model_path) and os.listdir(local_model_path):
+            return SentenceTransformer(local_model_path)
+    except Exception as e:
+        print(f"Failed to load local model: {e}")
+    try:
+        model = SentenceTransformer(model_name)
+        model.save(local_model_path)
+        return model
+    except Exception as e:
+        raise RuntimeError(f"Unable to load embedding model {model_name}: {e}")
+
+
+@dataclass
+class SynapseInstance:
+    """A single stored memory instance with multi-level abstractions."""
+    instance_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    query: str = ""
+    timestamp: float = field(default_factory=lambda: datetime.now(timezone.utc).timestamp())
+    
+    # Three abstraction levels
+    task_specific: str = ""      # Literal steps, numbers, names
+    domain_level: str = ""       # Methodological patterns for similar domain tasks
+    general_level: str = ""      # Cross-domain strategies
+
+    # Embeddings for all fields (stored for fast retrieval)
+    query_embedding: Optional[np.ndarray] = None
+    task_embedding: Optional[np.ndarray] = None
+    domain_embedding: Optional[np.ndarray] = None
+    general_embedding: Optional[np.ndarray] = None
+
+    # Utility tracking
+    retrieval_count: int = 0
+    success_count: int = 0
+    last_access: float = field(default_factory=lambda: datetime.now(timezone.utc).timestamp())
+
+    # Guidance mode tag: factual / strategic / computed
+    guidance_mode: str = "strategic"  # default
+
+    def get_utility(self, current_time: float) -> float:
+        """Compute utility score for pruning."""
+        age_hours = (current_time - self.timestamp) / 3600.0
+        if self.retrieval_count == 0:
+            return 0.0
+        success_rate = self.success_count / self.retrieval_count
+        return (success_rate * self.retrieval_count) / (age_hours + 1.0)
+
+
+class SynapseKnowledgeBase:
+    """
+    In-memory knowledge base with multi-field embeddings and utility tracking.
+    Supports lazy indexing and periodic pruning.
+    """
+
+    def __init__(self, embedding_model: SentenceTransformer, top_k: int = 3):
+        self.embedding_model = embedding_model
+        self.top_k = top_k
+        self.instances: Dict[str, SynapseInstance] = {}
+        self.dirty = False
+        # Indices: each field has its own embedding matrix and list of IDs
+        self.indices: Dict[str, Tuple[np.ndarray, List[str]]] = {}
+
+    def add_instance(self, instance: SynapseInstance):
+        self.instances[instance.instance_id] = instance
+        self.dirty = True
+
+    def remove_instance(self, instance_id: str):
+        if instance_id in self.instances:
+            del self.instances[instance_id]
+            self.dirty = True
+
+    def rebuild_indices(self):
+        """Recompute all embedding matrices from scratch."""
+        if not self.instances:
+            self.indices = {}
+            self.dirty = False
+            return
+        
+        field_embeddings = {
+            'query': [],
+            'task_specific': [],
+            'domain_level': [],
+            'general_level': []
+        }
+        field_ids = {key: [] for key in field_embeddings}
+        
+        for instance in self.instances.values():
+            field_ids['query'].append(instance.instance_id)
+            field_embeddings['query'].append(instance.query_embedding)
+            
+            field_ids['task_specific'].append(instance.instance_id)
+            field_embeddings['task_specific'].append(instance.task_embedding)
+            
+            field_ids['domain_level'].append(instance.instance_id)
+            field_embeddings['domain_level'].append(instance.domain_embedding)
+            
+            field_ids['general_level'].append(instance.instance_id)
+            field_embeddings['general_level'].append(instance.general_embedding)
+        
+        self.indices = {}
+        for field, emb_list in field_embeddings.items():
+            if emb_list:
+                # Stack embeddings; handle None by using zero vector (safeguard)
+                emb_array = np.array([(e if e is not None else np.zeros(384)) for e in emb_list])
+                self.indices[field] = (emb_array, field_ids[field])
+            else:
+                self.indices[field] = (np.array([]).reshape(0, 384), [])
+        self.dirty = False
+
+    def ensure_indices(self):
+        if self.dirty or not self.indices:
+            self.rebuild_indices()
+
+    def retrieve(self, query_embedding: np.ndarray, field: str, top_k: int = None) -> List[Tuple[str, float]]:
+        """
+        Retrieve instance IDs and scores for a given field.
+        Returns list of (instance_id, score) sorted descending.
+        """
+        self.ensure_indices()
+        if top_k is None:
+            top_k = self.top_k
+        emb_matrix, ids = self.indices.get(field, (None, []))
+        if emb_matrix is None or emb_matrix.shape[0] == 0:
+            return []
+        similarities = cosine_similarity([query_embedding], emb_matrix).flatten()
+        top_indices = similarities.argsort()[-top_k:][::-1]
+        results = []
+        for idx in top_indices:
+            instance_id = ids[idx]
+            score = float(similarities[idx])
+            results.append((instance_id, score))
+        return results
+
+
+class SynapseFlowProvider(BaseMemoryProvider):
+    """
+    SynapseFlow Memory Provider – a self-improving memory system that:
+    - Indexes multi-field embeddings (query, task-specific, domain-level, general-level)
+    - Supports phase-aware retrieval (BEGIN vs IN) with dynamic weight adjustment
+    - Classifies guidance mode (factual / strategic / computed) to provide appropriate content
+    - Implements utility-based pruning and redundancy merging
+    """
+
+    DEFAULT_PROMPTS = {
+        'query_refine': """Extract core keywords and domain concepts from the user query that will help retrieve the most relevant memory. Focus on: entities, actions, constraints, and domain terminology.
+
+Query: {{query}}
+Concise keywords:""",
+
+        'guidance_classify': """Analyze the user query and classify its primary nature into one of the following modes:
+- factual: The query asks for a specific fact, definition, or fixed value (e.g., "What is X?", "How many Y?")
+- strategic: The query requires planning, methodology, approach (e.g., "How to accomplish Z?", "What steps?")
+- computed: The query requires computation, calculation, or numerical derivation (e.g., "Calculate X", "Find distance")
+
+Return only one word: factual, strategic, or computed.
+
+Query: {{query}}
+Mode:""",
+
+        'begin_synthesis': """You have retrieved experiences relevant to the user's task. Based on the query mode ({{mode}}), synthesize a concise, high-level guidance. 
+
+Mode meanings:
+- factual: Provide the exact fact, number, or definition without extra commentary.
+- strategic: Provide a general strategy, methodology, and key steps. Avoid giving specific numbers.
+- computed: Provide the necessary formula, approach, or known constants, but do NOT compute the final answer for the user.
+
+Retrieved knowledge:
+{{retrieved_text}}
+
+User query: {{query}}
+
+Provide guidance (2-4 sentences, no markdown):""",
+
+        'in_synthesis': """The user is currently executing a task. Provide step-specific, concrete advice based on retrieved experiences. Focus on immediate actions, tool usage, validation techniques.
+
+User query: {{query}}
+Current context (last steps): {{context}}
+Retrieved knowledge: {{retrieved_text}}
+
+Provide 1-2 specific, concise suggestions:""",
+
+        'summarize': """Analyze the following successful task execution trajectory and extract memory at three abstraction levels:
+
+- task_specific: Literal steps taken, tools, exact numbers, names (concrete)
+- domain_level: Methodological patterns applicable to similar domain tasks (e.g., search patterns, validation techniques)
+- general_level: Cross-domain strategies that could apply to any problem (e.g., decompose complex tasks, cross-verify)
+
+Trajectory:
+Query: {{query}}
+Steps:
+{{trajectory}}
+Result: {{result}}
+
+Also classify the overall guidance mode as: factual, strategic, or computed.
+
+Return a JSON object with keys: "task_specific", "domain_level", "general_level", "guidance_mode". Each value should be a string of 2-4 sentences."""
+    }
+
+    def __init__(self, config: Optional[dict] = None):
+        super().__init__(MemoryType.SYNAPSE_FLOW, config)
+        self.database_path = self.config.get(
+            "database_path",
+            "./storage/synapse_flow/knowledge_base.json"
+        )
+        self.top_k = self.config.get("top_k", 3)
+        self.prune_interval = self.config.get("prune_interval", 10)  # prune every N additions
+        self.utility_threshold = self.config.get("utility_threshold", 0.1)
+        self.merge_similarity = self.config.get("merge_similarity", 0.85)
+        self.model_cache_dir = self.config.get(
+            "model_cache_dir",
+            "./storage/models"
+        )
+        self.model = self.config.get("model", None)
+
+        # Phase-specific retrieval weights for each field
+        # Fields: query, task_specific, domain_level, general_level
+        self.begin_weights = self.config.get("begin_weights", {
+            "query": 0.2,
+            "task_specific": 0.1,
+            "domain_level": 0.4,
+            "general_level": 0.3
+        })
+        self.in_weights = self.config.get("in_weights", {
+            "query": 0.1,
+            "task_specific": 0.5,
+            "domain_level": 0.3,
+            "general_level": 0.1
+        })
+
+        # Embedding dimension (all-MiniLM-L6-v2 is 384)
+        self.embed_dim = 384
+        self.embedding_model = None
+        self.knowledge_base: Optional[SynapseKnowledgeBase] = None
+        self.add_counter = 0  # for pruning
+
+    def initialize(self) -> bool:
+        try:
+            os.makedirs(os.path.dirname(self.database_path), exist_ok=True)
+            # Load pre-existing database
+            if not os.path.exists(self.database_path):
+                with open(self.database_path, 'w', encoding='utf-8') as f:
+                    json.dump([], f)
+            
+            # Load embedding model
+            self.embedding_model = load_embedding_model(
+                model_name='sentence-transformers/all-MiniLM-L6-v2',
+                cache_dir=self.model_cache_dir
+            )
+            
+            self.knowledge_base = SynapseKnowledgeBase(
+                embedding_model=self.embedding_model,
+                top_k=self.top_k
+            )
+
+            # Load instances from file
+            with open(self.database_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            for entry in data:
+                instance = self._deserialize_instance(entry)
+                if instance is not None:
+                    self.knowledge_base.add_instance(instance)
+            self.knowledge_base.rebuild_indices()
+            return True
+        except Exception as e:
+            print(f"SynapseFlow initialization error: {e}")
+            return False
+
+    def _deserialize_instance(self, entry: dict) -> Optional[SynapseInstance]:
+        try:
+            inst = SynapseInstance(
+                instance_id=entry.get("instance_id", str(uuid.uuid4())),
+                query=entry.get("query", ""),
+                timestamp=entry.get("timestamp", datetime.now(timezone.utc).timestamp()),
+                task_specific=entry.get("task_specific", ""),
+                domain_level=entry.get("domain_level", ""),
+                general_level=entry.get("general_level", ""),
+                retrieval_count=entry.get("retrieval_count", 0),
+                success_count=entry.get("success_count", 0),
+                last_access=entry.get("last_access", datetime.now(timezone.utc).timestamp()),
+                guidance_mode=entry.get("guidance_mode", "strategic")
+            )
+            # Recompute embeddings
+            inst.query_embedding = self.embedding_model.encode(inst.query, convert_to_numpy=True)
+            inst.task_embedding = self.embedding_model.encode(inst.task_specific, convert_to_numpy=True) if inst.task_specific else None
+            inst.domain_embedding = self.embedding_model.encode(inst.domain_level, convert_to_numpy=True) if inst.domain_level else None
+            inst.general_embedding = self.embedding_model.encode(inst.general_level, convert_to_numpy=True) if inst.general_level else None
+            return inst
+        except Exception as e:
+            print(f"Deserialization error: {e}")
+            return None
+
+    def _serialize_instance(self, inst: SynapseInstance) -> dict:
+        return {
+            "instance_id": inst.instance_id,
+            "query": inst.query,
+            "timestamp": inst.timestamp,
+            "task_specific": inst.task_specific,
+            "domain_level": inst.domain_level,
+            "general_level": inst.general_level,
+            "retrieval_count": inst.retrieval_count,
+            "success_count": inst.success_count,
+            "last_access": inst.last_access,
+            "guidance_mode": inst.guidance_mode
+        }
+
+    def _persist(self):
+        """Save all instances to JSON file."""
+        try:
+            data = [self._serialize_instance(inst) for inst in self.knowledge_base.instances.values()]
+            with open(self.database_path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"Persist error: {e}")
+
+    def _call_llm(self, prompt: str) -> str:
+        """Invoke the configured LLM model."""
+        if not self.model:
+            return ""
+        try:
+            messages = [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt}
+                    ]
+                }
+            ]
+            response = self.model(messages)
+            return getattr(response, "content", str(response)).strip()
+        except Exception as e:
+            print(f"LLM call error: {e}")
+            return ""
+
+    def _refine_query(self, query: str) -> str:
+        prompt = self.DEFAULT_PROMPTS['query_refine'].replace('{{query}}', query)
+        refined = self._call_llm(prompt)
+        return refined if refined else query
+
+    def _classify_guidance_mode(self, query: str) -> str:
+        prompt = self.DEFAULT_PROMPTS['guidance_classify'].replace('{{query}}', query)
+        mode = self._call_llm(prompt).strip().lower()
+        if mode in ('factual', 'strategic', 'computed'):
+            return mode
+        return 'strategic'  # default
+
+    def provide_memory(self, request: MemoryRequest) -> MemoryResponse:
+        if not self.knowledge_base or not self.embedding_model:
+            return MemoryResponse(
+                memories=[], memory_type=self.memory_type, total_count=0, request_id=str(uuid.uuid4())
+            )
+        try:
+            # Refine query
+            refined_query = self._refine_query(request.query)
+            query_embedding = self.embedding_model.encode(refined_query, convert_to_numpy=True)
+
+            # Choose phase weights
+            if request.status == MemoryStatus.IN:
+                weights = self.in_weights
+            else:
+                weights = self.begin_weights
+
+            # Multi-field retrieval
+            field_scores = defaultdict(float)  # instance_id -> aggregated score
+            for field, weight in weights.items():
+                results = self.knowledge_base.retrieve(query_embedding, field, top_k=self.top_k)
+                for instance_id, score in results:
+                    field_scores[instance_id] += weight * score
+
+            # Sort and select top-k overall
+            top_ids = sorted(field_scores, key=field_scores.get, reverse=True)[:self.top_k]
+            retrieved_instances = [self.knowledge_base.instances[iid] for iid in top_ids if iid in self.knowledge_base.instances]
+
+            if not retrieved_instances:
+                return MemoryResponse(
+                    memories=[], memory_type=self.memory_type, total_count=0, request_id=str(uuid.uuid4())
+                )
+
+            # Synthesize guidance based on phase and mode
+            guidance_mode = self._classify_guidance_mode(request.query)
+
+            if request.status == MemoryStatus.IN:
+                guidance = self._synthesize_in_guidance(retrieved_instances, request, guidance_mode)
+            else:
+                guidance = self._synthesize_begin_guidance(retrieved_instances, request, guidance_mode)
+
+            # Update utility tracking
+            now = datetime.now(timezone.utc).timestamp()
+            for inst in retrieved_instances:
+                inst.retrieval_count += 1
+                inst.last_access = now
+                # Success will be updated later in take_in_memory if this retrieval led to success.
+
+            memory_item = MemoryItem(
+                id=f"synapse_{uuid.uuid4()}",
+                content=guidance,
+                metadata={
+                    'guidance_mode': guidance_mode,
+                    'num_sources': len(retrieved_instances),
+                    'source_queries': [inst.query for inst in retrieved_instances],
+                    'status': request.status.value,
+                    'refined_query': refined_query
+                },
+                score=sum(field_scores[iid] for iid in top_ids) / max(len(top_ids), 1)
+            )
+            return MemoryResponse(
+                memories=[memory_item],
+                memory_type=self.memory_type,
+                total_count=1,
+                request_id=str(uuid.uuid4())
+            )
+        except Exception as e:
+            print(f"SynapseFlow provide memory error: {e}")
+            return MemoryResponse(
+                memories=[], memory_type=self.memory_type, total_count=0, request_id=str(uuid.uuid4())
+            )
+
+    def _format_retrieved_instances(self, instances: List[SynapseInstance], mode: str) -> str:
+        """Combine retrieved instances into a text block for LLM synthesis."""
+        parts = []
+        for i, inst in enumerate(instances, 1):
+            parts.append(f"Source {i} (mode: {inst.guidance_mode}):")
+            parts.append(f"  Query: {inst.query}")
+            if mode == 'factual':
+                # Prefer task_specific (concrete facts)
+                parts.append(f"  Task Specific: {inst.task_specific}")
+            elif mode == 'strategic':
+                parts.append(f"  Domain Level: {inst.domain_level}")
+                parts.append(f"  General Level: {inst.general_level}")
+            else:  # computed
+                parts.append(f"  Task Specific: {inst.task_specific}")
+                parts.append(f"  Domain Level: {inst.domain_level}")
+        return "\n".join(parts)
+
+    def _synthesize_begin_guidance(self, instances: List[SynapseInstance], request: MemoryRequest, mode: str) -> str:
+        if not self.model:
+            # Fallback: concatenate the best matching instance's domain_level
+            best = instances[0] if instances else None
+            return f"SynapseFlow Guidance: {best.general_level if best else ''}"
+        retrieved_text = self._format_retrieved_instances(instances, mode)
+        prompt = self.DEFAULT_PROMPTS['begin_synthesis'].replace('{{mode}}', mode) \
+                                                         .replace('{{retrieved_text}}', retrieved_text) \
+                                                         .replace('{{query}}', request.query)
+        guidance = self._call_llm(prompt)
+        return guidance if guidance else f"SynapseFlow: {instances[0].general_level if instances else ''}"
+
+    def _synthesize_in_guidance(self, instances: List[SynapseInstance], request: MemoryRequest, mode: str) -> str:
+        if not self.model:
+            best = instances[0] if instances else None
+            return f"SynapseFlow Step Hint: {best.task_specific if best else ''}"
+        retrieved_text = self._format_retrieved_instances(instances, mode)
+        context = request.context[-1000:] if request.context else ""
+        prompt = self.DEFAULT_PROMPTS['in_synthesis'].replace('{{retrieved_text}}', retrieved_text) \
+                                                     .replace('{{query}}', request.query) \
+                                                     .replace('{{context}}', context)
+        guidance = self._call_llm(prompt)
+        return guidance if guidance else f"SynapseFlow: {instances[0].task_specific if instances else ''}"
+
+    def take_in_memory(self, trajectory_data: TrajectoryData) -> Tuple[bool, str]:
+        try:
+            if not self.model:
+                return False, "No model available for summarization"
+
+            # Optional: only process successful tasks (configurable)
+            metadata = trajectory_data.metadata or {}
+            success = metadata.get('is_correct', False) or metadata.get('success', False) or metadata.get('task_success', False)
+            if not success:
+                return False, "Task not successful, skipping"
+
+            # Format trajectory for LLM
+            trajectory_str = self._format_trajectory(trajectory_data)
+
+            # Summarize into three levels using LLM
+            prompt = self.DEFAULT_PROMPTS['summarize'].replace('{{query}}', trajectory_data.query) \
+                                                       .replace('{{trajectory}}', trajectory_str) \
+                                                       .replace('{{result}}', str(trajectory_data.result or ""))
+            response = self._call_llm(prompt)
+
+            # Parse JSON
+            parsed = self._parse_llm_json(response)
+            if not parsed:
+                return False, "LLM summarization failed"
+
+            task_specific = parsed.get('task_specific', '')
+            domain_level = parsed.get('domain_level', '')
+            general_level = parsed.get('general_level', '')
+            guidance_mode = parsed.get('guidance_mode', 'strategic')
+
+            if not task_specific and not domain_level and not general_level:
+                return False, "Empty summary"
+
+            # Create new instance
+            new_instance = SynapseInstance(
+                query=trajectory_data.query,
+                timestamp=datetime.now(timezone.utc).timestamp(),
+                task_specific=task_specific,
+                domain_level=domain_level,
+                general_level=general_level,
+                guidance_mode=guidance_mode
+            )
+            new_instance.query_embedding = self.embedding_model.encode(new_instance.query, convert_to_numpy=True)
+            new_instance.task_embedding = self.embedding_model.encode(new_instance.task_specific, convert_to_numpy=True) if task_specific else None
+            new_instance.domain_embedding = self.embedding_model.encode(new_instance.domain_level, convert_to_numpy=True) if domain_level else None
+            new_instance.general_embedding = self.embedding_model.encode(new_instance.general_level, convert_to_numpy=True) if general_level else None
+
+            # Check redundancy and merge if needed
+            merged = self._try_merge(new_instance)
+            if merged:
+                self._persist()
+                return True, f"Merged with existing instance {merged.instance_id}"
+            else:
+                self.knowledge_base.add_instance(new_instance)
+                self.add_counter += 1
+                # Periodic pruning
+                if self.add_counter % self.prune_interval == 0:
+                    self._prune_old_instances()
+                self._persist()
+                return True, f"Added new instance {new_instance.instance_id}"
+
+        except Exception as e:
+            print(f"SynapseFlow take_in_memory error: {e}")
+            return False, str(e)
+
+    def _format_trajectory(self, td: TrajectoryData) -> str:
+        if not td.trajectory:
+            return "No trajectory steps."
+        parts = []
+        for i, step in enumerate(td.trajectory, 1):
+            step_type = step.get('type', 'step')
+            content = step.get('content', '')
+            parts.append(f"{i}. ({step_type}) {content}")
+        return "\n".join(parts)
+
+    def _parse_llm_json(self, text: str) -> Optional[Dict]:
+        """Extract JSON from LLM response."""
+        if not text:
+            return None
+        # Try direct parse
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            pass
+        # Use regex to find JSON object
+        match = re.search(r'\{.*\}', text, re.DOTALL)
+        if match:
+            try:
+                return json.loads(match.group(0))
+            except json.JSONDecodeError:
+                pass
+        return None
+
+    def _try_merge(self, new_instance: SynapseInstance) -> Optional[SynapseInstance]:
+        """Check if a highly similar instance exists; if so, merge content."""
+        if not self.knowledge_base.instances:
+            return None
+        # Use query embedding similarity
+        query_emb = new_instance.query_embedding
+        if query_emb is None:
+            return None
+        # Compute similarity against all existing queries
+        existing_ids = list(self.knowledge_base.instances.keys())
+        existing_embs = np.array([self.knowledge_base.instances[iid].query_embedding for iid in existing_ids])
+        if existing_embs.shape[0] == 0:
+            return None
+        sims = cosine_similarity([query_emb], existing_embs).flatten()
+        max_idx = sims.argmax()
+        if sims[max_idx] >= self.merge_similarity:
+            target_id = existing_ids[max_idx]
+            target = self.knowledge_base.instances[target_id]
+            # Merge: keep longer/more detailed text for each level
+            target.task_specific = self._merge_text(target.task_specific, new_instance.task_specific)
+            target.domain_level = self._merge_text(target.domain_level, new_instance.domain_level)
+            target.general_level = self._merge_text(target.general_level, new_instance.general_level)
+            # Update embeddings (recompute)
+            target.task_embedding = self.embedding_model.encode(target.task_specific, convert_to_numpy=True) if target.task_specific else None
+            target.domain_embedding = self.embedding_model.encode(target.domain_level, convert_to_numpy=True) if target.domain_level else None
+            target.general_embedding = self.embedding_model.encode(target.general_level, convert_to_numpy=True) if target.general_level else None
+            # Update guidance mode to the one with more content or keep both? Prefer more specific.
+            if len(new_instance.guidance_mode) > len(target.guidance_mode):
+                target.guidance_mode = new_instance.guidance_mode
+            target.timestamp = max(target.timestamp, new_instance.timestamp)  # keep most recent
+            self.knowledge_base.dirty = True
+            return target
+        return None
+
+    @staticmethod
+    def _merge_text(existing: str, new: str) -> str:
+        """Combine two text strings, preferring longer and unique content."""
+        if not existing:
+            return new
+        if not new:
+            return existing
+        # Simple concatenation if they are not duplicates
+        if existing.strip()[-50:] in new or new.strip()[-50:] in existing:
+            # likely redundant, keep longer
+            return existing if len(existing) >= len(new) else new
+        return existing + "\n" + new
+
+    def _prune_old_instances(self):
+        """Remove instances with low utility score."""
+        now = datetime.now(timezone.utc).timestamp()
+        to_remove = []
+        for iid, inst in self.knowledge_base.instances.items():
+            if inst.get_utility(now) < self.utility_threshold:
+                to_remove.append(iid)
+        for iid in to_remove:
+            self.knowledge_base.remove_instance(iid)
+        if to_remove:
+            self.knowledge_base.dirty = True
+            print(f"Pruned {len(to_remove)} low-utility instances.")
+
+    def update_success_tracking(self, retrieved_instance_ids: List[str], success: bool):
+        """Called externally after task completion to update success counts."""
+        now = datetime.now(timezone.utc).timestamp()
+        for iid in retrieved_instance_ids:
+            inst = self.knowledge_base.instances.get(iid)
+            if inst:
+                inst.last_access = now
+                if success:
+                    inst.success_count += 1
+        self._persist()

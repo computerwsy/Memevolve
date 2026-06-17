@@ -1,0 +1,17 @@
+{
+  "score": 0,
+  "extracted_answer": "无",
+  "task_id": "86",
+  "question": "在美国南方文学中，一种食物常作为 “乡愁” 和 “家庭温暖” 的象征 。小说《油炸绿番茄》中，主角通过制作这种食物传递情感。这种食物在一个国家的变体内馅更轻盈，常加入酸奶或奶油奶酪，饼底用消化饼干混合玉米片，增加脆感。这个国家最高的山海拔是多少？单位：米。",
+  "full_query": "在美国南方文学中，一种食物常作为 “乡愁” 和 “家庭温暖” 的象征 。小说《油炸绿番茄》中，主角通过制作这种食物传递情感。这种食物在一个国家的变体内馅更轻盈，常加入酸奶或奶油奶酪，饼底用消化饼干混合玉米片，增加脆感。这个国家最高的山海拔是多少？单位：米。",
+  "golden_answer": "3776",
+  "status": "success",
+  "error": "Error in generating tool call with model:\n'str' object has no attribute 'get'",
+  "metrics": {
+    "elapsed_time": 266.10149335861206,
+    "total_tokens": 176419,
+    "prompt_tokens": 153416,
+    "completion_tokens": 23003,
+    "api_calls": 15
+  }
+}
