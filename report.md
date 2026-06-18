@@ -29,9 +29,10 @@
 （注：llm judge时将两个memevolve的结果判为93错，实际检查发现93回答正确，因此在错题集中将93删除，report.txt中未重判。）
 
 本实验最核心的发现有三点：
-第一，数据量对MemEvolve比较重要——基于10条seed的synapse_flow没有超过No-Memory，扩充到20条后cognition_loom_memory才超过ExpeL，论文中的evolve数据量为60，我因为时间和成本限制改为了10、20，且只进化一轮，可能因此大大减少了mem系统的进化程度；
-第二，更复杂的memory不等于更高性价比，cognition_loom_memory达到17/20，但token成本是ExpeL的2.8倍、是No-Memory的5.2倍，成本爆炸；
-第三，memory不一定有效，agent_kb相较于no-memory没有提升，错误题目完全一致，但token消耗和时延变长，
+
+1. evolve数据量对MemEvolve比较重要——基于10条seed的synapse_flow没有超过No-Memory，扩充到20条后cognition_loom_memory才超过ExpeL，论文中的evolve数据量为60，我因为时间和成本限制改为了10、20，且只进化一轮，可能因此大大减少了mem系统的进化程度；
+2. 更复杂的memory不等于更高性价比，cognition_loom_memory达到17/20，但token成本是ExpeL的2.8倍、是No-Memory的5.2倍，成本爆炸；
+3. memory不一定有效，agent_kb相较于no-memory没有提升，错误题目完全一致，但token消耗和时延变长，
 
 
 从错题集合可以看到，两轮 MemEvolve 产物表现差异明显：第一轮基于 1-10 条 seed 数据得到的 `synapse_flow` 错题为 84, 86, 87, 94, 97, 99，与 No-Memory 持平；在补充 11-20 条数据后，基于 1-20 条轨迹 evolve 得到的 `cognition_loom_memory` 错题变为 94, 97, 99，准确率提升到 17/20，高于 Agent-KB、ExpeL 和 No-Memory，但付出约 3.82 倍 Agent-KB token 成本。
