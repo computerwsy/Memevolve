@@ -1,0 +1,160 @@
+{
+  "score": 1,
+  "extracted_answer": "192k",
+  "task_id": "89",
+  "question": "截止2025年5月18日，OpenAI发布的codex-1 agent支持的最大上下文tokens数为多少？",
+  "full_query": "截止2025年5月18日，OpenAI发布的codex-1 agent支持的最大上下文tokens数为多少？",
+  "golden_answer": "192k",
+  "status": "success",
+  "agent_result": "截至2025年5月18日，OpenAI发布的codex-1 agent（即Codex编程智能体，由codex-1模型驱动）支持的最大上下文tokens数为192,000 tokens（即192k tokens）。",
+  "agent_trajectory": [
+    {
+      "name": "plan",
+      "value": "## Goal 1: 确认 \"codex-1 agent\" 是否为 OpenAI 正式发布的产品名称及其准确身份\n- Path 1.1: 英文官方文档搜索\n  - 使用 web_search 工具，搜索关键词 \"OpenAI codex-1 agent official release\" 或 \"OpenAI codex-1 model\"，再通过 crawl_page 访问 OpenAI 官方博客或模型文档页，确认产品名称和发布时间。\n  - Success: 找到 OpenAI 官方页面明确提及 \"codex-1 agent\" 作为产品名，或确认该名称是否存在（若不存在则说明可能混淆）。\n- Path 1.2: 中文技术社区与新闻搜索\n  - 使用 web_search 工具，搜索中文关键词 \"OpenAI codex-1 agent 发布\" 或 \"OpenAI codex-1 智能体\"，再通过 crawl_page 访问如 36氪、机器之心、知乎等中文技术媒体的报道，验证产品名称和基本信息。\n  - Success: 在至少两个中文权威来源中找到关于 \"codex-1 agent\" 的明确描述，或确认该名称未被正式使用。\n- Path 1.3: 英文科技新闻搜索\n  - 使用 web_search 工具，搜索关键词 \"codex-1 agent OpenAI announcement 2025\" 或 \"OpenAI releases codex-1 agent\"，再通过 crawl_page 访问 TechCrunch、The Verge 等媒体的文章，确认产品身份。\n  - Success: 在英文科技新闻中找到关于 \"codex-1 agent\" 的明确报道，或确认该名称不存在。\n\n## Goal 2: 精确查找 \"codex-1 agent\" 支持的最大上下文 tokens 数\n- Path 2.1: OpenAI API 文档直接查询\n  - 使用 web_search 工具，搜索关键词 \"site:platform.openai.com codex-1 context tokens\" 或 \"site:openai.com/api codex-1 max tokens\"，再通过 crawl_page 访问 OpenAI 官方 API 参考文档中关于模型参数的页面，查找上下文长度。\n  - Success: 从官方文档中获得明确的数字，并记录来源 URL 和更新日期。\n- Path 2.2: 英文技术博客与开发者社区验证\n  - 使用 web_search 工具，搜索关键词 \"codex-1 agent max context tokens 2025\" 或 \"OpenAI codex-1 context length tokens\"，再通过 crawl_page 访问如 Reddit 的 r/MachineLearning、Stack Overflow、GitHub 讨论或 OpenAI 社区论坛，寻找用户或开发者的讨论和确认。\n  - Success: 在至少一个开发者社区中找到与官方文档一致的上下文长度数据，并附有引用。\n- Path 2.3: 中文技术博客与社区交叉验证\n  - 使用 web_search 工具，搜索关键词 \"codex-1 agent 上下文 tokens 最大\" 或 \"codex-1 智能体 上下文长度\"，再通过 crawl_page 访问中文技术博客（如 CSDN、博客园）或知乎上的技术分析文章，获取其给出的数据。\n  - Success: 在中文技术文章中找到明确数字，并与英文来源进行对比，确保数字一致。\n- Path 2.4: 时间过滤与版本校对\n  - 使用 web_search 工具，设定时间范围（如 2025-05-01 至 2025-05-18），搜索 \"codex-1 context length 2025\" 或 \"OpenAI codex-1 max tokens update\"，再通过 crawl_page 访问结果页面，确认信息的时效性，特别注意是否有版本迭代导致的上下文变化。\n  - Success: 找到明确标注为 2025 年 5 月或更新日期在截止日期前的来源，并记录上下文长度数字。",
+      "think": "",
+      "cot_think": "我们被问到：\"截止2025年5月18日，OpenAI发布的codex-1 agent支持的最大上下文tokens数为多少？\" 我们需要制定一个计划来分解这个任务。根据记忆指导，我们需要分两个子目标：首先确认\"codex-1 agent\"是否为OpenAI正式发布的产品名称，然后查找其最大上下文长度。使用中英文并行搜索，并交叉验证。\n\n我的计划应该包括目标分解和路径多样性。每个目标有1-5条路径。输出格式如要求所示。\n\n我将设计两个主要目标：\n目标1: 确认\"codex-1 agent\"的身份和存在性\n目标2: 查找其最大上下文tokens数\n\n对于目标1，路径可以是：搜索英文官方文档、搜索中文官方或技术博客、搜索科技新闻。\n对于目标2，路径可以是：直接在OpenAI文档中搜索上下文长度、在权威科技媒体中查找、在开发者社区（如Reddit, Stack Overflow）中查找。\n\n注意：我们需要确保时间截止于2025年5月18日，所以可能需要注意最新信息。\n\n让我们构建计划。",
+      "memory_guidance": "AGENT-KB Student Guidance:\n1. 将问题拆解为两个可验证的子目标：先确认“codex-1 agent”是否为OpenAI正式发布的产品名称（注意可能与Codex系列其他模型混淆），再精确查找其最大上下文长度，优先使用OpenAI官方文档、技术博客或权威科技媒体（如TechCrunch、The Verge）作为数据源。  \n2. 采用中英文并行搜索策略，同时使用英文关键词“OpenAI codex-1 agent context tokens maximum”和中文关键词“OpenAI codex-1 agent 上下文 tokens 最大”，并结合时间过滤（2025年5月）捕捉最新更新，避免引用过时信息。  \n3. 在获得一个数字后，通过至少两个独立来源（如OpenAI API文档更新日志、知名开发者社区Stack Overflow或Reddit讨论）交叉验证，确保数字的准确性，因为模型上下文限制可能随版本迭代而变化。\n\nAGENT-KB Teacher Guidance:\n针对这类直接查询技术参数的任务，建议首先结合中英文关键词进行搜索，例如“OpenAI codex-1 agent max context tokens”和“OpenAI codex-1 最大上下文tokens”，以覆盖更多可靠来源。其次，注意验证信息的时效性，优先选择官方文档或权威技术博客（如OpenAI官网、GitHub、技术新闻）中的最新数据，并通过对比多个来源（如英文维基百科与中文技术社区）来消除歧义。最后，若搜索结果中出现多个版本号或上下文长度，需进一步确认“codex-1 agent”的具体版本定义，确保答案精确匹配截止日期。"
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "OpenAI codex-1 agent official release 2025"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "OpenAI codex-1 agent 发布 2025"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "site:platform.openai.com codex-1 context tokens"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "codex-1 agent max context tokens 2025"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "codex-1 agent OpenAI TechCrunch"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'web_search' with arguments '{'query': 'OpenAI codex-1 agent official release 2025'}':\n1. [Codex is now generally available | OpenAI](https://openai.com/index/codex-now-generally-available/)\nDate published: Oct 6, 2025\nSource: Unknown source\n   OpenAI Codex is now generally available with powerful new features for developers: a Slack integration, Codex SDK, and admin tools like ...\n\n2. [The Return of Codex AI — as an Agent - Visual Studio Magazine](https://visualstudiomagazine.com/articles/2025/05/16/the-return-of-codex-ai-as-an-agent.aspx)\nDate published: May 16, 2025\nSource: Unknown source\n   OpenAI's \"Codex\" AI model is back, Update on May 16, 2025: We launched Codex, a cloud-based software engineering agent that can work on many ...\n\n3. [OpenAI launches Codex, an AI coding agent, in ChatGPT](https://techcrunch.com/2025/05/16/openai-launches-codex-an-ai-coding-agent-in-chatgpt/)\nDate published: May 16, 2025\nSource: Unknown source\n   OpenAI has launched an AI agent in ChatGPT, Codex, that can handle multiple software engineering tasks on behalf of users simultaneously.\n\n4. [OpenAI Launches Codex: An Autonomous Programming Agent](https://www.youtube.com/watch?v=qIhdpIP1d-I)\nDate published: May 16, 2025\nSource: Unknown source\n   Read my full Codex review on Every here: https://every.to/chain-of-thought/vibe-check-codex-openai-s-new-coding-agent?utm_source=YouTube ...\n\n5. [OpenAI for Developers in 2025 - Reddit](https://www.reddit.com/r/OpenAI/comments/1q09636/openai_for_developers_in_2025/)\nDate published: Dec 31, 2025\nSource: Unknown source\n   OpenAI here, we published a recap of all the things we shipped in 2025 from models to APIs to tools like Codex ・ codex as a coding surface ・ ...\n\nResults for tool call 'web_search' with arguments '{'query': 'OpenAI codex-1 agent 发布 2025'}':\n1. [Introducing Codex - OpenAI](https://openai.com/index/introducing-codex/)\nDate published: May 16, 2025\nSource: Unknown source\n   May 16, 2025. ReleaseProduct. Introducing Codex. A cloud-based software engineering agent that can work on many tasks in parallel, powered by ...\n\n2. [Codex 简介 - OpenAI](https://openai.com/zh-Hans-CN/index/introducing-codex/)\nDate published: May 16, 2025\nSource: Unknown source\n   OpenAI 2025年5月16日发布产品Codex 简介基于云的软件工程智能体,可并行处理多项任务,由Codex-1 提供支持。 GPT-5.5 GPT-5.4 GPT-5.3 Instant 安全安全措 ...\n\n3. [Introducing upgrades to Codex - OpenAI](https://openai.com/index/introducing-upgrades-to-codex/)\nDate published: Sep 15, 2025\nSource: Unknown source\n   Update on September 23, 2025: GPT‐5‐Codex is now available to developers using Codex via API key brings the Codex agent into VS Code, Cursor\n\n4. [隆重介紹Codex - OpenAI](https://openai.com/zh-Hant/index/introducing-codex/)\nDate published: May 16, 2025\nSource: Unknown source\n   一款以codex-1 為核心的雲端軟體工程代理程式，具備多工處理能力。 目前已開放ChatGPT Pro、Team 和Enterprise 使用者使用，並將於近期提供給Plus 使用者。\n\n5. [Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/)\nDate published: Feb 11, 2026\nSource: Unknown source\n   The first commit to an empty repository landed in late August 2025. The initial scaffold—repository structure, CI configuration, formatting ...\n\nResults for tool call 'web_search' with arguments '{'query': 'site:platform.openai.com codex-1 context tokens'}':\n1. [Tokenizer - OpenAI API](https://platform.openai.com/tokenizer)\nSource: Unknown source\n   Use the tool below to understand how a piece of text might be tokenized by a language model, and the total count of tokens in that piece of text.\n\n2. [OpenAI Platform](https://platform.openai.com/)\nSource: Unknown source\n   Build on the OpenAI API Platform. Sign up or login with an OpenAI account to build with the OpenAI API. Email address. Continue. Or. Continue with Google\n\n3. [Retrieve run step | OpenAI API Reference](https://platform.openai.com/docs/api-reference/run-steps/getRunStep)\nSource: Unknown source\n   Context management. Compaction · Counting tokens · Prompt caching. Prompting ... Codex Ambassadors · Codex for Students · Codex for Open Source. Events. Meetups ...\n\nResults for tool call 'web_search' with arguments '{'query': 'codex-1 agent max context tokens 2025'}':\n1. [Introducing Codex - OpenAI](https://openai.com/index/introducing-codex/)\nDate published: May 16, 2025\nSource: Unknown source\n   codex-1 was tested at a maximum context length of 192k tokens and medium 'reasoning effort', which is the setting that will be available in ...\n\n2. [The 1 Million context rugpull by Codex and Openai. New max is ...](https://www.reddit.com/r/codex/comments/1swqdt9/the_1_million_context_rugpull_by_codex_and_openai/)\nDate published: Apr 27, 2026\nSource: Unknown source\n   The 1 Million context rugpull by Codex and Openai. New max is (258k). Complaint.\n\n3. [Introducing upgrades to Codex - OpenAI](https://openai.com/index/introducing-upgrades-to-codex/)\nDate published: Sep 15, 2025\nSource: Unknown source\n   Update on September 23, 2025: GPT‑5‑Codex is now available to developers using Codex via API key (in addition to being available to developers ...\n\n4. [Codex vs. Claude Code: Context Window, Token Efficiency, and ...](https://www.mindstudio.ai/blog/codex-vs-claude-code-context-window-token-efficiency)\nDate published: May 7, 2026\nSource: Unknown source\n   Codex has a 256,000-token context window. Claude Code with Opus has roughly 1 million. On paper, that's a 4x disadvantage for Codex. In practice ...\n\n5. [What is the token limit for Codex requests? - Milvus](https://milvus.io/ai-quick-reference/what-is-the-token-limit-for-codex-requests)\nSource: Unknown source\n   The current version of Codex, powered by the codex-1 model, supports a maximum context length of 192,000 tokens, which allows it to work with significant ...\n\nResults for tool call 'web_search' with arguments '{'query': 'codex-1 agent OpenAI TechCrunch'}':\n1. [OpenAI launches Codex, an AI coding agent, in ChatGPT](https://techcrunch.com/2025/05/16/openai-launches-codex-an-ai-coding-agent-in-chatgpt/)\nDate published: May 16, 2025\nSource: Unknown source\n   OpenAI has launched an AI agent in ChatGPT, Codex, that can handle multiple software engineering tasks on behalf of users simultaneously.\n\n2. [OpenAI is getting serious about courting enterprise users. On ...](https://www.facebook.com/techcrunch/posts/openai-is-getting-serious-about-courting-enterprise-users-on-tuesday-the-ai-lab-/1344195250907672/)\nDate published: Jun 2, 2026\nSource: Unknown source\n   OpenAI Codex is a coding agent that can interpret natural-language instructions, navigate entire codebases, write code, fix bugs, run tests, and ...\n\n3. [OpenAI's Codex is part of a new cohort of agentic coding tools](https://techcrunch.com/2025/05/20/openais-codex-is-part-of-a-new-cohort-of-agentic-coding-tools/)\nDate published: May 20, 2025\nSource: Unknown source\n   OpenAI introduced a new coding system called Codex, designed to perform complex programming tasks from natural language commands.\n\n4. [OpenAI unveils Codex, a software engineering agent - LinkedIn](https://www.linkedin.com/posts/isabelle-bousquette_openai-launches-new-ai-coding-agent-activity-7329184334572105728-SHR1)\nDate published: May 16, 2025\nSource: Unknown source\n   The agent, known as Codex, will be able to perform several tasks at the same time, including writing code, fixing bugs, running tests and ...\n\n5. [OpenAI launches new Codex tools for white-collar work - TechCrunch](https://techcrunch.com/2026/06/02/openai-launches-new-codex-tools-for-white-collar-work/)\nDate published: Jun 2, 2026\nSource: Unknown source\n   OpenAI released a set of six plug-ins aimed at specific jobs: data analytics, creative production, sales, product design, equity investing, ...",
+      "think": "I need to start investigating both goals in parallel. Goal 1 is to confirm the product identity of 'codex-1 agent' (via English official search, Chinese search, and English tech news). Goal 2 is to find the maximum context tokens (via official API docs, English tech discussion). I'll execute the first path of each goal simultaneously since they are independent web searches.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://openai.com/index/introducing-codex/",
+            "query": "codex-1 was tested at a maximum context length of"
+          }
+        },
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://techcrunch.com/2025/05/16/openai-launches-codex-an-ai-coding-agent-in-chatgpt/",
+            "query": "context tokens maximum codex-1"
+          }
+        },
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://visualstudiomagazine.com/articles/2025/05/16/the-return-of-codex-ai-as-an-agent.aspx",
+            "query": "context length"
+          }
+        },
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://openai.com/zh-Hans-CN/index/introducing-codex/",
+            "query": "最大上下文长度"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'crawl_page' with arguments '{'url': 'https://openai.com/index/introducing-codex/', 'query': 'codex-1 was tested at a maximum context length of'}':\nThe relevant content from the webpage matching the query \"codex-1 was tested at a maximum context length of\" is:\n\n- codex-1 was tested at a maximum context length of **192k tokens** and medium ‘reasoning effort’, which is the setting that will be available in product today.\n\nResults for tool call 'crawl_page' with arguments '{'url': 'https://techcrunch.com/2025/05/16/openai-launches-codex-an-ai-coding-agent-in-chatgpt/', 'query': 'context tokens maximum codex-1'}':\nNo relevant information\n\nResults for tool call 'crawl_page' with arguments '{'url': 'https://visualstudiomagazine.com/articles/2025/05/16/the-return-of-codex-ai-as-an-agent.aspx', 'query': 'context length'}':\nNo relevant information\n\nResults for tool call 'crawl_page' with arguments '{'url': 'https://openai.com/zh-Hans-CN/index/introducing-codex/', 'query': '最大上下文长度'}':\n- **最大上下文长度**：Codex-1 在测试时使用的最大上下文长度为 **192k 令牌**（在中等“推理努力”条件下）。",
+      "think": "From the initial web searches, I've gathered promising data. The product is confirmed as 'Codex' (agent) powered by 'codex-1' model, launched on May 16, 2025. The search result for 'codex-1 was tested at a maximum context length of 192k tokens' from the official 'Introducing Codex' page suggests the answer is 192,000 tokens. However, I need to verify this by directly crawling the official OpenAI announcement page, the TechCrunch article, and the Chinese official page to cross-check the exact number. I will execute these crawls in parallel since they are independent verification paths.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "codex-1 192k context length Reddit"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "codex-1 上下文 192k 令牌 知乎"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'web_search' with arguments '{'query': 'codex-1 192k context length Reddit'}':\n1. [The 1 Million context rugpull by Codex and Openai. New max is ...](https://www.reddit.com/r/codex/comments/1swqdt9/the_1_million_context_rugpull_by_codex_and_openai/)\nDate published: Apr 27, 2026\nSource: Unknown source\n   I have used token windows of allll sizes from 10k to 1M… I can say that the 1M context window is a valuable tool that should be in the toolbox.\n\n2. [GPT 5.4 (with 1m context) is Officialy OUT : r/codex - Reddit](https://www.reddit.com/r/codex/comments/1rlp7rh/gpt_54_with_1m_context_is_officialy_out/)\nDate published: Mar 5, 2026\nSource: Unknown source\n   Guys don't be excited about 1M context size. It's clear from their needle in the haystack eval it drops exponentially after 256k.\n\n3. [just found out they turned off 1M context GPT-5.5 in codex for pro subs](https://www.reddit.com/r/codex/comments/1stvd0t/just_found_out_they_turned_off_1m_context_gpt55/)\nDate published: Apr 23, 2026\nSource: Unknown source\n   Got excited about GPT-5.5's improved long-context performance, only to find out once I went over to try it in codex with my usual 1M config ...\n\n4. [GPT-5 Thinking has 192K Context in ChatGPT Plus : r/OpenAI - Reddit](https://www.reddit.com/r/OpenAI/comments/1mo4amo/gpt5_thinking_has_192k_context_in_chatgpt_plus/)\nDate published: Aug 12, 2025\nSource: Unknown source\n   As for non-reasoning model - for Plus it has 34k context window length. It can actually remember ~28k of input and it's advertised to have ...\n\n5. [1M context is not worth it, seriously - the quality drop is insane : r/codex](https://www.reddit.com/r/codex/comments/1rlyf98/1m_context_is_not_worth_it_seriously_the_quality/)\nDate published: Mar 6, 2026\nSource: Unknown source\n   At 1M, you basically stay in the smart zone for 50% (128k) of the prior context window size.\n\nResults for tool call 'web_search' with arguments '{'query': 'codex-1 上下文 192k 令牌 知乎'}':\n1. [如何评价OpenAI 推出Codex 可将自然语言翻译成代码？ - 知乎](https://www.zhihu.com/question/479001278/answer/1906867694994715504)\nDate published: Aug 11, 2021\nSource: Unknown source\n   codex-1 的评测是在最大上下文长度为192k tokens、采用中等“推理强度 ... 现在，您可以直接使用ChatGPT 账号登录，选择需要的API 组织，无需手动生成和配置API ...\n\n2. [Codex等六大Agent上下文压缩策略后，我们做了第7 个](https://zhuanlan.zhihu.com/p/2047337481255884504)\nDate published: Jun 8, 2026\nSource: Unknown source\n   横向拆解六大Agent 的上下文压缩策略，提炼通用配方，并面向云端多用户的Agent 场景落地一套四级水位线方案。 1. 同一个问题，六种做法. Agent 要做上下文 ...\n\n3. [OpenAI 正式发布GPT-5.3-Codex，与其他版本相比 - 知乎](https://www.zhihu.com/question/2002935266940310387/answer/2003046188404999674)\nDate published: Feb 5, 2026\nSource: Unknown source\n   首个百万Token上下文窗口（Beta）：这是Opus系列的历史性突破，支持处理约75万字的单提示输入，在MRCR v2长文本检索测试中达到76%的准确率，相比Sonnet 4.5的 ...\n\n4. [GPT-5.6 惊现150 万上下文窗口，将如何影响大模型竞争格局？ - 知乎](https://www.zhihu.com/question/2042539496676352614/answer/2050025003077440104)\nDate published: May 25, 2026\nSource: Unknown source\n   多名开发者在OpenAI Codex 后端日志中捕捉到了一系列未官宣模型的踪迹，其中代号为「iris-alpha」的GPT-5.6 模型凭借150 万Token 的超大上下文窗口， ...\n\n5. [最近发布的GPT-5.5具体使用体验怎么样？ - 知乎用户的回答](https://www.zhihu.com/question/2030915204708577599/answer/2032423837174853651)\nDate published: Apr 23, 2026\nSource: Unknown source\n   大家用codex，用/statusline勾选上下文窗口显示，你会发现虽然GPT 5.5的上下文是1.05M，但是codex里面被强制限制在了286k. 官方在github仓库的issue ...",
+      "think": "I have already obtained the primary answer from multiple official and third-party sources:\n- OpenAI official page (https://openai.com/index/introducing-codex/) states: 'codex-1 was tested at a maximum context length of 192k tokens'\n- OpenAI Chinese page (https://openai.com/zh-Hans-CN/index/introducing-codex/) states: '最大上下文长度为 192k 令牌'\n- Milvus AI FAQ also mentions 192,000 tokens.\n\nNow I need to cross-verify this information with additional independent sources as per the plan:\n- Path 2.2: Search English developer communities (Reddit, Stack Overflow) for discussions about codex-1 context length.\n- Path 2.3: Search Chinese technical communities (Zhihu, CSDN) for verification.\n\nI will search for both in parallel.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "crawl_page",
+          "arguments": {
+            "url": "https://milvus.io/ai-quick-reference/what-is-the-token-limit-for-codex-requests",
+            "query": "context length 192,000 tokens codex-1"
+          }
+        },
+        {
+          "name": "web_search",
+          "arguments": {
+            "query": "codex-1 192k tokens context length May 2025"
+          }
+        }
+      ],
+      "obs": "Results for tool call 'crawl_page' with arguments '{'url': 'https://milvus.io/ai-quick-reference/what-is-the-token-limit-for-codex-requests', 'query': 'context length 192,000 tokens codex-1'}':\n- The OpenAI Codex model, powered by **codex-1**, supports a **maximum context length of 192,000 tokens**.\n- This large context window enables Codex to handle entire file structures, maintain cross-file awareness, and generate comprehensive solutions for complex software engineering tasks.\n- Token allocation includes both input and output tokens, with intelligent prioritization of relevant context to use tokens effectively.\n- For comparison, a smaller model called `codex-mini-latest` is available for faster, lower-latency interactions but is not the focus of the 192k context length.\n\nResults for tool call 'web_search' with arguments '{'query': 'codex-1 192k tokens context length May 2025'}':\n1. [Larger context length please - Codex - OpenAI Developer Community](https://community.openai.com/t/larger-context-length-please/1380603)\nDate published: May 10, 2026\nSource: Unknown source\n   context window size is a fixed property of a model that can't be extended. The workaround is to use a model with a larger context window. ...\n\n2. [The 1 Million context rugpull by Codex and Openai. New max is ...](https://www.reddit.com/r/codex/comments/1swqdt9/the_1_million_context_rugpull_by_codex_and_openai/)\nDate published: Apr 27, 2026\nSource: Unknown source\n   OpenAI introduced a 1 token context people sizes from 10k to 1M... lower token lengths got significantly better, it doesn't really matter. having ...\n\n3. [Support 1M token context for GPT-5.5 in Codex #19464 - GitHub](https://github.com/openai/codex/issues/19464)\nDate published: Apr 24, 2026\nSource: Unknown source\n   GPT-5.5 in Codex is documented as having a 400K context window, while the API version supports 1M context. Codex subscription users are now ...\n\n4. [What is the token limit for Codex requests? - Milvus](https://milvus.io/ai-quick-reference/what-is-the-token-limit-for-codex-requests)\nSource: Unknown source\n   The current version of Codex, powered by the codex-1 model, supports a maximum context length of 192,000 tokens, which allows it to work with significant ...\n\n5. [Codex vs. Claude Code: Context Window, Token Efficiency, and ...](https://www.mindstudio.ai/blog/codex-vs-claude-code-context-window-token-efficiency)\nDate published: May 7, 2026\nSource: Unknown source\n   Codex has a 256,000-token context window. Context window size and session length are not the same thing. Codex: ~256,000 tokens per session. ...",
+      "think": "I have already gathered strong evidence from OpenAI's official announcement page (both English and Chinese) that codex-1 was tested at a maximum context length of 192k tokens at launch on May 16, 2025. To cross-validate this number with independent sources, I should crawl the Milvus page (which mentioned 192,000 tokens) and also search for additional articles or discussions specifically stating '192k context length' for codex-1 within the cutoff date. This will provide multi-source verification.",
+      "cot_think": null,
+      "memory_guidance": null
+    },
+    {
+      "name": "action",
+      "tool_calls": [
+        {
+          "name": "final_answer",
+          "arguments": {
+            "answer": "截至2025年5月18日，OpenAI发布的codex-1 agent（即Codex编程智能体，由codex-1模型驱动）支持的最大上下文tokens数为192,000 tokens（即192k tokens）。"
+          }
+        }
+      ],
+      "obs": "截至2025年5月18日，OpenAI发布的codex-1 agent（即Codex编程智能体，由codex-1模型驱动）支持的最大上下文tokens数为192,000 tokens（即192k tokens）。",
+      "think": "I have collected sufficient evidence from multiple independent sources to answer the question. The official OpenAI blog (English and Chinese), the Milvus AI reference, and Zhihu all converge on the same number: 192,000 tokens (192k tokens). The product 'Codex' was officially launched on May 16, 2025, powered by the codex-1 model, which is before the May 18, 2025 cutoff. All goals are satisfied. I will now provide the final answer in Chinese (the language of the original task).",
+      "cot_think": null,
+      "memory_guidance": null
+    }
+  ],
+  "metrics": {
+    "elapsed_time": 117.91705846786499,
+    "total_tokens": 93174,
+    "prompt_tokens": 85073,
+    "completion_tokens": 8101,
+    "api_calls": 15
+  }
+}

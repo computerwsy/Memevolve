@@ -2422,3 +2422,343 @@ Code context:
 [2026-06-16 20:08:06.317] [FETCH]... ↓ https://tvshowtranscripts.ourboard.org/viewtopic.php?f=185&t=11319                                   | ✓ | ⏱: 1.28s 
 [2026-06-16 20:08:06.321] [SCRAPE].. ◆ https://tvshowtranscripts.ourboard.org/viewtopic.php?f=185&t=11319                                   | ✓ | ⏱: 0.00s 
 [2026-06-16 20:08:06.323] [COMPLETE] ● https://tvshowtranscripts.ourboard.org/viewtopic.php?f=185&t=11319                                   | ✓ | ⏱: 1.29s 
+[2026-06-18 09:19:27.950] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:19:32.571] [FETCH]... ↓ https://ipdefenseforum.com/2025/05/germany-philippines-sign-defense-agreement/                       | ✓ | ⏱: 4.60s 
+[2026-06-18 09:19:32.644] [SCRAPE].. ◆ https://ipdefenseforum.com/2025/05/germany-philippines-sign-defense-agreement/                       | ✓ | ⏱: 0.07s 
+[2026-06-18 09:19:32.645] [COMPLETE] ● https://ipdefenseforum.com/2025/05/germany-philippines-sign-defense-agreement/                       | ✓ | ⏱: 4.68s 
+[2026-06-18 09:19:51.626] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:19:52.159] [FETCH]... ↓ https://en.wikipedia.org/wiki/National_symbols_of_the_Philippines                                    | ✓ | ⏱: 0.51s 
+[2026-06-18 09:19:52.330] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/National_symbols_of_the_Philippines                                    | ✓ | ⏱: 0.17s 
+[2026-06-18 09:19:52.331] [COMPLETE] ● https://en.wikipedia.org/wiki/National_symbols_of_the_Philippines                                    | ✓ | ⏱: 0.69s 
+[2026-06-18 09:20:04.656] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:20:06.981] [FETCH]... ↓ https://unifuncs.com/s/o3POAfyi                                                                      | ✓ | ⏱: 2.31s 
+[2026-06-18 09:20:07.052] [SCRAPE].. ◆ https://unifuncs.com/s/o3POAfyi                                                                      | ✓ | ⏱: 0.07s 
+[2026-06-18 09:20:07.052] [COMPLETE] ● https://unifuncs.com/s/o3POAfyi                                                                      | ✓ | ⏱: 2.39s 
+[2026-06-18 09:22:08.378] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:22:09.196] [FETCH]... ↓ https://www.theguardian.com/lifeandstyle/2015/se...gustave-flaubert-cold-chocolate-breakfast-recipe  | ✓ | ⏱: 0.81s 
+[2026-06-18 09:22:09.245] [SCRAPE].. ◆ https://www.theguardian.com/lifeandstyle/2015/se...gustave-flaubert-cold-chocolate-breakfast-recipe  | ✓ | ⏱: 0.05s 
+[2026-06-18 09:22:09.245] [COMPLETE] ● https://www.theguardian.com/lifeandstyle/2015/se...gustave-flaubert-cold-chocolate-breakfast-recipe  | ✓ | ⏱: 0.86s 
+[2026-06-18 09:22:29.612] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:22:30.429] [FETCH]... ↓ https://www.rfi.fr/cn/专栏检索/法国美食/20220805-福楼拜笔下的美食                                                    | ✓ | ⏱: 0.80s 
+[2026-06-18 09:22:30.489] [SCRAPE].. ◆ https://www.rfi.fr/cn/专栏检索/法国美食/20220805-福楼拜笔下的美食                                                    | ✓ | ⏱: 0.06s 
+[2026-06-18 09:22:30.490] [COMPLETE] ● https://www.rfi.fr/cn/专栏检索/法国美食/20220805-福楼拜笔下的美食                                                    | ✓ | ⏱: 0.86s 
+[2026-06-18 09:22:39.511] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:22:43.880] [FETCH]... ↓ https://fivepoints.gsu.edu/madame-bovary-what-is-food-if-you-cant-consume-it/                        | ✓ | ⏱: 4.35s 
+[2026-06-18 09:22:43.920] [SCRAPE].. ◆ https://fivepoints.gsu.edu/madame-bovary-what-is-food-if-you-cant-consume-it/                        | ✓ | ⏱: 0.04s 
+[2026-06-18 09:22:43.921] [COMPLETE] ● https://fivepoints.gsu.edu/madame-bovary-what-is-food-if-you-cant-consume-it/                        | ✓ | ⏱: 4.39s 
+[2026-06-18 09:22:51.492] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:22:52.440] [FETCH]... ↓ https://paperandsalt.org/tag/gruyere/                                                                | ✓ | ⏱: 0.94s 
+[2026-06-18 09:22:52.475] [SCRAPE].. ◆ https://paperandsalt.org/tag/gruyere/                                                                | ✓ | ⏱: 0.03s 
+[2026-06-18 09:22:52.476] [COMPLETE] ● https://paperandsalt.org/tag/gruyere/                                                                | ✓ | ⏱: 0.97s 
+[2026-06-18 09:24:13.873] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:24:14.532] [FETCH]... ↓ https://en.wikipedia.org/wiki/Madame_Bovary_(1991_film)                                              | ✓ | ⏱: 0.64s 
+[2026-06-18 09:24:14.609] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Madame_Bovary_(1991_film)                                              | ✓ | ⏱: 0.08s 
+[2026-06-18 09:24:14.610] [COMPLETE] ● https://en.wikipedia.org/wiki/Madame_Bovary_(1991_film)                                              | ✓ | ⏱: 0.72s 
+[2026-06-18 09:24:34.077] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:24:34.742] [FETCH]... ↓ https://www.nytimes.com/1991/12/25/movies/review...abrol-a-madame-bovary-with-isabelle-huppert.html  | ✓ | ⏱: 0.64s 
+[2026-06-18 09:24:34.744] [SCRAPE].. ◆ https://www.nytimes.com/1991/12/25/movies/review...abrol-a-madame-bovary-with-isabelle-huppert.html  | ✓ | ⏱: 0.00s 
+[2026-06-18 09:24:34.744] [COMPLETE] ● https://www.nytimes.com/1991/12/25/movies/review...abrol-a-madame-bovary-with-isabelle-huppert.html  | ✓ | ⏱: 0.64s 
+[2026-06-18 09:25:01.241] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:25:02.818] [FETCH]... ↓ https://www.imdb.com/title/tt0102368/trivia                                                          | ✓ | ⏱: 1.56s 
+[2026-06-18 09:25:02.821] [SCRAPE].. ◆ https://www.imdb.com/title/tt0102368/trivia                                                          | ✓ | ⏱: 0.00s 
+[2026-06-18 09:25:02.822] [COMPLETE] ● https://www.imdb.com/title/tt0102368/trivia                                                          | ✓ | ⏱: 1.56s 
+[2026-06-18 09:26:16.755] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:26:17.717] [FETCH]... ↓ https://en.wikipedia.org/wiki/Taylor_Swift                                                           | ✓ | ⏱: 0.94s 
+[2026-06-18 09:26:18.777] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Taylor_Swift                                                           | ✓ | ⏱: 1.06s 
+[2026-06-18 09:26:18.782] [COMPLETE] ● https://en.wikipedia.org/wiki/Taylor_Swift                                                           | ✓ | ⏱: 2.01s 
+[2026-06-18 09:27:01.645] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:27:03.186] [FETCH]... ↓ https://en.wikipedia.org/wiki/Carnegie_Mellon_University                                             | ✓ | ⏱: 1.53s 
+[2026-06-18 09:27:03.572] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Carnegie_Mellon_University                                             | ✓ | ⏱: 0.38s 
+[2026-06-18 09:27:03.573] [COMPLETE] ● https://en.wikipedia.org/wiki/Carnegie_Mellon_University                                             | ✓ | ⏱: 1.92s 
+[2026-06-18 09:27:14.773] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:27:19.392] [FETCH]... ↓ https://www.amtrak.com/pennsylvanian-train                                                           | ✓ | ⏱: 4.60s 
+[2026-06-18 09:27:19.488] [SCRAPE].. ◆ https://www.amtrak.com/pennsylvanian-train                                                           | ✓ | ⏱: 0.10s 
+[2026-06-18 09:27:19.489] [COMPLETE] ● https://www.amtrak.com/pennsylvanian-train                                                           | ✓ | ⏱: 4.70s 
+[2026-06-18 09:27:29.181] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:27:30.314] [FETCH]... ↓ https://www.rome2rio.com/s/University-of-Pennsylvania/Carnegie-Mellon-University                     | ✓ | ⏱: 1.12s 
+[2026-06-18 09:27:30.319] [SCRAPE].. ◆ https://www.rome2rio.com/s/University-of-Pennsylvania/Carnegie-Mellon-University                     | ✓ | ⏱: 0.00s 
+[2026-06-18 09:27:30.320] [COMPLETE] ● https://www.rome2rio.com/s/University-of-Pennsylvania/Carnegie-Mellon-University                     | ✓ | ⏱: 1.13s 
+[2026-06-18 09:27:45.278] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:27:49.237] [FETCH]... ↓ https://www.paturnpike.com/toll-calculator                                                           | ✓ | ⏱: 3.95s 
+[2026-06-18 09:27:49.273] [SCRAPE].. ◆ https://www.paturnpike.com/toll-calculator                                                           | ✓ | ⏱: 0.04s 
+[2026-06-18 09:27:49.274] [COMPLETE] ● https://www.paturnpike.com/toll-calculator                                                           | ✓ | ⏱: 3.99s 
+[2026-06-18 09:32:14.473] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:32:17.706] [FETCH]... ↓ https://zh.wikipedia.org/wiki/油炸绿蕃茄                                                                  | ✓ | ⏱: 3.22s 
+[2026-06-18 09:32:17.787] [SCRAPE].. ◆ https://zh.wikipedia.org/wiki/油炸绿蕃茄                                                                  | ✓ | ⏱: 0.08s 
+[2026-06-18 09:32:17.788] [COMPLETE] ● https://zh.wikipedia.org/wiki/油炸绿蕃茄                                                                  | ✓ | ⏱: 3.30s 
+[2026-06-18 09:39:54.542] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:39:55.038] [FETCH]... ↓ https://en.wikipedia.org/wiki/Fried_Green_Tomatoes_at_the_Whistle_Stop_Cafe                          | ✓ | ⏱: 0.48s 
+[2026-06-18 09:39:55.106] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Fried_Green_Tomatoes_at_the_Whistle_Stop_Cafe                          | ✓ | ⏱: 0.07s 
+[2026-06-18 09:39:55.107] [COMPLETE] ● https://en.wikipedia.org/wiki/Fried_Green_Tomatoes_at_the_Whistle_Stop_Cafe                          | ✓ | ⏱: 0.55s 
+[2026-06-18 09:41:59.259] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:42:01.410] [FETCH]... ↓ https://openai.com/index/openai-five/                                                                | ✓ | ⏱: 2.14s 
+[2026-06-18 09:42:01.484] [SCRAPE].. ◆ https://openai.com/index/openai-five/                                                                | ✓ | ⏱: 0.07s 
+[2026-06-18 09:42:01.484] [COMPLETE] ● https://openai.com/index/openai-five/                                                                | ✓ | ⏱: 2.21s 
+[2026-06-18 09:42:08.413] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:42:09.227] [FETCH]... ↓ https://arxiv.org/abs/1912.06680                                                                     | ✓ | ⏱: 0.80s 
+[2026-06-18 09:42:09.271] [SCRAPE].. ◆ https://arxiv.org/abs/1912.06680                                                                     | ✓ | ⏱: 0.04s 
+[2026-06-18 09:42:09.271] [COMPLETE] ● https://arxiv.org/abs/1912.06680                                                                     | ✓ | ⏱: 0.85s 
+[2026-06-18 09:42:25.667] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:42:26.133] [FETCH]... ↓ https://en.wikipedia.org/wiki/OpenAI_Five                                                            | ✓ | ⏱: 0.45s 
+[2026-06-18 09:42:26.271] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/OpenAI_Five                                                            | ✓ | ⏱: 0.14s 
+[2026-06-18 09:42:26.272] [COMPLETE] ● https://en.wikipedia.org/wiki/OpenAI_Five                                                            | ✓ | ⏱: 0.58s 
+[2026-06-18 09:42:51.779] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:42:51.894] [ERROR]... × https://cdc.openai.com/dota-2.pdf                  | Error: Unexpected error in _crawl_web at line 696 in _crawl_web (../../../../../../home/gujing/.local/lib/python3.10/site-packages/crawl4ai/async_crawler_strategy.py):
+Error: Failed on navigating ACS-GOTO:
+Page.goto: net::ERR_NAME_NOT_RESOLVED at https://cdc.openai.com/dota-2.pdf
+Call log:
+  - navigating to "https://cdc.openai.com/dota-2.pdf", waiting until "domcontentloaded"
+
+
+Code context:
+ 691                               tag="GOTO",
+ 692                               params={"url": url},
+ 693                           )
+ 694                           response = None
+ 695                       else:
+ 696 →                         raise RuntimeError(f"Failed on navigating ACS-GOTO:\n{str(e)}")
+ 697   
+ 698                   await self.execute_hook(
+ 699                       "after_goto", page, context=context, url=url, response=response, config=config
+ 700                   )
+ 701    
+[2026-06-18 09:43:05.917] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:43:07.146] [FETCH]... ↓ https://arxiv.org/pdf/1912.06680.pdf                                                                 | ✓ | ⏱: 1.21s 
+[2026-06-18 09:43:07.148] [SCRAPE].. ◆ https://arxiv.org/pdf/1912.06680.pdf                                                                 | ✓ | ⏱: 0.00s 
+[2026-06-18 09:43:07.149] [COMPLETE] ● https://arxiv.org/pdf/1912.06680.pdf                                                                 | ✓ | ⏱: 1.21s 
+[2026-06-18 09:45:58.235] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:45:58.731] [FETCH]... ↓ https://en.wikipedia.org/wiki/The_Little_Mermaid_(1989_film)                                         | ✓ | ⏱: 0.48s 
+[2026-06-18 09:45:59.113] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/The_Little_Mermaid_(1989_film)                                         | ✓ | ⏱: 0.38s 
+[2026-06-18 09:45:59.114] [COMPLETE] ● https://en.wikipedia.org/wiki/The_Little_Mermaid_(1989_film)                                         | ✓ | ⏱: 0.86s 
+[2026-06-18 09:46:06.694] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:46:07.975] [ERROR]... × https://zh.wikipedia.org/zh-hans/小美人鱼_(1989年电影)    | Error: Unexpected error in _crawl_web at line 696 in _crawl_web (../../../../../../home/gujing/.local/lib/python3.10/site-packages/crawl4ai/async_crawler_strategy.py):
+Error: Failed on navigating ACS-GOTO:
+Page.goto: net::ERR_NETWORK_CHANGED at https://zh.wikipedia.org/zh-hans/%E5%B0%8F%E7%BE%8E%E4%BA%BA%E9%B1%BC_(1989%E5%B9%B4%E7%94%B5%E5%BD%B1)
+Call log:
+  - navigating to "https://zh.wikipedia.org/zh-hans/%E5%B0%8F%E7%BE%8E%E4%BA%BA%E9%B1%BC_(1989%E5%B9%B4%E7%94%B5%E5%BD%B1)", waiting until "domcontentloaded"
+
+
+Code context:
+ 691                               tag="GOTO",
+ 692                               params={"url": url},
+ 693                           )
+ 694                           response = None
+ 695                       else:
+ 696 →                         raise RuntimeError(f"Failed on navigating ACS-GOTO:\n{str(e)}")
+ 697   
+ 698                   await self.execute_hook(
+ 699                       "after_goto", page, context=context, url=url, response=response, config=config
+ 700                   )
+ 701    
+[2026-06-18 09:47:14.532] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:47:15.515] [FETCH]... ↓ https://en.wikipedia.org/wiki/Taylor_Swift                                                           | ✓ | ⏱: 0.97s 
+[2026-06-18 09:47:16.814] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Taylor_Swift                                                           | ✓ | ⏱: 1.30s 
+[2026-06-18 09:47:16.819] [COMPLETE] ● https://en.wikipedia.org/wiki/Taylor_Swift                                                           | ✓ | ⏱: 2.28s 
+[2026-06-18 09:47:47.964] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:47:48.437] [FETCH]... ↓ https://en.wikipedia.org/wiki/The_Little_Mermaid_(1989_film)                                         | ✓ | ⏱: 0.45s 
+[2026-06-18 09:47:48.808] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/The_Little_Mermaid_(1989_film)                                         | ✓ | ⏱: 0.37s 
+[2026-06-18 09:47:48.810] [COMPLETE] ● https://en.wikipedia.org/wiki/The_Little_Mermaid_(1989_film)                                         | ✓ | ⏱: 0.82s 
+[2026-06-18 09:47:56.708] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:47:57.388] [FETCH]... ↓ https://en.wikipedia.org/wiki/The_Lion_King                                                          | ✓ | ⏱: 0.67s 
+[2026-06-18 09:47:58.044] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/The_Lion_King                                                          | ✓ | ⏱: 0.66s 
+[2026-06-18 09:47:58.047] [COMPLETE] ● https://en.wikipedia.org/wiki/The_Lion_King                                                          | ✓ | ⏱: 1.33s 
+[2026-06-18 09:50:31.769] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:50:34.544] [FETCH]... ↓ https://openai.com/index/introducing-codex/                                                          | ✓ | ⏱: 2.76s 
+[2026-06-18 09:50:34.645] [SCRAPE].. ◆ https://openai.com/index/introducing-codex/                                                          | ✓ | ⏱: 0.10s 
+[2026-06-18 09:50:34.646] [COMPLETE] ● https://openai.com/index/introducing-codex/                                                          | ✓ | ⏱: 2.87s 
+[2026-06-18 09:50:38.436] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:50:39.493] [FETCH]... ↓ https://techcrunch.com/2025/05/16/openai-launches-codex-an-ai-coding-agent-in-chatgpt/               | ✓ | ⏱: 1.05s 
+[2026-06-18 09:50:39.544] [SCRAPE].. ◆ https://techcrunch.com/2025/05/16/openai-launches-codex-an-ai-coding-agent-in-chatgpt/               | ✓ | ⏱: 0.05s 
+[2026-06-18 09:50:39.544] [COMPLETE] ● https://techcrunch.com/2025/05/16/openai-launches-codex-an-ai-coding-agent-in-chatgpt/               | ✓ | ⏱: 1.10s 
+[2026-06-18 09:50:44.921] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:50:48.128] [FETCH]... ↓ https://visualstudiomagazine.com/articles/2025/05/16/the-return-of-codex-ai-as-an-agent.aspx         | ✓ | ⏱: 3.20s 
+[2026-06-18 09:50:48.189] [SCRAPE].. ◆ https://visualstudiomagazine.com/articles/2025/05/16/the-return-of-codex-ai-as-an-agent.aspx         | ✓ | ⏱: 0.06s 
+[2026-06-18 09:50:48.189] [COMPLETE] ● https://visualstudiomagazine.com/articles/2025/05/16/the-return-of-codex-ai-as-an-agent.aspx         | ✓ | ⏱: 3.26s 
+[2026-06-18 09:50:51.258] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:50:52.594] [FETCH]... ↓ https://openai.com/zh-Hans-CN/index/introducing-codex/                                               | ✓ | ⏱: 1.32s 
+[2026-06-18 09:50:52.694] [SCRAPE].. ◆ https://openai.com/zh-Hans-CN/index/introducing-codex/                                               | ✓ | ⏱: 0.10s 
+[2026-06-18 09:50:52.694] [COMPLETE] ● https://openai.com/zh-Hans-CN/index/introducing-codex/                                               | ✓ | ⏱: 1.42s 
+[2026-06-18 09:51:15.997] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:51:17.624] [FETCH]... ↓ https://milvus.io/ai-quick-reference/what-is-the-token-limit-for-codex-requests                      | ✓ | ⏱: 1.62s 
+[2026-06-18 09:51:17.648] [SCRAPE].. ◆ https://milvus.io/ai-quick-reference/what-is-the-token-limit-for-codex-requests                      | ✓ | ⏱: 0.02s 
+[2026-06-18 09:51:17.648] [COMPLETE] ● https://milvus.io/ai-quick-reference/what-is-the-token-limit-for-codex-requests                      | ✓ | ⏱: 1.64s 
+[2026-06-18 09:52:50.416] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:52:52.874] [FETCH]... ↓ https://www.vogue.com/slideshow/met-gala-2025-red-carpet                                             | ✓ | ⏱: 2.44s 
+[2026-06-18 09:52:52.943] [SCRAPE].. ◆ https://www.vogue.com/slideshow/met-gala-2025-red-carpet                                             | ✓ | ⏱: 0.07s 
+[2026-06-18 09:52:52.944] [COMPLETE] ● https://www.vogue.com/slideshow/met-gala-2025-red-carpet                                             | ✓ | ⏱: 2.51s 
+[2026-06-18 09:53:13.812] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:53:17.225] [FETCH]... ↓ https://www.today.com/style/celeb-style/met-gala-guest-list-2025-rcna203399                          | ✓ | ⏱: 3.39s 
+[2026-06-18 09:53:17.343] [SCRAPE].. ◆ https://www.today.com/style/celeb-style/met-gala-guest-list-2025-rcna203399                          | ✓ | ⏱: 0.12s 
+[2026-06-18 09:53:17.345] [COMPLETE] ● https://www.today.com/style/celeb-style/met-gala-guest-list-2025-rcna203399                          | ✓ | ⏱: 3.51s 
+[2026-06-18 09:53:53.549] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:53:56.644] [FETCH]... ↓ https://www.grammy.com/artists/mary-j-blige/779/                                                     | ✓ | ⏱: 3.08s 
+[2026-06-18 09:53:56.726] [SCRAPE].. ◆ https://www.grammy.com/artists/mary-j-blige/779/                                                     | ✓ | ⏱: 0.08s 
+[2026-06-18 09:53:56.727] [COMPLETE] ● https://www.grammy.com/artists/mary-j-blige/779/                                                     | ✓ | ⏱: 3.16s 
+[2026-06-18 09:54:01.098] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:54:03.349] [FETCH]... ↓ https://www.grammy.com/artists/sheryl-crow/1553/                                                     | ✓ | ⏱: 2.24s 
+[2026-06-18 09:54:03.422] [SCRAPE].. ◆ https://www.grammy.com/artists/sheryl-crow/1553/                                                     | ✓ | ⏱: 0.07s 
+[2026-06-18 09:54:03.422] [COMPLETE] ● https://www.grammy.com/artists/sheryl-crow/1553/                                                     | ✓ | ⏱: 2.31s 
+[2026-06-18 09:55:33.891] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:55:35.586] [FETCH]... ↓ https://academicdevelopment.hku.hk/new-academic-staff-2024/                                          | ✓ | ⏱: 1.68s 
+[2026-06-18 09:55:35.688] [SCRAPE].. ◆ https://academicdevelopment.hku.hk/new-academic-staff-2024/                                          | ✓ | ⏱: 0.10s 
+[2026-06-18 09:55:35.688] [COMPLETE] ● https://academicdevelopment.hku.hk/new-academic-staff-2024/                                          | ✓ | ⏱: 1.79s 
+[2026-06-18 09:55:40.398] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:55:41.837] [FETCH]... ↓ https://www.ugcs.gov.hk/en/information/disclosure.html                                               | ✓ | ⏱: 1.43s 
+[2026-06-18 09:55:41.844] [SCRAPE].. ◆ https://www.ugcs.gov.hk/en/information/disclosure.html                                               | ✓ | ⏱: 0.01s 
+[2026-06-18 09:55:41.845] [COMPLETE] ● https://www.ugcs.gov.hk/en/information/disclosure.html                                               | ✓ | ⏱: 1.44s 
+[2026-06-18 09:58:21.376] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:58:23.377] [FETCH]... ↓ https://www.olympics.com/en/athletes/cate-campbell                                                   | ✓ | ⏱: 1.98s 
+[2026-06-18 09:58:23.415] [SCRAPE].. ◆ https://www.olympics.com/en/athletes/cate-campbell                                                   | ✓ | ⏱: 0.04s 
+[2026-06-18 09:58:23.415] [COMPLETE] ● https://www.olympics.com/en/athletes/cate-campbell                                                   | ✓ | ⏱: 2.02s 
+[2026-06-18 09:58:27.359] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 09:58:28.776] [FETCH]... ↓ https://www.olympics.com/en/athletes/bronte-campbell                                                 | ✓ | ⏱: 1.40s 
+[2026-06-18 09:58:28.813] [SCRAPE].. ◆ https://www.olympics.com/en/athletes/bronte-campbell                                                 | ✓ | ⏱: 0.04s 
+[2026-06-18 09:58:28.814] [COMPLETE] ● https://www.olympics.com/en/athletes/bronte-campbell                                                 | ✓ | ⏱: 1.43s 
+[2026-06-18 10:00:44.127] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:00:44.605] [FETCH]... ↓ https://en.wikipedia.org/wiki/Martini_(cocktail)                                                     | ✓ | ⏱: 0.46s 
+[2026-06-18 10:00:44.715] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Martini_(cocktail)                                                     | ✓ | ⏱: 0.11s 
+[2026-06-18 10:00:44.716] [COMPLETE] ● https://en.wikipedia.org/wiki/Martini_(cocktail)                                                     | ✓ | ⏱: 0.57s 
+[2026-06-18 10:02:19.088] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:02:42.496] [FETCH]... ↓ https://iba-world.com/iba-cocktail/dry-martini/                                                      | ✓ | ⏱: 23.40s 
+[2026-06-18 10:02:42.533] [SCRAPE].. ◆ https://iba-world.com/iba-cocktail/dry-martini/                                                      | ✓ | ⏱: 0.04s 
+[2026-06-18 10:02:42.534] [COMPLETE] ● https://iba-world.com/iba-cocktail/dry-martini/                                                      | ✓ | ⏱: 23.44s 
+[2026-06-18 10:02:46.316] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:02:46.793] [FETCH]... ↓ https://en.wikipedia.org/wiki/Martini_(cocktail)                                                     | ✓ | ⏱: 0.46s 
+[2026-06-18 10:02:46.903] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Martini_(cocktail)                                                     | ✓ | ⏱: 0.11s 
+[2026-06-18 10:02:46.904] [COMPLETE] ● https://en.wikipedia.org/wiki/Martini_(cocktail)                                                     | ✓ | ⏱: 0.57s 
+[2026-06-18 10:04:28.697] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:04:30.582] [FETCH]... ↓ https://unifuncs.com/s/PSEtt1XB                                                                      | ✓ | ⏱: 1.87s 
+[2026-06-18 10:04:30.650] [SCRAPE].. ◆ https://unifuncs.com/s/PSEtt1XB                                                                      | ✓ | ⏱: 0.07s 
+[2026-06-18 10:04:30.650] [COMPLETE] ● https://unifuncs.com/s/PSEtt1XB                                                                      | ✓ | ⏱: 1.94s 
+[2026-06-18 10:04:38.681] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:04:40.127] [FETCH]... ↓ https://www.youtube.com/shorts/4Q5xkSxxGkQ                                                           | ✓ | ⏱: 1.43s 
+[2026-06-18 10:04:40.172] [SCRAPE].. ◆ https://www.youtube.com/shorts/4Q5xkSxxGkQ                                                           | ✓ | ⏱: 0.04s 
+[2026-06-18 10:04:40.172] [COMPLETE] ● https://www.youtube.com/shorts/4Q5xkSxxGkQ                                                           | ✓ | ⏱: 1.47s 
+[2026-06-18 10:05:09.224] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:05:10.407] [FETCH]... ↓ https://www.juksy.com/tag/ishowspeed 1亿播放量 物理挑战 视频                                                   | ✓ | ⏱: 1.16s 
+[2026-06-18 10:05:10.410] [SCRAPE].. ◆ https://www.juksy.com/tag/ishowspeed 1亿播放量 物理挑战 视频                                                   | ✓ | ⏱: 0.00s 
+[2026-06-18 10:05:10.411] [COMPLETE] ● https://www.juksy.com/tag/ishowspeed 1亿播放量 物理挑战 视频                                                   | ✓ | ⏱: 1.17s 
+[2026-06-18 10:05:14.397] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:05:16.627] [FETCH]... ↓ https://www.facebook.com/MARCAinEnglish/videos/s...d-off-the-challenge-of-escapin/1841062116680803/  | ✓ | ⏱: 2.21s 
+[2026-06-18 10:05:16.702] [SCRAPE].. ◆ https://www.facebook.com/MARCAinEnglish/videos/s...d-off-the-challenge-of-escapin/1841062116680803/  | ✓ | ⏱: 0.07s 
+[2026-06-18 10:05:16.703] [COMPLETE] ● https://www.facebook.com/MARCAinEnglish/videos/s...d-off-the-challenge-of-escapin/1841062116680803/  | ✓ | ⏱: 2.29s 
+[2026-06-18 10:06:26.041] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:06:28.463] [FETCH]... ↓ https://www.balenciaga.com/en-it/re-sell-program                                                     | ✓ | ⏱: 2.41s 
+[2026-06-18 10:06:28.577] [SCRAPE].. ◆ https://www.balenciaga.com/en-it/re-sell-program                                                     | ✓ | ⏱: 0.11s 
+[2026-06-18 10:06:28.578] [COMPLETE] ● https://www.balenciaga.com/en-it/re-sell-program                                                     | ✓ | ⏱: 2.53s 
+[2026-06-18 10:06:33.418] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:06:35.405] [FETCH]... ↓ https://balenciaga.reflaunt.com/                                                                     | ✓ | ⏱: 1.97s 
+[2026-06-18 10:06:35.414] [SCRAPE].. ◆ https://balenciaga.reflaunt.com/                                                                     | ✓ | ⏱: 0.01s 
+[2026-06-18 10:06:35.415] [COMPLETE] ● https://balenciaga.reflaunt.com/                                                                     | ✓ | ⏱: 1.99s 
+[2026-06-18 10:06:38.621] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:06:41.228] [FETCH]... ↓ https://www.worldwar1centennial.org/index.php/ed...rld-at-war/5048-participants-in-world-war-i.html  | ✓ | ⏱: 2.59s 
+[2026-06-18 10:06:41.307] [SCRAPE].. ◆ https://www.worldwar1centennial.org/index.php/ed...rld-at-war/5048-participants-in-world-war-i.html  | ✓ | ⏱: 0.08s 
+[2026-06-18 10:06:41.307] [COMPLETE] ● https://www.worldwar1centennial.org/index.php/ed...rld-at-war/5048-participants-in-world-war-i.html  | ✓ | ⏱: 2.67s 
+[2026-06-18 10:08:31.312] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:08:34.364] [FETCH]... ↓ https://www.space.com/space-exploration/artemis/...a-artemis-accords-for-peaceful-space-exploration  | ✓ | ⏱: 3.03s 
+[2026-06-18 10:08:34.457] [SCRAPE].. ◆ https://www.space.com/space-exploration/artemis/...a-artemis-accords-for-peaceful-space-exploration  | ✓ | ⏱: 0.09s 
+[2026-06-18 10:08:34.458] [COMPLETE] ● https://www.space.com/space-exploration/artemis/...a-artemis-accords-for-peaceful-space-exploration  | ✓ | ⏱: 3.13s 
+[2026-06-18 10:08:40.654] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:08:41.223] [FETCH]... ↓ https://en.wikipedia.org/wiki/Artemis_Accords                                                        | ✓ | ⏱: 0.55s 
+[2026-06-18 10:08:41.538] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Artemis_Accords                                                        | ✓ | ⏱: 0.31s 
+[2026-06-18 10:08:41.540] [COMPLETE] ● https://en.wikipedia.org/wiki/Artemis_Accords                                                        | ✓ | ⏱: 0.87s 
+[2026-06-18 10:09:01.617] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:09:02.119] [FETCH]... ↓ https://en.wikipedia.org/wiki/Climate_of_Norway                                                      | ✓ | ⏱: 0.49s 
+[2026-06-18 10:09:02.306] [SCRAPE].. ◆ https://en.wikipedia.org/wiki/Climate_of_Norway                                                      | ✓ | ⏱: 0.18s 
+[2026-06-18 10:09:02.306] [COMPLETE] ● https://en.wikipedia.org/wiki/Climate_of_Norway                                                      | ✓ | ⏱: 0.68s 
+[2026-06-18 10:09:14.328] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:09:15.686] [FETCH]... ↓ https://www.visitnorway.com/plan-your-trip/seasons-climate/                                          | ✓ | ⏱: 1.35s 
+[2026-06-18 10:09:15.756] [SCRAPE].. ◆ https://www.visitnorway.com/plan-your-trip/seasons-climate/                                          | ✓ | ⏱: 0.07s 
+[2026-06-18 10:09:15.757] [COMPLETE] ● https://www.visitnorway.com/plan-your-trip/seasons-climate/                                          | ✓ | ⏱: 1.42s 
+[2026-06-18 10:11:04.889] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:11:09.122] [FETCH]... ↓ https://baike.baidu.com/item/沿海地区/1083210                                                            | ✓ | ⏱: 4.22s 
+[2026-06-18 10:11:09.182] [SCRAPE].. ◆ https://baike.baidu.com/item/沿海地区/1083210                                                            | ✓ | ⏱: 0.06s 
+[2026-06-18 10:11:09.183] [COMPLETE] ● https://baike.baidu.com/item/沿海地区/1083210                                                            | ✓ | ⏱: 4.28s 
+[2026-06-18 10:11:13.897] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:11:20.752] [FETCH]... ↓ http://star.sse.com.cn/star/renewal/                                                                 | ✓ | ⏱: 6.83s 
+[2026-06-18 10:11:20.761] [SCRAPE].. ◆ http://star.sse.com.cn/star/renewal/                                                                 | ✓ | ⏱: 0.01s 
+[2026-06-18 10:11:20.761] [COMPLETE] ● http://star.sse.com.cn/star/renewal/                                                                 | ✓ | ⏱: 6.84s 
+[2026-06-18 10:11:32.669] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:11:40.868] [FETCH]... ↓ https://www.sse.com.cn/listing/renewal/ipo/                                                          | ✓ | ⏱: 8.18s 
+[2026-06-18 10:11:41.009] [SCRAPE].. ◆ https://www.sse.com.cn/listing/renewal/ipo/                                                          | ✓ | ⏱: 0.14s 
+[2026-06-18 10:11:41.009] [COMPLETE] ● https://www.sse.com.cn/listing/renewal/ipo/                                                          | ✓ | ⏱: 8.32s 
+[2026-06-18 10:12:06.883] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:12:12.747] [FETCH]... ↓ http://star.sse.com.cn/star/renewal/                                                                 | ✓ | ⏱: 5.84s 
+[2026-06-18 10:12:12.769] [SCRAPE].. ◆ http://star.sse.com.cn/star/renewal/                                                                 | ✓ | ⏱: 0.02s 
+[2026-06-18 10:12:12.770] [COMPLETE] ● http://star.sse.com.cn/star/renewal/                                                                 | ✓ | ⏱: 5.87s 
+[2026-06-18 10:12:52.011] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:12:55.978] [FETCH]... ↓ https://baike.baidu.com/item/沿海地区/1083210                                                            | ✓ | ⏱: 3.96s 
+[2026-06-18 10:12:56.038] [SCRAPE].. ◆ https://baike.baidu.com/item/沿海地区/1083210                                                            | ✓ | ⏱: 0.06s 
+[2026-06-18 10:12:56.039] [COMPLETE] ● https://baike.baidu.com/item/沿海地区/1083210                                                            | ✓ | ⏱: 4.02s 
+[2026-06-18 10:13:03.923] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:13:05.741] [FETCH]... ↓ https://emdatah5.eastmoney.com/dc/CYBIPO/Index                                                       | ✓ | ⏱: 1.80s 
+[2026-06-18 10:13:05.750] [SCRAPE].. ◆ https://emdatah5.eastmoney.com/dc/CYBIPO/Index                                                       | ✓ | ⏱: 0.01s 
+[2026-06-18 10:13:05.751] [COMPLETE] ● https://emdatah5.eastmoney.com/dc/CYBIPO/Index                                                       | ✓ | ⏱: 1.81s 
+[2026-06-18 10:14:52.591] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:14:55.035] [FETCH]... ↓ https://zh.wikipedia.org/wiki/饶阳站                                                                    | ✓ | ⏱: 2.43s 
+[2026-06-18 10:14:55.121] [SCRAPE].. ◆ https://zh.wikipedia.org/wiki/饶阳站                                                                    | ✓ | ⏱: 0.09s 
+[2026-06-18 10:14:55.122] [COMPLETE] ● https://zh.wikipedia.org/wiki/饶阳站                                                                    | ✓ | ⏱: 2.51s 
+[2026-06-18 10:15:01.525] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:15:02.707] [FETCH]... ↓ https://qq.ip138.com/train/hebei/raoyang.htm                                                         | ✓ | ⏱: 1.16s 
+[2026-06-18 10:15:02.752] [SCRAPE].. ◆ https://qq.ip138.com/train/hebei/raoyang.htm                                                         | ✓ | ⏱: 0.04s 
+[2026-06-18 10:15:02.752] [COMPLETE] ● https://qq.ip138.com/train/hebei/raoyang.htm                                                         | ✓ | ⏱: 1.21s 
+[2026-06-18 10:15:41.261] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:15:43.479] [FETCH]... ↓ https://hk.trip.com/trains/china/route/raoyang-to-beijing-west/                                      | ✓ | ⏱: 2.20s 
+[2026-06-18 10:15:43.559] [SCRAPE].. ◆ https://hk.trip.com/trains/china/route/raoyang-to-beijing-west/                                      | ✓ | ⏱: 0.08s 
+[2026-06-18 10:15:43.560] [COMPLETE] ● https://hk.trip.com/trains/china/route/raoyang-to-beijing-west/                                      | ✓ | ⏱: 2.28s 
+[2026-06-18 10:17:28.154] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:17:29.465] [FETCH]... ↓ https://zh.wikipedia.org/zh-hans/樂隊的夏天_(第一季)                                                         | ✓ | ⏱: 1.30s 
+[2026-06-18 10:17:29.938] [SCRAPE].. ◆ https://zh.wikipedia.org/zh-hans/樂隊的夏天_(第一季)                                                         | ✓ | ⏱: 0.47s 
+[2026-06-18 10:17:29.939] [COMPLETE] ● https://zh.wikipedia.org/zh-hans/樂隊的夏天_(第一季)                                                         | ✓ | ⏱: 1.77s 
+[2026-06-18 10:17:37.361] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:17:38.209] [FETCH]... ↓ https://zh.wikipedia.org/zh-hans/樂隊的夏天_(第二季)                                                         | ✓ | ⏱: 0.83s 
+[2026-06-18 10:17:38.442] [SCRAPE].. ◆ https://zh.wikipedia.org/zh-hans/樂隊的夏天_(第二季)                                                         | ✓ | ⏱: 0.23s 
+[2026-06-18 10:17:38.442] [COMPLETE] ● https://zh.wikipedia.org/zh-hans/樂隊的夏天_(第二季)                                                         | ✓ | ⏱: 1.06s 
+[2026-06-18 10:17:47.607] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:17:48.412] [FETCH]... ↓ https://zh.wikipedia.org/wiki/樂隊的夏天_(第三季)                                                            | ✓ | ⏱: 0.79s 
+[2026-06-18 10:17:48.555] [SCRAPE].. ◆ https://zh.wikipedia.org/wiki/樂隊的夏天_(第三季)                                                            | ✓ | ⏱: 0.14s 
+[2026-06-18 10:17:48.555] [COMPLETE] ● https://zh.wikipedia.org/wiki/樂隊的夏天_(第三季)                                                            | ✓ | ⏱: 0.93s 
+[2026-06-18 10:18:00.833] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:18:04.371] [FETCH]... ↓ http://yn.people.com.cn/BIG5/n2/2020/1012/c372315-34343407.html                                      | ✓ | ⏱: 3.53s 
+[2026-06-18 10:18:04.400] [SCRAPE].. ◆ http://yn.people.com.cn/BIG5/n2/2020/1012/c372315-34343407.html                                      | ✓ | ⏱: 0.03s 
+[2026-06-18 10:18:04.401] [COMPLETE] ● http://yn.people.com.cn/BIG5/n2/2020/1012/c372315-34343407.html                                      | ✓ | ⏱: 3.56s 
+[2026-06-18 10:22:57.945] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:22:59.839] [FETCH]... ↓ https://unifuncs.com/s/QxW7IHMJ                                                                      | ✓ | ⏱: 1.87s 
+[2026-06-18 10:22:59.885] [SCRAPE].. ◆ https://unifuncs.com/s/QxW7IHMJ                                                                      | ✓ | ⏱: 0.04s 
+[2026-06-18 10:22:59.885] [COMPLETE] ● https://unifuncs.com/s/QxW7IHMJ                                                                      | ✓ | ⏱: 1.92s 
+[2026-06-18 10:23:07.006] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:23:13.575] [FETCH]... ↓ https://m.douban.com/movie/review/7814334/                                                           | ✓ | ⏱: 6.56s 
+[2026-06-18 10:23:13.599] [SCRAPE].. ◆ https://m.douban.com/movie/review/7814334/                                                           | ✓ | ⏱: 0.02s 
+[2026-06-18 10:23:13.600] [COMPLETE] ● https://m.douban.com/movie/review/7814334/                                                           | ✓ | ⏱: 6.58s 
+[2026-06-18 10:23:18.530] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:23:19.913] [FETCH]... ↓ https://www.imdb.com/title/tt2790184/quotes/                                                         | ✓ | ⏱: 1.36s 
+[2026-06-18 10:23:19.915] [SCRAPE].. ◆ https://www.imdb.com/title/tt2790184/quotes/                                                         | ✓ | ⏱: 0.00s 
+[2026-06-18 10:23:19.916] [COMPLETE] ● https://www.imdb.com/title/tt2790184/quotes/                                                         | ✓ | ⏱: 1.37s 
+[2026-06-18 10:23:23.309] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:23:24.961] [FETCH]... ↓ https://www.springfieldspringfield.co.uk/view_ep...s.php?tv-show=true-detective-2014&episode=s01e03  | ✓ | ⏱: 1.63s 
+[2026-06-18 10:23:24.973] [SCRAPE].. ◆ https://www.springfieldspringfield.co.uk/view_ep...s.php?tv-show=true-detective-2014&episode=s01e03  | ✓ | ⏱: 0.01s 
+[2026-06-18 10:23:24.974] [COMPLETE] ● https://www.springfieldspringfield.co.uk/view_ep...s.php?tv-show=true-detective-2014&episode=s01e03  | ✓ | ⏱: 1.65s 
+[2026-06-18 10:23:27.710] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:23:29.219] [FETCH]... ↓ https://www.springfieldspringfield.co.uk/view_ep...s.php?tv-show=true-detective-2014&episode=s01e04  | ✓ | ⏱: 1.50s 
+[2026-06-18 10:23:29.233] [SCRAPE].. ◆ https://www.springfieldspringfield.co.uk/view_ep...s.php?tv-show=true-detective-2014&episode=s01e04  | ✓ | ⏱: 0.01s 
+[2026-06-18 10:23:29.234] [COMPLETE] ● https://www.springfieldspringfield.co.uk/view_ep...s.php?tv-show=true-detective-2014&episode=s01e04  | ✓ | ⏱: 1.51s 
+[2026-06-18 10:23:55.201] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:23:57.466] [FETCH]... ↓ https://genius.com/Nic-pizzolatto-rust-cohles-philosophy-annotated                                   | ✓ | ⏱: 2.25s 
+[2026-06-18 10:23:57.517] [SCRAPE].. ◆ https://genius.com/Nic-pizzolatto-rust-cohles-philosophy-annotated                                   | ✓ | ⏱: 0.05s 
+[2026-06-18 10:23:57.517] [COMPLETE] ● https://genius.com/Nic-pizzolatto-rust-cohles-philosophy-annotated                                   | ✓ | ⏱: 2.30s 
+[2026-06-18 10:24:08.036] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:24:09.398] [FETCH]... ↓ https://www.tumblr.com/truedetectivequotes/83331...each-stilled-body-so-certain-that-they-were-more  | ✓ | ⏱: 1.34s 
+[2026-06-18 10:24:09.454] [SCRAPE].. ◆ https://www.tumblr.com/truedetectivequotes/83331...each-stilled-body-so-certain-that-they-were-more  | ✓ | ⏱: 0.06s 
+[2026-06-18 10:24:09.455] [COMPLETE] ● https://www.tumblr.com/truedetectivequotes/83331...each-stilled-body-so-certain-that-they-were-more  | ✓ | ⏱: 1.40s 
+[2026-06-18 10:24:18.076] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:24:20.130] [FETCH]... ↓ https://www.magicalquote.com/series/true-detective/season/1/page/4/                                  | ✓ | ⏱: 2.04s 
+[2026-06-18 10:24:20.175] [SCRAPE].. ◆ https://www.magicalquote.com/series/true-detective/season/1/page/4/                                  | ✓ | ⏱: 0.04s 
+[2026-06-18 10:24:20.175] [COMPLETE] ● https://www.magicalquote.com/series/true-detective/season/1/page/4/                                  | ✓ | ⏱: 2.09s 
+[2026-06-18 10:24:31.257] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:24:33.238] [FETCH]... ↓ https://subslikescript.com/series/True_Detective-2356777/season-1/episode-3-The_Locked_Room          | ✓ | ⏱: 1.97s 
+[2026-06-18 10:24:33.241] [SCRAPE].. ◆ https://subslikescript.com/series/True_Detective-2356777/season-1/episode-3-The_Locked_Room          | ✓ | ⏱: 0.00s 
+[2026-06-18 10:24:33.243] [COMPLETE] ● https://subslikescript.com/series/True_Detective-2356777/season-1/episode-3-The_Locked_Room          | ✓ | ⏱: 1.97s 
+[2026-06-18 10:24:43.953] [INIT].... → Crawl4AI 0.7.6 
+[2026-06-18 10:24:47.613] [FETCH]... ↓ https://clip.cafe/true-detective-2014/each-still...ore-than-the-sum-of-their-urges-all-the-useless/  | ✓ | ⏱: 3.64s 
+[2026-06-18 10:24:47.668] [SCRAPE].. ◆ https://clip.cafe/true-detective-2014/each-still...ore-than-the-sum-of-their-urges-all-the-useless/  | ✓ | ⏱: 0.05s 
+[2026-06-18 10:24:47.669] [COMPLETE] ● https://clip.cafe/true-detective-2014/each-still...ore-than-the-sum-of-their-urges-all-the-useless/  | ✓ | ⏱: 3.70s 

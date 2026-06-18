@@ -1,0 +1,17 @@
+{
+  "score": 0,
+  "extracted_answer": "无",
+  "task_id": "99",
+  "question": "《乐队的夏天》各季 top5 乐队中一共有多少名女性成员？",
+  "full_query": "《乐队的夏天》各季 top5 乐队中一共有多少名女性成员？",
+  "golden_answer": "6名",
+  "status": "success",
+  "error": "Error in generating tool call with model:\n'str' object has no attribute 'get'",
+  "metrics": {
+    "elapsed_time": 298.52189111709595,
+    "total_tokens": 278480,
+    "prompt_tokens": 256607,
+    "completion_tokens": 21873,
+    "api_calls": 26
+  }
+}
