@@ -357,7 +357,7 @@ python evolve_cli.py \
     2>&1 | tee ./memevolve_work/xbench_agent_kb_seed_1_20/run_all.log
 ```
 
-### 多轮自动 evolve（建议后续实验）
+### 多轮自动 evolve （未完成）
 
 ```bash
 python evolve_cli.py \
